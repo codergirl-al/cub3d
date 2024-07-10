@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/05 15:52:21 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/06 20:06:19 by apeposhi         ###   ########.fr       */
+/*   Created: 2024/07/06 21:06:22 by apeposhi          #+#    #+#             */
+/*   Updated: 2024/07/06 21:29:15 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
-int main(int argc, char **argv)
+void	ft_free_data(t_data *gd)
 {
-	t_game game;
+	if (gd->map_2d)
+		free(gd->map_2d);
+	if (gd->map)
+		free(gd->map);
+	if (gd->ff)
+		free(gd->ff);
+	if (gd->cc)
+		free(gd->cc);
+	if (gd->ture)
+		free(gd->map_2d);
+	if (gd->map_2d)
+		free(gd->map_2d);
+	if (gd->map_2d)
+		free(gd->map_2d);
 
-	// init data structure
-	// validate arguments
-	if (ft_validate_args(argc, argv))
-		return (1);
-	// read into map
-	if (ft_read_map(game, char *map))
-		return (1);
-	// validate the map
-	// initialize game
-	// set up hookers nd shit
-	//         HOOKS
 }
+

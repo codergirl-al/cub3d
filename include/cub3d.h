@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:53:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/05 19:57:33 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/07/06 21:33:55 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,36 @@
 // 	t_settings	settings;
 // }				t_game;
 
-typedef	struct s_data
+typedef struct s_data
 {
-	char		**map;
-	int			p_x;
-	int			p_y;
-	int			w_map;
-	int			h_map;
-}				t_data;
-
+	char	**map_2d;
+	int		rows;
+	int		cols;
+	int		p_x;
+	int		p_y;
+	int		w_map;
+	int		h_map;
+	char	**ff;
+	char	**cc;
+	int		fd;
+	int		i;
+	char	*line;
+	char	*ture;
+	char	*map;
+	char	**ture2d;
+	char	**sq_map;
+	char	**rgb;
+	// t_txtr	*t;
+}	t_data;
 // validator functions
 int	ft_validate_args(int argc, char **argv);
-int	f
+
 // parser functions
 
 // utility functions
 int	ft_print_err(char *message, int r_value);
+
+// cleanup 
+void	ft_free_data(t_data *gd);
 
 #endif
