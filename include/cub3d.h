@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # include "libft.h"
-#include <cmath>
+# include "MLX42.h"
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
