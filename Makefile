@@ -6,7 +6,7 @@
 #    By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 23:23:18 by apeposhi          #+#    #+#              #
-#    Updated: 2024/07/12 19:00:20 by JFikents         ###   ########.fr        #
+#    Updated: 2024/07/12 19:23:59 by JFikents         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,14 +38,16 @@ OBJS			:=	$(SRC:src/%.c=bin/%.o)
 
 # Compiler and Flags
 CC				:=	cc
-CFLAGS			:=	-Wall -Wextra -Werror
+CFLAGS			:=	-Wall -Wextra -Werror -Wunreachable-code
 
-_INCLUDES		:=	include/ libft/includes/ lib/MLX42/include/MLX42/
+_INCLUDES		:=	include/ libft/includes/ lib/MLX42/include/MLX42/ \
+					lib/libft/includes/
 INCLUDES		:=	$(addprefix -I, $(_INCLUDES))
 
 # Libraries
+$
 LIBMLX42		:=	lib/MLX42/build/libmlx42.a
-LIBFT			:=	libft/libft.a
+LIBFT			:=	libft/libft.a lib/libft/libft.a
 _LIBS			:=	$(LIBFT) $(LIBMLX42)
 LIBS			:=	$(addprefix -l, $(_LIBS))
 
@@ -54,9 +56,14 @@ $(LIBMLX42):
 	@cmake -B lib/MLX42/build -S lib/MLX42/
 	@cmake --build lib/MLX42/build -j4
 
+$(LIBFT):
+	@git submodule update --init --recursive lib/libft
+	@make -C libft
+	@make -C lib/libft
+
 # Targets
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(LIBFT) $(LIBMLX42)
 	$(CC) -o $@ $(OBJS) $(CFLAGS) $(INCLUDES) $(LIBS)
 
 clean:

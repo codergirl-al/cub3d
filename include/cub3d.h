@@ -6,13 +6,16 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:53:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/12 18:59:57 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/12 19:12:14 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include "mem/libft_mem_allocation.h"
+# include "libft_fd_operations.h"
+# include "printf.h"
 # include "libft.h"
 # include "MLX42.h"
 # include <math.h>
