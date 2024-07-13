@@ -6,7 +6,7 @@
 #    By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 23:23:18 by apeposhi          #+#    #+#              #
-#    Updated: 2024/05/14 23:30:12 by apeposhi         ###   ########.fr        #
+#    Updated: 2024/07/12 00:18:27 by apeposhi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,10 @@ AUTHOR    :=	apeposhi
 NAME      :=	cub3d
 
 # Sources & Objects
-SRC       :=	src/main.c src/parser.c \
-				src/validator/arguments.c
+SRC       :=	src/main.c \
+				src/validator/arguments.c \
+				src/cleanup/cleanup.c \
+				src/parser/parsing.c \
 OBJS      :=	$(SRC:.cpp=.o)
 
 # Compiler and Flags

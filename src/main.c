@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/05 15:52:21 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/06 20:06:19 by apeposhi         ###   ########.fr       */
+/*   Created: 2024/07/12 11:04:05 by apeposhi          #+#    #+#             */
+/*   Updated: 2024/07/12 11:04:33 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
 
 int main(int argc, char **argv)
 {
@@ -18,7 +19,7 @@ int main(int argc, char **argv)
 
 	// init data structure
 	// validate arguments
-	if (ft_validate_args(argc, argv))
+	if (ft_validate_arguments(argc, argv))
 		return (1);
 	// read into map
 	if (ft_read_map(game, char *map))

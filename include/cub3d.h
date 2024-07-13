@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:53:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/06 21:33:55 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/07/12 00:16:17 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_h
 
 # include "../libft/includes/libft.h"
-#include <cmath>
+#include <cmath.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>

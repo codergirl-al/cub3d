@@ -6,7 +6,18 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:46:25 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/05 19:46:26 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/07/12 00:22:35 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../include/cub3d.h"
+
+int ft_read_map() 
+{
+	return (1);
+}
+
+int	ft_validate_map() {
+
+	return (1);
+}
