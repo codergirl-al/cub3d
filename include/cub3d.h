@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:53:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/12 19:12:14 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/14 13:43:56 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "mem/libft_mem_allocation.h"
 # include "libft_fd_operations.h"
-# include "printf.h"
+# include "ft_printf.h"
 # include "libft.h"
 # include "MLX42.h"
 # include <math.h>
