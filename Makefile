@@ -6,7 +6,7 @@
 #    By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 23:23:18 by apeposhi          #+#    #+#              #
-#    Updated: 2024/07/12 19:23:59 by JFikents         ###   ########.fr        #
+#    Updated: 2024/07/14 13:46:23 by JFikents         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,11 +45,13 @@ _INCLUDES		:=	include/ libft/includes/ lib/MLX42/include/MLX42/ \
 INCLUDES		:=	$(addprefix -I, $(_INCLUDES))
 
 # Libraries
-$
+_LIB_PATH		:=	lib/MLX42/build/ lib/libft/ libft/
+LIB_PATH		:=	$(addprefix -L, $(_LIB_PATH))
 LIBMLX42		:=	lib/MLX42/build/libmlx42.a
 LIBFT			:=	libft/libft.a lib/libft/libft.a
-_LIBS			:=	$(LIBFT) $(LIBMLX42)
+_LIBS			:=	mlx42 ft glfw
 LIBS			:=	$(addprefix -l, $(_LIBS))
+LIB_FLAGS		:=	$(LIB_PATH) $(LIBS)
 
 $(LIBMLX42):
 	@git submodule update --init --recursive lib/MLX42
@@ -64,7 +66,7 @@ $(LIBFT):
 # Targets
 
 $(NAME): $(OBJS) $(LIBFT) $(LIBMLX42)
-	$(CC) -o $@ $(OBJS) $(CFLAGS) $(INCLUDES) $(LIBS)
+	$(CC) -o $@ $(OBJS) $(CFLAGS) $(INCLUDES) $(LIB_FLAGS)
 
 clean:
 	rm -rf $(OBJS)
