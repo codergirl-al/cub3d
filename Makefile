@@ -28,7 +28,7 @@ PARSER_SRC		:=	$(addprefix parser/, $(_PARSER_SRC))
 _VALIDATOR_SRC	:=	arguments.c
 VALIDATOR_SRC	:=	$(addprefix validator/, $(_VALIDATOR_SRC))
 
-_SRC			:=	main.c parser.c \
+_SRC			:=	main.c parser.c error_handling.c\
 					$(VALIDATOR_SRC)\
 					$(PARSER_SRC)\
 					$(CLEANUP_SRC)
