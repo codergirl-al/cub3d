@@ -89,3 +89,8 @@ bin/%.o: src/%.c | bin/
 
 # Phony Targets
 .PHONY:	all clean fclean re
+
+ifeq ($(DEBUG), 1)
+CFLAGS	+= -g3
+all: fclean $(NAME)
+endif
