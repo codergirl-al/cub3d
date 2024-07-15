@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:24:43 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/15 19:40:02 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/15 21:06:55 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ void	movement(t_player *player, int direction)
 	{
 		delta_x = player->delta_x;
 		delta_y = player->delta_y;
-		player->img->instances->y += direction * (PLAYER_CENTER - delta_y);
-		player->img->instances->x += direction * (PLAYER_CENTER - delta_x);
+		player->img->instances->y
+			+= (int)(direction * (PLAYER_CENTER - delta_y));
+		player->img->instances->x
+			+= (int)(direction * (PLAYER_CENTER - delta_x));
 		return ;
 	}
 	new_angle = adjust_angle(player->angle - (PI / 2), 0);
@@ -31,8 +33,8 @@ void	movement(t_player *player, int direction)
 		new_angle = adjust_angle(player->angle + (PI / 2), 0);
 	delta_x = get_delta_x(new_angle) - PLAYER_CENTER;
 	delta_y = get_delta_y(new_angle) - PLAYER_CENTER;
-	player->img->instances->x += delta_x;
-	player->img->instances->y += delta_y;
+	player->img->instances->x += (int) delta_x;
+	player->img->instances->y += (int) delta_y;
 }
 
 void	player_moves(mlx_key_data_t key, void *param)
