@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:59:21 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/15 18:50:27 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/15 20:19:23 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ double	get_delta_x(double angle)
 
 double	get_delta_y(double angle)
 {
-	return (16 + (16 * sin(angle)));
+	return (PLAYER_CENTER + (PLAYER_CENTER * sin(angle)));
 }
 
 double	adjust_angle(double angle, int direction)
@@ -31,3 +31,8 @@ double	adjust_angle(double angle, int direction)
 		angle -= 2 * PI;
 	return (angle);
 }
+
+/*
+All math can be seen in the following link:
+https://www.geogebra.org/graphing/bkd7pzm4
+*/
