@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:53:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/14 13:43:56 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/14 18:51:22 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "ft_printf.h"
 # include "libft.h"
 # include "MLX42.h"
+# include "exec.h"
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
