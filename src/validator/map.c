@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:46:43 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/07 17:30:41 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/07/15 14:32:11 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,4 @@ static char	*ft_get_map(t_data *gd)
 			return(ft_free_data(gd), NULL);
 		}
 	}
-}
-
-int ft_read_map() 
-{
-	return (1);
-}
-
-int	ft_validate_map() {
-	
-	return (1);
 }
