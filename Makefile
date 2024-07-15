@@ -6,7 +6,7 @@
 #    By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 23:23:18 by apeposhi          #+#    #+#              #
-#    Updated: 2024/07/14 13:46:23 by JFikents         ###   ########.fr        #
+#    Updated: 2024/07/15 16:43:20 by JFikents         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,9 @@ NAME			:=	cub3d
 all: $(NAME)
 
 # Sources & Objects
+_EXEC_SRC		:=	draw.c keyhook.c math.c
+EXEC_SRC		:=	$(addprefix execution/, $(_EXEC_SRC))
+
 _CLEANUP_SRC	:=	cleanup.c
 CLEANUP_SRC		:=	$(addprefix cleanup/, $(_CLEANUP_SRC))
 
@@ -31,7 +34,8 @@ VALIDATOR_SRC	:=	$(addprefix validator/, $(_VALIDATOR_SRC))
 _SRC			:=	main.c parser.c error_handling.c\
 					$(VALIDATOR_SRC)\
 					$(PARSER_SRC)\
-					$(CLEANUP_SRC)
+					$(CLEANUP_SRC)\
+					$(EXEC_SRC)
 SRC				:=	$(addprefix src/, $(_SRC))
 
 OBJS			:=	$(SRC:src/%.c=bin/%.o)
@@ -77,7 +81,7 @@ fclean: clean
 re:	fclean all
 
 bin/:
-	@mkdir -p bin/cleanup bin/parser bin/validator
+	@mkdir -p bin/cleanup bin/parser bin/validator bin/execution
 
 # Suffix Rules
 bin/%.o: src/%.c | bin/
