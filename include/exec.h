@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 18:47:49 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/15 18:44:00 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/15 19:30:10 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@
 
 # define PI 3.1415926535
 # define PLAYER_CENTER 16
+
+enum e_direction
+{
+	FORWARD = -1,
+	BACKWARD = 1,
+	LEFT,
+	RIGHT,
+};
 
 typedef struct s_player
 {
