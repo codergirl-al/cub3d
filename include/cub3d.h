@@ -85,12 +85,12 @@ typedef struct s_data
 	// t_txtr	*t;
 }	t_data;
 // validator functions
-int	ft_validate_args(int argc, char **argv);
+int		ft_validate_args(int argc, char **argv);
 
 // parser functions
 
 // utility functions
-int	ft_print_err(char *message, int r_value);
+int		ft_print_err(char *message, int r_value);
 
 // cleanup 
 void	ft_free_data(t_data *gd);
