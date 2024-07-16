@@ -6,7 +6,7 @@
 #    By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/17 14:25:17 by apeposhi          #+#    #+#              #
-#    Updated: 2024/06/20 12:46:58 by apeposhi         ###   ########.fr        #
+#    Updated: 2024/07/16 23:58:23 by apeposhi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,8 @@ SRC		= ./src/memory/ft_bzero.c\
 		  ./src/stack/ft_stack_size.c\
 		  ./src/stack/ft_stack_sorted.c\
 		  ./src/stack/ft_sqrt.c\
-		  ./src/stack/ft_stack_rotations.c
+		  ./src/stack/ft_stack_rotations.c\
+		  ./src/get_next_line.c\
 
 OBJ=$(SRC:.c=.o)
 

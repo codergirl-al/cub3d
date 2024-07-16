@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:24:48 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/06/20 12:45:25 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/07/16 23:57:50 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
+# include <fcntl.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
 
 typedef struct s_list
 {
@@ -100,5 +106,8 @@ int		ft_stack_size(t_stack *stack);
 int		ft_stack_sorted(t_stack **s);
 int		ft_sqrt(int nb);
 int		ft_stack_rotations(t_stack *stack, int index);
+
+/*		GETNEXTLINE		*/
+char	*get_next_line(int fd);
 
 #endif
