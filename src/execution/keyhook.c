@@ -64,4 +64,5 @@ void	player_moves(mlx_key_data_t key, void *param)
 		player->delta_y = get_delta_y(player->angle);
 	}
 	redraw_player(player);
+	draw_h_ray(player);
 }

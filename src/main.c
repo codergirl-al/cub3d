@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:52:21 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/15 16:19:02 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/16 15:48:50 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int	main(void)
 
 	window = mlx_init(768, 640, "Cub3D", true);
 	player->img = NULL;
+	player->window = window;
 	put_map(window, map);
 	put_player(window, player);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
