@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:19:44 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/15 18:52:44 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/16 16:12:30 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,17 +84,23 @@ int	put_player(mlx_t *window, t_player player[1])
 
 int	redraw_player(t_player player[1])
 {
-	const double	left_angle = adjust_angle(player->angle + (3 * PI / 2), 0);
-	const double	right_angle = adjust_angle(player->angle + (PI / 2), 0);
-
 	ft_bzero(player->img->pixels,
 		player->img->width * player->img->height * sizeof(int));
 	draw_line(player->img, (int []){PLAYER_CENTER, PLAYER_CENTER},
 		(int []){(player->delta_x), (player->delta_y)}, 0xff0000FF);
-	draw_line(player->img,
-		(int []){get_delta_x(left_angle), get_delta_y(left_angle)},
-		(int []){get_delta_x(right_angle), get_delta_y(right_angle)},
-		0x00ff00FF);
 	mlx_put_pixel(player->img, PLAYER_CENTER, PLAYER_CENTER, 0xffffffFF);
+	mlx_put_pixel(player->img, PLAYER_CENTER + 1, PLAYER_CENTER, 0xffffffFF);
+	mlx_put_pixel(player->img, PLAYER_CENTER - 1, PLAYER_CENTER, 0xffffffFF);
+	mlx_put_pixel(player->img, PLAYER_CENTER, PLAYER_CENTER + 1, 0xffffffFF);
+	mlx_put_pixel(player->img, PLAYER_CENTER, PLAYER_CENTER - 1, 0xffffffFF);
+	mlx_put_pixel(player->img, 0, 0, 0xffff00FF);
+	mlx_put_pixel(player->img, PLAYER_CENTER - 1, PLAYER_CENTER + 1,
+		0xffffffFF);
+	mlx_put_pixel(player->img, PLAYER_CENTER - 1, PLAYER_CENTER - 1,
+		0xffffffFF);
+	mlx_put_pixel(player->img, PLAYER_CENTER + 1, PLAYER_CENTER + 1,
+		0xffffffFF);
+	mlx_put_pixel(player->img, PLAYER_CENTER + 1, PLAYER_CENTER - 1,
+		0xffffffFF);
 	return (0);
 }
