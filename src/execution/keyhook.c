@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:24:43 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/16 18:08:49 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/16 18:56:14 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	movement(t_player *player, int direction)
 
 void	player_moves(mlx_key_data_t key, void *param)
 {
-	t_player *const	player = (t_player *)param;
+	t_loop_data *const	data = (t_loop_data *)param;
+	t_player *const		player = data->player;
 
 	if (key.key == MLX_KEY_ESCAPE)
 		exit(0);
@@ -53,9 +54,9 @@ void	player_moves(mlx_key_data_t key, void *param)
 		movement(player, RIGHT);
 	if (key.key == MLX_KEY_LEFT)
 	{
-		player->angle = adjust_angle(player->angle, -1);
-		player->delta_x = get_delta_x(player->angle);
-		player->delta_y = get_delta_y(player->angle);
+		data->player->angle = adjust_angle(player->angle, -1);
+		data->player->delta_x = get_delta_x(player->angle);
+		data->player->delta_y = get_delta_y(player->angle);
 	}
 	if (key.key == MLX_KEY_RIGHT)
 	{
@@ -64,6 +65,6 @@ void	player_moves(mlx_key_data_t key, void *param)
 		player->delta_y = get_delta_y(player->angle);
 	}
 	redraw_player(player);
-	draw_h_ray(player);
-	draw_v_ray(player);
+	draw_h_ray(data, player);
+	draw_v_ray(data, player);
 }

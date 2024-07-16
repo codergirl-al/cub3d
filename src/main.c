@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:52:21 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/16 15:48:50 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/16 18:54:33 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,18 +101,16 @@ int	put_map(mlx_t *window, const char **map)
 
 int	main(void)
 {
-	t_player	player[1];
-	mlx_t		*window;
-	const char	**map = get_map(player);
+	t_loop_data	data[1];
 
-	window = mlx_init(768, 640, "Cub3D", true);
-	player->img = NULL;
-	player->window = window;
-	put_map(window, map);
-	put_player(window, player);
+	data->map = get_map(data->player);
+	data->window = mlx_init(768, 640, "Cub3D", true);
+	data->player->img = NULL;
+	put_map(data->window, data->map);
+	put_player(data->window, data->player);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	mlx_set_setting(MLX_FULLSCREEN, true);
-	mlx_key_hook(window, player_moves, (void *)player);
-	mlx_loop(window);
+	mlx_key_hook(data->window, player_moves, (void *)data);
+	mlx_loop(data->window);
 	return (0);
 }
