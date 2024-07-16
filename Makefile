@@ -6,7 +6,7 @@
 #    By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 23:23:18 by apeposhi          #+#    #+#              #
-#    Updated: 2024/07/15 16:43:20 by JFikents         ###   ########.fr        #
+#    Updated: 2024/07/16 20:54:38 by JFikents         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,10 @@
 AUTHOR			:=	apeposhi\
 					JFikents
 NAME			:=	cub3d
+
+ifeq ($(DEBUG), 1)
+re: fclean all
+endif
 
 all: $(NAME)
 
@@ -43,6 +47,9 @@ OBJS			:=	$(SRC:src/%.c=bin/%.o)
 # Compiler and Flags
 CC				:=	cc
 CFLAGS			:=	-Wall -Wextra -Werror -Wunreachable-code
+ifeq ($(DEBUG), 1)
+CFLAGS	+= -g3
+endif
 
 _INCLUDES		:=	include/ libft/includes/ lib/MLX42/include/MLX42/ \
 					lib/libft/includes/
@@ -89,8 +96,3 @@ bin/%.o: src/%.c | bin/
 
 # Phony Targets
 .PHONY:	all clean fclean re
-
-ifeq ($(DEBUG), 1)
-CFLAGS	+= -g3
-all: fclean $(NAME)
-endif
