@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleanup.c                                          :+:      :+:    :+:   */
+/*   ft_stack_rotations.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/06 21:06:22 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/15 18:54:28 by apeposhi         ###   ########.fr       */
+/*   Created: 2024/06/20 12:44:16 by apeposhi          #+#    #+#             */
+/*   Updated: 2024/06/20 12:48:47 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../includes/libft.h"
 
-void	ft_free_data(t_data *gd)
+int	ft_stack_rotations(t_stack *stack, int index)
 {
-	if (gd->map_2d)
-		free(gd->map_2d);
-}
+	int	counter;
 
+	counter = 0;
+	while (stack && stack->index != index)
+	{
+		stack = stack->next;
+		counter++;
+	}
+	return (counter);
+}

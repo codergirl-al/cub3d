@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:49:28 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/01/09 14:51:04 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/06/10 12:04:29 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 		{
 			*(unsigned char *)(dest + i) = *(unsigned char *)(src + i);
 			i++;
-		}	
+		}
 	}
 	return (dest);
 }

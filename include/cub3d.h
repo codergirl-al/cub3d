@@ -6,14 +6,14 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:53:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/12 00:16:17 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/07/15 22:30:28 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_h
 
-# include "../libft/includes/libft.h"
+# include "../../libft/includes/libft.h"
 #include <cmath.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -59,27 +59,36 @@
 // 	t_settings	settings;
 // }				t_game;
 
+typedef struct	s_game
+{
+	char		*map_data;
+	char		**map_2d;
+	// t_texture	n_txt;
+	// write all textures for each textures
+}				t_game;
+
 typedef struct s_data
 {
 	char	**map_2d;
-	int		rows;
-	int		cols;
-	int		p_x;
-	int		p_y;
-	int		w_map;
-	int		h_map;
-	char	**ff;
-	char	**cc;
-	int		fd;
-	int		i;
-	char	*line;
-	char	*ture;
-	char	*map;
-	char	**ture2d;
-	char	**sq_map;
-	char	**rgb;
-	// t_txtr	*t;
+	int		map_rows;
+	int		map_cols;
+	int		player_x;
+	int		player_y;
+	int		map_width;
+	int		map_height;
+	char	**floor_data;
+	char	**ceiling_data;
+	int		file_desc;
+	int		index;
+	char	*current_line;
+	char	*texture_key;
+	char	*map_data;
+	char	**texture_2d;
+	char	**square_map;
+	char	**rgb_values;
+	// t_txtr *textures;
 }	t_data;
+
 // validator functions
 int	ft_validate_args(int argc, char **argv);
 
@@ -89,6 +98,7 @@ int	ft_validate_args(int argc, char **argv);
 int	ft_print_err(char *message, int r_value);
 
 // cleanup 
+
 void	ft_free_data(t_data *gd);
 
 #endif

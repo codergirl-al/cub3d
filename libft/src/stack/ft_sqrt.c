@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleanup.c                                          :+:      :+:    :+:   */
+/*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/06 21:06:22 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/15 18:54:28 by apeposhi         ###   ########.fr       */
+/*   Created: 2024/06/20 11:21:05 by apeposhi          #+#    #+#             */
+/*   Updated: 2024/06/20 12:57:58 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../includes/libft.h"
 
-void	ft_free_data(t_data *gd)
+int	ft_sqrt(int nb)
 {
-	if (gd->map_2d)
-		free(gd->map_2d);
-}
+	int	n;
 
+	if (nb <= 0)
+		return (0);
+	n = 1;
+	while (n * n <= nb && n <= 46340)
+	{
+		if (n * n == nb)
+			return (n);
+		n++;
+	}
+	return (n - 1);
+}

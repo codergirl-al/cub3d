@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:16:29 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/01/09 14:52:22 by apeposhi         ###   ########.fr       */
+/*   Updated: 2023/04/30 12:37:51 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** to the start of linked list.
 ** @param back: the node to be appended
 */
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back(t_list **lst, t_list *list)
 {
 	t_list	*lista;
 
@@ -28,9 +28,9 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		if (*lst)
 		{
 			lista = ft_lstlast(*lst);
-			lista -> next = new;
+			lista->next = list;
 		}
 		else
-			*lst = new;
+			*lst = list;
 	}
 }

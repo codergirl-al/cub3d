@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:46:25 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/15 14:31:32 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/07/15 20:03:24 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,16 @@ int	ft_validate_map() {
 	return (1);
 }
 
-int	ft_parse(int argc, char **argv)
+t_data	ft_parse(int argc, char **argv)
 {
+	t_data	playground;
+	int		c;
+
+	if (argc != 2 || ft_check_ending(argv[1]))
+	{
+		write()
+	}
+
   // init data structure
   // validate arguments
   if (ft_validate_arguments(argc, argv))
@@ -33,5 +41,5 @@ int	ft_parse(int argc, char **argv)
     return (1);
   // validate the map
   // initialize game
-  return (0);
+  return (playground);
 }

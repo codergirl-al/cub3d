@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:24:01 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/01/09 14:51:02 by apeposhi         ###   ########.fr       */
+/*   Updated: 2023/04/12 13:10:22 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 ** @return a new node/a size-1 linked list, where lst.next is
 ** pointing to NULL.
 */
-t_list	*ft_lstnew(void *content)
+t_list	*ft_lstnew(int *content)
 {
 	t_list	*new_node;
 

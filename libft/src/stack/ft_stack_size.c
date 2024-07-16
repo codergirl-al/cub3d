@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleanup.c                                          :+:      :+:    :+:   */
+/*   ft_stack_size.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/06 21:06:22 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/15 18:54:28 by apeposhi         ###   ########.fr       */
+/*   Created: 2024/06/04 15:12:14 by apeposhi          #+#    #+#             */
+/*   Updated: 2024/06/10 12:05:19 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../includes/libft.h"
 
-void	ft_free_data(t_data *gd)
+int	ft_stack_size(t_stack *stack)
 {
-	if (gd->map_2d)
-		free(gd->map_2d);
-}
+	int	len;
 
+	len = 1;
+	if (!stack)
+		return (0);
+	while (stack->next != NULL)
+	{
+		len++;
+		stack = stack->next;
+	}
+	return (len);
+}
