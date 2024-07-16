@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:24:43 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/15 21:06:55 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/16 15:49:11 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void	player_moves(mlx_key_data_t key, void *param)
 
 	if (key.key == MLX_KEY_ESCAPE)
 		exit(0);
-	if (key.key == MLX_KEY_W)
+	if (key.key == MLX_KEY_W || key.key == MLX_KEY_UP)
 		movement(player, FORWARD);
-	if (key.key == MLX_KEY_S)
+	if (key.key == MLX_KEY_S || key.key == MLX_KEY_DOWN)
 		movement(player, BACKWARD);
 	if (key.key == MLX_KEY_A)
 		movement(player, LEFT);
