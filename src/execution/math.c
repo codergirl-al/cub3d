@@ -24,7 +24,7 @@ double	get_delta_y(double angle)
 
 double	adjust_angle(double angle, int direction)
 {
-	angle += direction * 0.05;
+	angle += direction * 0.08727;
 	if (angle < 0)
 		angle += 2 * PI;
 	if (angle > 2 * PI)
