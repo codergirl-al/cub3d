@@ -14,12 +14,12 @@
 
 double	get_delta_x(double angle)
 {
-	return (PLAYER_CENTER + (PLAYER_CENTER * cos(angle)));
+	return (PLAYER_CENTER * (1 + cos(angle)));
 }
 
 double	get_delta_y(double angle)
 {
-	return (PLAYER_CENTER + (PLAYER_CENTER * sin(angle)));
+	return (PLAYER_CENTER * (1 + sin(angle)));
 }
 
 double	adjust_angle(double angle, int direction)
