@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:24:43 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/17 15:56:19 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/17 17:03:48 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ void	movement(t_player *player, int direction)
 	player->img->instances->y += (int) delta_y;
 }
 
+static void	recalculate_deltas(t_player *player)
+{
+	player->delta_x = get_delta_x(player->angle);
+	player->delta_y = get_delta_y(player->angle);
+}
+
 void	player_moves(mlx_key_data_t key, void *param)
 {
 	t_loop_data *const	data = (t_loop_data *)param;
@@ -53,17 +59,10 @@ void	player_moves(mlx_key_data_t key, void *param)
 	if (key.key == MLX_KEY_D)
 		movement(player, RIGHT);
 	if (key.key == MLX_KEY_LEFT)
-	{
-		data->player->angle = adjust_angle(player->angle, -1);
-		data->player->delta_x = get_delta_x(player->angle);
-		data->player->delta_y = get_delta_y(player->angle);
-	}
+		player->angle = adjust_angle(player->angle, -1);
 	if (key.key == MLX_KEY_RIGHT)
-	{
 		player->angle = adjust_angle(player->angle, 1);
-		player->delta_x = get_delta_x(player->angle);
-		player->delta_y = get_delta_y(player->angle);
-	}
+	recalculate_deltas(player);
 	redraw_player(player);
 	draw_horizontal_rays(data, player);
 	draw_vertical_ray(data, player);

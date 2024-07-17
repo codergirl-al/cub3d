@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:02:55 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/17 15:53:19 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/17 16:55:20 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ bool	is_inside_map(int x, int y)
 	return (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT);
 }
 
-void	find_h_wall(t_loop_data *data, t_player *player, int coords[2])
+void	find_h_wall(t_loop_data *data, double angle, int coords[2])
 {
-	const float			ncot = -1 / tan(player->angle);
+	const float			ncot = -1 / tan(angle);
 	int					adjustment[2];
 
 	adjustment[X] = 64 * ncot;
 	adjustment[Y] = -64;
-	if (player->angle < PI)
+	if (angle < PI)
 	{
 		adjustment[X] *= -1;
 		adjustment[Y] *= -1;
@@ -35,7 +35,7 @@ void	find_h_wall(t_loop_data *data, t_player *player, int coords[2])
 		coords[Y] += adjustment[Y];
 		coords[X] += adjustment[X];
 	}
-	if (player->angle < PI)
+	if (angle < PI)
 		coords[Y] -= 1;
 }
 
@@ -60,7 +60,7 @@ void	draw_horizontal_rays(t_loop_data *data, t_player *player)
 		mlx_put_pixel(ray, 0, 0, 0x00FF00FF);
 		mlx_image_to_window(data->window, ray, hit_coords[X], hit_coords[Y]);
 	}
-	find_h_wall(data, player, hit_coords);
+	find_h_wall(data, player->angle, hit_coords);
 	ray->instances->x = hit_coords[X];
 	ray->instances->y = hit_coords[Y];
 }

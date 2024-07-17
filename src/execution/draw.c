@@ -6,35 +6,13 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:19:44 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/16 16:12:30 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/17 16:53:19 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	is_coord_valid(int *xy, const mlx_image_t *image)
-{
-	uint32_t	x;
-	uint32_t	y;
-
-	x = *xy;
-	y = xy[1];
-	if (x < 0 || x >= image->width || y < 0 || y >= image->height)
-		return (0);
-	return (1);
-}
-
-void	put_pixel(const mlx_image_t *img, int x, int y, int color)
-{
-	mlx_image_t	*image;
-
-	image = (mlx_image_t *)img;
-	if (is_coord_valid((int []){x, y}, img))
-		mlx_put_pixel(image, x, y, color);
-}
-
-static void	draw_straight(const mlx_image_t *img, int *start, int *final,
-		int color)
+static void	draw_straight(mlx_image_t *img, int *start, int *final, int color)
 {
 	int		i;
 
@@ -44,13 +22,12 @@ static void	draw_straight(const mlx_image_t *img, int *start, int *final,
 	if (start[1] > final[1] || start[0] > final[0])
 		return (draw_straight(img, final, start, color));
 	while (++i + start[1] <= final[1] && start[0] == final[0])
-		put_pixel(img, start[0], start[1] + i, color);
+		mlx_put_pixel(img, start[0], start[1] + i, color);
 	while (++i + start[0] <= final[0] && start[1] == final[1])
-		put_pixel(img, start[0] + i, start[1], color);
+		mlx_put_pixel(img, start[0] + i, start[1], color);
 }
 
-void	draw_line(const mlx_image_t *img, int start[2], int end[2],
-		int color)
+void	draw_line(mlx_image_t *img, int start[2], int end[2], int color)
 {
 	float	slope;
 	float	y;
@@ -66,9 +43,9 @@ void	draw_line(const mlx_image_t *img, int start[2], int end[2],
 	{
 		i = 1;
 		while (--i > slope && slope < 0 && y + i >= end[1])
-			put_pixel(img, *start, y + i, color);
+			mlx_put_pixel(img, *start, y + i, color);
 		while (i++ < slope && slope > 0 && y + i <= end[1] && i >= 0)
-			put_pixel(img, *start, y + i, color);
+			mlx_put_pixel(img, *start, y + i, color);
 		y += slope;
 		*start += 1;
 	}

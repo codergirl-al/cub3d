@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:46:43 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/12 14:33:14 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/17 17:05:38 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ static char	*ft_get_map(t_data *gd)
 	}
 }
 
-int	ft_read_map() 
+int	ft_read_map(void)
 {
 	return (1);
 }
 
-int	ft_validate_map()
+int	ft_validate_map(void)
 {
 	return (1);
 }

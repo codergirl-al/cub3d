@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 18:47:49 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/17 15:56:19 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/17 16:53:01 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ typedef struct s_loop_data
 	mlx_t		*window;
 }	t_loop_data;
 
-void	draw_line(const mlx_image_t *img, int start[2], int end[2], int color);
-void	put_pixel(const mlx_image_t *img, int x, int y, int color);
+void	draw_line(mlx_image_t *img, int start[2], int end[2], int color);
 void	player_moves(mlx_key_data_t key, void *param);
 int		put_player(mlx_t *window, t_player player[1]);
 int		redraw_player(t_player player[1]);

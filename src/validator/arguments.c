@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 23:03:00 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/12 14:32:05 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/17 17:05:06 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,3 @@ int	ft_validate_args(int argc, char **argv)
 	close (fd);
 	return (0);
 }
-
