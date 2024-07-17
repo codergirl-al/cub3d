@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:59:21 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/17 15:15:31 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/17 17:55:45 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ double	get_delta_y(double angle)
 
 double	adjust_angle(double angle, int direction)
 {
-	angle += direction * 0.08727;
+	angle += direction * RADIAN_STEP;
 	if (angle < 0)
 		angle += 2 * PI;
 	if (angle > 2 * PI)

@@ -6,13 +6,13 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:13:36 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/17 16:55:31 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/17 19:14:21 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	find_v_wall(t_loop_data *data, double angle, int coords[2])
+static void	find_wall(t_loop_data *data, double angle, int coords[2])
 {
 	const float			ntan = -tan(angle);
 	int					adjustment[2];
@@ -34,28 +34,24 @@ void	find_v_wall(t_loop_data *data, double angle, int coords[2])
 		coords[X] -= 1;
 }
 
-void	draw_vertical_ray(t_loop_data *data, t_player *player)
+static double	get_adjustment_to_where_player_is_facing(double angle)
 {
-	int					hit_coords[2];
-	static mlx_image_t	*ray;
-	const float			ntan = -tan(player->angle);
-	const int			player_pos[2]
-		= {(int)(player->img->instances->x + PLAYER_CENTER),
-		(player->img->instances->y + PLAYER_CENTER)};
+	if (angle > PI / 2 && angle < 3 * PI / 2)
+		return (-0.0001);
+	return (64);
+}
 
-	hit_coords[X] = normalize_coord_to_grid(player_pos[X]);
-	if (player->angle > PI / 2 && player->angle < 3 * PI / 2)
-		hit_coords[X] -= 0.0001;
-	else
-		hit_coords[X] += 64;
-	hit_coords[Y] = (player_pos[X] - hit_coords[X]) * ntan + player_pos[Y];
-	if (ray == NULL)
-	{
-		ray = mlx_new_image(data->window, 1, 1);
-		mlx_put_pixel(ray, 0, 0, 0xFF00FFFF);
-		mlx_image_to_window(data->window, ray, hit_coords[X], hit_coords[Y]);
-	}
-	find_v_wall(data, player->angle, hit_coords);
-	ray->instances->x = hit_coords[X];
-	ray->instances->y = hit_coords[Y];
+int	*get_coords_vertical_ray(t_loop_data *data, double angle)
+{
+	static int			coords[2];
+	const float			ntan = -tan(angle);
+	const int			player_pos[2]
+		= {(int)(data->player->img->instances->x + PLAYER_CENTER),
+		(data->player->img->instances->y + PLAYER_CENTER)};
+
+	coords[X] = normalize_coord_to_grid(player_pos[X]);
+	coords[X] += get_adjustment_to_where_player_is_facing(angle);
+	coords[Y] = (player_pos[X] - coords[X]) * ntan + player_pos[Y];
+	find_wall(data, angle, coords);
+	return (coords);
 }

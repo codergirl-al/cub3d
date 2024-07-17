@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:24:43 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/17 17:03:48 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/17 19:13:25 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ void	player_moves(mlx_key_data_t key, void *param)
 	if (key.key == MLX_KEY_D)
 		movement(player, RIGHT);
 	if (key.key == MLX_KEY_LEFT)
-		player->angle = adjust_angle(player->angle, -1);
+		player->angle = adjust_angle(player->angle, CLOCKWISE);
 	if (key.key == MLX_KEY_RIGHT)
-		player->angle = adjust_angle(player->angle, 1);
+		player->angle = adjust_angle(player->angle, COUNTER_CLOCKWISE);
 	recalculate_deltas(player);
 	redraw_player(player);
 	draw_horizontal_rays(data, player);
-	draw_vertical_ray(data, player);
+	cast_rays(data);
 }

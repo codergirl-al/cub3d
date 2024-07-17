@@ -6,7 +6,7 @@
 #    By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 23:23:18 by apeposhi          #+#    #+#              #
-#    Updated: 2024/07/17 15:02:27 by JFikents         ###   ########.fr        #
+#    Updated: 2024/07/17 20:15:25 by JFikents         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,11 @@ endif
 all: $(NAME)
 
 # Sources & Objects
-_EXEC_SRC		:=	draw.c keyhook.c math.c horizontal_rays.c vertical_rays.c
+_DEPENDENCIES	:=	cub3d.h exec.h
+DEPENDENCIES	:=	$(addprefix include/, $(_DEPENDENCIES))
+
+_EXEC_SRC		:=	draw.c keyhook.c math.c horizontal_rays.c vertical_rays.c\
+					cast_rays.c
 EXEC_SRC		:=	$(addprefix execution/, $(_EXEC_SRC))
 
 _CLEANUP_SRC	:=	cleanup.c
@@ -91,7 +95,7 @@ bin/:
 	@mkdir -p bin/cleanup bin/parser bin/validator bin/execution
 
 # Suffix Rules
-bin/%.o: src/%.c | bin/
+bin/%.o: src/%.c $(DEPENDENCIES) | bin/
 	$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDES)
 
 # Phony Targets
