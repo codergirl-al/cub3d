@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:46:25 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/17 22:43:35 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/07/17 23:01:39 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@
 int	ft_check_map(char **argv, t_data *playground)
 {
 	int 	i;
+	int		k;
 	char	**temp;
 	char	**temp2;
 	int		fd;
 
 	temp = malloc(sizeof(char *) * 5);
-	if (!temp)
+	temp2 = malloc(sizeof(char *) * 10);
+	if (!temp || !temp2)
 	  return (0);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0) {
@@ -35,27 +37,37 @@ int	ft_check_map(char **argv, t_data *playground)
 	  return (0);
 	}
 	i = -1;
+	k = 0;
 	while (++i < 4)
 	{
-	  temp[i] = get_next_line(fd);
-	  if (!temp[i])
-	    break;
+		temp[i] = get_next_line(fd);
+		if (!temp[i])
+			break;
 
-	  temp2 = ft_split(temp[i], ' ');
-	  textures[i] = 
-	  if (!playground->textures) {
-	    perror("Error splitting line");
-	    free(temp);
-	    close(fd);
-	    return (0);
-	  }
-	  printf("Printing example 1: %s\n", playground->texture_2d[i]);
-	  // printf("Printing example 2: %s\n", playground->texture_2d[2]);
+		temp2 = ft_split(temp[i], ' ');
+		playground->textures[k] = temp2[0];
+		playground->textures[++k] = temp2[1];
+		if (!playground->textures)
+		{
+			perror("Error splitting line");
+			free(temp);
+			free(temp2);
+			close(fd);
+			return (0);
+		}
+		printf("Printing example 1: %s\n", playground->textures[i]);
+		// printf("Printing example 2: %s\n", playground->texture_2d[2]);
 	}
-
-	for (int j = 0; j < i; j++)
-	  free(temp[j]);
+	i = -1;
+	k = -1;
+	while((++i || ++k) && k < 8)
+	{
+		if (i < 4)
+			free(temp[i]);
+		free(temp2[k]);
+	}
 	free(temp);
+	free(temp2);
 	close(fd);
 	return (0);
 }

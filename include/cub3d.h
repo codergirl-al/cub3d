@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:53:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/17 22:42:31 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/07/17 22:46:28 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef struct s_data
 	char	*current_line;
 	char	*texture_key;
 	char	*map_data;
-	char	*textures;
+	char	**textures;
 	char	**square_map;
 	char	**rgb_values;
 	// t_txtr *textures;
