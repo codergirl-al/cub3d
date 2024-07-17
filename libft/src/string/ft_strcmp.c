@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/14 23:31:56 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/17 16:31:49 by apeposhi         ###   ########.fr       */
+/*   Created: 2024/07/17 17:48:32 by apeposhi          #+#    #+#             */
+/*   Updated: 2024/07/17 19:05:28 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
-
-int	ft_print_err(char *message, int r_value)
+int	ft_strcmp(char *s1, char *s2)
 {
-	ft_putstr_fd("Error: ", 2);
-	ft_putstr_fd(message, 2);
-	return (r_value);
+	int i;
+	
+	i = 0;
+
+	while ((s1[i] == s2[i]) && s1[i] && s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }

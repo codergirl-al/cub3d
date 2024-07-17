@@ -6,14 +6,14 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:53:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/16 12:40:04 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/07/17 22:42:31 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_h
 
-# include "libft.h"
+# include "../libft/includes/libft.h"
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -84,7 +84,7 @@ typedef struct s_data
 	char	*current_line;
 	char	*texture_key;
 	char	*map_data;
-	char	**texture_2d;
+	char	*textures;
 	char	**square_map;
 	char	**rgb_values;
 	// t_txtr *textures;
@@ -94,6 +94,10 @@ typedef struct s_data
 int	ft_validate_args(int argc, char **argv);
 
 // parser functions
+t_data	ft_parse(t_data *playground, int argc, char **argv);
+
+// parser utilities
+int	ft_check_ending(char *filename);
 
 // utility functions
 int	ft_print_err(char *message, int r_value);

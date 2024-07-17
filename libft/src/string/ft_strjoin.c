@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 18:44:59 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/16 23:51:18 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/07/17 19:28:27 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 ** concatenation of the 2 original strings. NULL is returned if
 ** malloc fails.
 */
-char *ft_strjoin(char *s1, char *s2) {
+char  *ft_strjoin(char *s1, char *s2)
+{
   size_t i;
   size_t j;
   char *res;
