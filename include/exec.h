@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 18:47:49 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/16 18:55:14 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/17 15:56:19 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 # define PI 3.1415926535
 # define PLAYER_CENTER 16
+# define WIDTH 768
+# define HEIGHT 640
 
 enum e_coordinates
 {
@@ -57,7 +59,9 @@ int		redraw_player(t_player player[1]);
 double	get_delta_x(double angle);
 double	get_delta_y(double angle);
 double	adjust_angle(double angle, int direction);
-void	draw_h_ray(t_loop_data *data, t_player *player);
-void	draw_v_ray(t_loop_data *data, t_player *player);
+void	draw_horizontal_rays(t_loop_data *data, t_player *player);
+void	draw_vertical_ray(t_loop_data *data, t_player *player);
+int		normalize_coord_to_grid(int coord);
+bool	is_inside_map(int x, int y);
 
 #endif

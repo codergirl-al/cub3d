@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:24:43 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/16 18:56:14 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/17 15:56:19 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ void	player_moves(mlx_key_data_t key, void *param)
 		player->delta_y = get_delta_y(player->angle);
 	}
 	redraw_player(player);
-	draw_h_ray(data, player);
-	draw_v_ray(data, player);
+	draw_horizontal_rays(data, player);
+	draw_vertical_ray(data, player);
 }

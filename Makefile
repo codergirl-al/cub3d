@@ -6,7 +6,7 @@
 #    By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 23:23:18 by apeposhi          #+#    #+#              #
-#    Updated: 2024/07/16 20:54:38 by JFikents         ###   ########.fr        #
+#    Updated: 2024/07/17 15:02:27 by JFikents         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ endif
 all: $(NAME)
 
 # Sources & Objects
-_EXEC_SRC		:=	draw.c keyhook.c math.c
+_EXEC_SRC		:=	draw.c keyhook.c math.c horizontal_rays.c vertical_rays.c
 EXEC_SRC		:=	$(addprefix execution/, $(_EXEC_SRC))
 
 _CLEANUP_SRC	:=	cleanup.c

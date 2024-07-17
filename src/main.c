@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:52:21 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/16 18:54:33 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/17 15:55:51 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ const char	**get_map(t_player player[1])
 	player->delta_y = 17 * (1 + sin(player->angle));
 	return (map);
 }
-
 
 mlx_image_t	*get_wall_img(mlx_t *window)
 {
@@ -104,7 +103,7 @@ int	main(void)
 	t_loop_data	data[1];
 
 	data->map = get_map(data->player);
-	data->window = mlx_init(768, 640, "Cub3D", true);
+	data->window = mlx_init(WIDTH, HEIGHT, "Cub3D", true);
 	data->player->img = NULL;
 	put_map(data->window, data->map);
 	put_player(data->window, data->player);
