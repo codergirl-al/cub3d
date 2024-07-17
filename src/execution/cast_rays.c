@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 18:19:53 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/17 20:18:33 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/17 20:47:23 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static int	*get_closer_wall_to_player(t_loop_data *data, double angle)
 	int		*coords;
 	int		*horizontal;
 	int		*vertical;
+	int		hipotenuse;
 
-	// horizontal = get_coords_horizontal_ray(data, angle);
-	(void)horizontal;
+	horizontal = get_coords_horizontal_ray(data, angle);
 	vertical = get_coords_vertical_ray(data, angle);
 	coords = vertical;
 	return (coords);

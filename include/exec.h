@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 18:47:49 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/17 20:18:27 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/17 20:47:54 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		redraw_player(t_player player[1]);
 double	get_delta_x(double angle);
 double	get_delta_y(double angle);
 double	adjust_angle(double angle, int direction);
-void	draw_horizontal_rays(t_loop_data *data, t_player *player);
+int		*get_coords_horizontal_ray(t_loop_data *data, double angle);
 int		*get_coords_vertical_ray(t_loop_data *data, double angle);
 int		normalize_coord_to_grid(int coord);
 bool	is_inside_map(int x, int y);
