@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:02:55 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/17 20:48:26 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/18 11:16:44 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ static double	get_adjustment_to_where_player_is_facing(double angle)
 
 int	*get_coords_horizontal_ray(t_loop_data *data, double angle)
 {
-	int					coords[2];
-	const float			ncot = -1 / tan(angle);
-	const int			player_pos[2]
+	static int	coords[2];
+	const float	ncot = -1 / tan(angle);
+	const int	player_pos[2]
 		= {data->player->img->instances->x + PLAYER_CENTER,
 		data->player->img->instances->y + PLAYER_CENTER};
 

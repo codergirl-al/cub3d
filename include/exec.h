@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 18:47:49 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/17 20:47:54 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/18 11:49:57 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ int		*get_coords_vertical_ray(t_loop_data *data, double angle);
 int		normalize_coord_to_grid(int coord);
 bool	is_inside_map(int x, int y);
 void	cast_rays(t_loop_data *data);
+double	get_hipothenuse(int opposite, double angle);
 
 #endif
