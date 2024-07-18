@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:19:44 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/17 16:53:19 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/18 13:39:40 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,11 @@ void	draw_line(mlx_image_t *img, int start[2], int end[2], int color)
 
 int	put_player(mlx_t *window, t_player player[1])
 {
-	player->img = mlx_new_image(window, 33, 33);
+	player->img = mlx_new_image(window, (PLAYER_CENTER * 2) + 1,
+			(PLAYER_CENTER * 2) + 1);
 	redraw_player(player);
-	mlx_image_to_window(window, player->img, player->x * 64, player->y * 64);
+	mlx_image_to_window(window, player->img, player->x * MINIMAP_SIZE,
+		player->y * MINIMAP_SIZE);
 	return (0);
 }
 
@@ -66,18 +68,6 @@ int	redraw_player(t_player player[1])
 	draw_line(player->img, (int []){PLAYER_CENTER, PLAYER_CENTER},
 		(int []){(player->delta_x), (player->delta_y)}, 0xff0000FF);
 	mlx_put_pixel(player->img, PLAYER_CENTER, PLAYER_CENTER, 0xffffffFF);
-	mlx_put_pixel(player->img, PLAYER_CENTER + 1, PLAYER_CENTER, 0xffffffFF);
-	mlx_put_pixel(player->img, PLAYER_CENTER - 1, PLAYER_CENTER, 0xffffffFF);
-	mlx_put_pixel(player->img, PLAYER_CENTER, PLAYER_CENTER + 1, 0xffffffFF);
-	mlx_put_pixel(player->img, PLAYER_CENTER, PLAYER_CENTER - 1, 0xffffffFF);
 	mlx_put_pixel(player->img, 0, 0, 0xffff00FF);
-	mlx_put_pixel(player->img, PLAYER_CENTER - 1, PLAYER_CENTER + 1,
-		0xffffffFF);
-	mlx_put_pixel(player->img, PLAYER_CENTER - 1, PLAYER_CENTER - 1,
-		0xffffffFF);
-	mlx_put_pixel(player->img, PLAYER_CENTER + 1, PLAYER_CENTER + 1,
-		0xffffffFF);
-	mlx_put_pixel(player->img, PLAYER_CENTER + 1, PLAYER_CENTER - 1,
-		0xffffffFF);
 	return (0);
 }

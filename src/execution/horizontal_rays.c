@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:02:55 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/18 11:16:44 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/18 12:18:15 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	is_inside_map(int x, int y)
 {
-	return (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT);
+	return (x >= 0 && x < MINIMAP_SIZE * 11 && y >= 0 && y < MINIMAP_SIZE * 10);
 }
 
 static void	find_wall(t_loop_data *data, double angle, int coords[2])
@@ -22,15 +22,15 @@ static void	find_wall(t_loop_data *data, double angle, int coords[2])
 	const float			ncot = -1 / tan(angle);
 	int					adjustment[2];
 
-	adjustment[X] = 64 * ncot;
-	adjustment[Y] = -64;
+	adjustment[X] = MINIMAP_SIZE * ncot;
+	adjustment[Y] = -MINIMAP_SIZE;
 	if (angle < PI)
 	{
 		adjustment[X] *= -1;
 		adjustment[Y] *= -1;
 	}
 	while (is_inside_map(coords[X], coords[Y])
-		&& data->map[coords[Y] / 64][coords[X] / 64] != '1')
+		&& data->map[coords[Y] / MINIMAP_SIZE][coords[X] / MINIMAP_SIZE] != '1')
 	{
 		coords[Y] += adjustment[Y];
 		coords[X] += adjustment[X];
@@ -43,7 +43,7 @@ static double	get_adjustment_to_where_player_is_facing(double angle)
 {
 	if (angle > PI)
 		return (-0.0001);
-	return (64);
+	return (MINIMAP_SIZE);
 }
 
 int	*get_coords_horizontal_ray(t_loop_data *data, double angle)

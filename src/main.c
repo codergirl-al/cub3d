@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:52:21 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/17 15:55:51 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/18 12:14:10 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ mlx_image_t	*get_wall_img(mlx_t *window)
 	int			x;
 	int			y;
 
-	img = mlx_new_image(window, 64, 64);
+	img = mlx_new_image(window, MINIMAP_SIZE, MINIMAP_SIZE);
 	y = 0;
-	while (y < 63)
+	while (y < MINIMAP_SIZE - 1)
 	{
 		x = 0;
-		while (x < 63)
+		while (x < MINIMAP_SIZE - 1)
 			mlx_put_pixel(img, x++, y, 0x00FFFFFF);
 		y++;
 	}
@@ -60,12 +60,12 @@ mlx_image_t	*get_floor_img(mlx_t *window)
 	int			x;
 	int			y;
 
-	img = mlx_new_image(window, 64, 64);
+	img = mlx_new_image(window, MINIMAP_SIZE, MINIMAP_SIZE);
 	y = 0;
-	while (y < 63)
+	while (y < MINIMAP_SIZE - 1)
 	{
 		x = 0;
-		while (x < 63)
+		while (x < MINIMAP_SIZE - 1)
 			mlx_put_pixel(img, x++, y, 0x000000FF);
 		y++;
 	}
@@ -88,9 +88,11 @@ int	put_map(mlx_t *window, const char **map)
 		while (map[y][x])
 		{
 			if (map[y][x] == '1')
-				mlx_image_to_window(window, wall, x * 64, y * 64);
+				mlx_image_to_window(window, wall, x * MINIMAP_SIZE,
+					y * MINIMAP_SIZE);
 			else
-				mlx_image_to_window(window, floor, x * 64, y * 64);
+				mlx_image_to_window(window, floor, x * MINIMAP_SIZE,
+					y * MINIMAP_SIZE);
 			x++;
 		}
 		y++;
