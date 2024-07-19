@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:24:48 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/17 19:29:08 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/07/18 23:39:28 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_memset(void *str, int c, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
-void	*ft_calloc(size_t nmemb, size_t size);
+void	*ft_calloc(unsigned long count, unsigned long size);
 void	ft_bzero(void *s, size_t n);
 
 /*		STRING		*/

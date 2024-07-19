@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:53:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/17 22:46:28 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/07/18 22:44:23 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_data
 	int		map_height;
 	char	**floor_data;
 	char	**ceiling_data;
-	int		file_desc;
+	int		fd;
 	int		index;
 	char	*current_line;
 	char	*texture_key;

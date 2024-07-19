@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:29:07 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/01/09 14:50:27 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/07/18 18:19:54 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,16 @@
 ** @return the memory address with the corresponding size,
 ** null when malloc fails.
 */
-void	*ft_calloc(size_t count, size_t size)
+void *ft_calloc(unsigned long count, unsigned long size)
 {
-	void	*ptr;
-	size_t	amount;
+  void *new_p;
+  unsigned long i;
 
-	amount = count * size;
-	if (count && (amount) / count != size)
-		return (NULL);
-	ptr = malloc(amount);
-	if (!ptr)
-		return (NULL);
-	ft_bzero(ptr, amount);
-	return (ptr);
+  i = 0;
+  new_p = malloc(count * size);
+  if (!new_p)
+    return ((void *)0);
+  while ((count * size) > i)
+    ((char *)new_p)[i++] = 0;
+  return (new_p);
 }

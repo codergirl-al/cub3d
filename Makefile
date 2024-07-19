@@ -6,7 +6,7 @@
 #    By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 23:23:18 by apeposhi          #+#    #+#              #
-#    Updated: 2024/07/17 20:54:12 by apeposhi         ###   ########.fr        #
+#    Updated: 2024/07/18 23:20:18 by apeposhi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,7 @@ OBJS            :=  $(SRC:src/%.c=bin/%.o)
 
 # Compiler and Flags
 CC              :=  cc
-CFLAGS          :=  -Wall -Wextra -Werror 
-# -fsanitize=address -g
+CFLAGS          :=  -Wall -Wextra -Werror -fsanitize=address -g
 
 INCLUDES        :=  -Iinclude -Ilibft/includes
 
@@ -46,7 +45,7 @@ LIBS            :=  -Llibft -lft
 # Targets
 
 $(NAME): $(OBJS) libft/libft.a
-	$(CC) -o $@ $(OBJS) $(CFLAGS) $(INCLUDES) $(LIBS)
+	$(CC) -o $@ $(OBJS) $(CFLAGS)  $(INCLUDES) $(LIBS)
 
 libft/libft.a: 
 	$(MAKE) -C libft
