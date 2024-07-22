@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:52:21 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/18 18:10:53 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/22 16:16:15 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ int	main(void)
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	mlx_set_setting(MLX_FULLSCREEN, true);
 	mlx_key_hook(data->window, player_moves, (void *)data);
+	mlx_loop_hook(data->window, render_fov, (void *)data);
 	mlx_loop(data->window);
 	return (0);
 }

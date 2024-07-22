@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:13:36 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/18 17:13:57 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/22 15:55:30 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	find_wall(t_loop_data *data, double angle, int coords[2])
 static double	get_adjustment_to_where_player_is_facing(double angle)
 {
 	if (angle > PI / 2 && angle < 3 * PI / 2)
-		return (-0.005);
+		return (-0.0001);
 	return (MINIMAP_SIZE);
 }
 

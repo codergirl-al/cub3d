@@ -86,5 +86,6 @@ bool		is_inside_map(int x, int y, t_loop_data *data);
 mlx_image_t	**cast_rays(t_loop_data *data);
 double		get_hipothenuse(int opposite, double angle);
 void		movement(t_loop_data *data, int direction);
+void		render_fov(void *param);
 
 #endif
