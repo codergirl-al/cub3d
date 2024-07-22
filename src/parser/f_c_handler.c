@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   f_c_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/12 11:04:05 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/20 16:07:27 by apeposhi         ###   ########.fr       */
+/*   Created: 2024/07/22 15:23:19 by apeposhi          #+#    #+#             */
+/*   Updated: 2024/07/22 15:38:12 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
-int main(int argc, char **argv)
+int ft_handle_input(t_data *playground, char flag)
 {
-	t_data	playground;
-	
-	playground = ft_parse(argc, argv);
-	// set up hookers nd shit
-	ft_free_data(&playground);
+	if (flag == 'C')
+ 		printf("============== %c: %s\n", flag, playground->ceiling_data);
+	else
+		printf("============== %c: %s\n", flag, playground->floor_data);
+	return (1);
 }

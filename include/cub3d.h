@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:53:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/18 22:44:23 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/07/22 15:23:02 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,14 @@ typedef struct s_data
 	char	player_d;
 	int		map_width;
 	int		map_height;
-	char	**floor_data;
-	char	**ceiling_data;
+	char	*floor_data;
+	char	*ceiling_data;
 	int		fd;
 	int		index;
 	char	*current_line;
 	char	*texture_key;
 	char	*map_data;
-	char	**textures;
+	char	*textures;
 	char	**square_map;
 	char	**rgb_values;
 	// t_txtr *textures;
@@ -94,8 +94,11 @@ typedef struct s_data
 int	ft_validate_args(int argc, char **argv);
 
 // parser functions
-t_data	ft_parse(t_data *playground, int argc, char **argv);
-
+// t_data	ft_parse(t_data *playground, int argc, char **argv);
+t_data	ft_parse(int argc, char **argv);
+int		ft_handle_textures(t_data *playground);
+int		ft_handle_map(t_data *playground);
+int		ft_handle_input(t_data *playground, char flag);
 // parser utilities
 int	ft_check_ending(char *filename);
 
