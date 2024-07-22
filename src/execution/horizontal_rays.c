@@ -6,15 +6,16 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:02:55 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/18 12:18:15 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/18 17:13:46 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	is_inside_map(int x, int y)
+bool	is_inside_map(int x, int y, t_loop_data *data)
 {
-	return (x >= 0 && x < MINIMAP_SIZE * 11 && y >= 0 && y < MINIMAP_SIZE * 10);
+	return (x >= 0 && x < MINIMAP_SIZE * data->map_width
+		&& y >= 0 && y < MINIMAP_SIZE * data->map_height);
 }
 
 static void	find_wall(t_loop_data *data, double angle, int coords[2])
@@ -29,7 +30,7 @@ static void	find_wall(t_loop_data *data, double angle, int coords[2])
 		adjustment[X] *= -1;
 		adjustment[Y] *= -1;
 	}
-	while (is_inside_map(coords[X], coords[Y])
+	while (is_inside_map(coords[X], coords[Y], data)
 		&& data->map[coords[Y] / MINIMAP_SIZE][coords[X] / MINIMAP_SIZE] != '1')
 	{
 		coords[Y] += adjustment[Y];

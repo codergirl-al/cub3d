@@ -6,33 +6,49 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:52:21 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/18 12:14:10 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/18 18:10:53 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-const char	**get_map(t_player player[1])
+		// "111111111111",
+		// "100010000001",
+		// "100010000001",
+		// "100001000001",
+		// "10000N000001",
+		// "100000000001",
+		// "100100000001",
+		// "100010000001",
+		// "100000000001",
+		// "111111111111",
+const char	**get_map(t_player player[1], t_loop_data *data)
 {
-	static const char	*map[11] = {
-		"111111111111",
-		"100010000001",
-		"100010000001",
-		"100001000001",
-		"10000N000001",
-		"100000000001",
-		"100100000001",
-		"100010000001",
-		"100000000001",
-		"111111111111",
+	static const char	*map[15] = {
+		"1111111111111111111111111",
+		"1000000000110000000000001",
+		"1011000001110000000000001",
+		"100100000000000000000000111111111",
+		"111111111011000001110000000000001",
+		"100000000011000001110111100011111",
+		"11110111111111011100000010001",
+		"11110111111111011101010010001",
+		"11000000110101011100000010001",
+		"10000000000000001100000010001",
+		"10000000000000001101010010001",
+		"11000001110101011111011110N0111",
+		"11110111 1110101 101111010001",
+		"11111111 1111111 111111111111",
 		NULL
 	};
 
-	player->x = 5;
-	player->y = 4;
+	data->map_height = 14;
+	data->map_width = 33;
+	player->x = 26;
+	player->y = 11;
 	player->angle = 3 * PI / 2;
-	player->delta_x = 17 * (1 + cos(player->angle));
-	player->delta_y = 17 * (1 + sin(player->angle));
+	player->delta_x = PLAYER_CENTER * (1 + cos(player->angle));
+	player->delta_y = PLAYER_CENTER * (1 + sin(player->angle));
 	return (map);
 }
 
@@ -72,15 +88,30 @@ mlx_image_t	*get_floor_img(mlx_t *window)
 	return (img);
 }
 
-int	put_map(mlx_t *window, const char **map)
+void	draw_minimap_tile(mlx_image_t *img, int x, int y, int color)
 {
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < MINIMAP_SIZE - 1)
+	{
+		j = 0;
+		while (j < MINIMAP_SIZE - 1)
+			mlx_put_pixel(img, x + j++, y + i, color);
+		i++;
+	}
+}
+
+mlx_image_t	*put_minimap(mlx_t *window, t_loop_data *data)
+{
+	const char	**map = data->map;
 	uint32_t	x;
 	uint32_t	y;
-	mlx_image_t	*wall;
-	mlx_image_t	*floor;
+	mlx_image_t	*minimap;
 
-	wall = get_wall_img(window);
-	floor = get_floor_img(window);
+	minimap = mlx_new_image(window, data->map_width * MINIMAP_SIZE,
+			data->map_height * MINIMAP_SIZE);
 	y = 0;
 	while (map[y])
 	{
@@ -88,26 +119,54 @@ int	put_map(mlx_t *window, const char **map)
 		while (map[y][x])
 		{
 			if (map[y][x] == '1')
-				mlx_image_to_window(window, wall, x * MINIMAP_SIZE,
-					y * MINIMAP_SIZE);
-			else
-				mlx_image_to_window(window, floor, x * MINIMAP_SIZE,
-					y * MINIMAP_SIZE);
+				draw_minimap_tile(minimap, x * MINIMAP_SIZE, y * MINIMAP_SIZE,
+					MINIMAP_WALL_COLOR);
+			else if (map[y][x] != ' ')
+				draw_minimap_tile(minimap, x * MINIMAP_SIZE, y * MINIMAP_SIZE,
+					MINIMAP_FLOOR_COLOR);
 			x++;
 		}
 		y++;
 	}
-	return (0);
+	mlx_image_to_window(window, minimap, 0, 0);
+	return (minimap);
+}
+
+static mlx_image_t	*put_floor_and_ceiling(mlx_t *window, int floor,
+	int ceiling)
+{
+	uint32_t	x;
+	uint32_t	y;
+	mlx_image_t	*img;
+
+	img = mlx_new_image(window, WIDTH, HEIGHT);
+	y = 0;
+	while (y < HEIGHT / 2)
+	{
+		x = 0;
+		while (x < WIDTH)
+			mlx_put_pixel(img, x++, y, ceiling);
+		y++;
+	}
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+			mlx_put_pixel(img, x++, y, floor);
+		y++;
+	}
+	mlx_image_to_window(window, img, 0, 0);
+	return (img);
 }
 
 int	main(void)
 {
 	t_loop_data	data[1];
 
-	data->map = get_map(data->player);
+	data->map = get_map(data->player, data);
 	data->window = mlx_init(WIDTH, HEIGHT, "Cub3D", true);
-	data->player->img = NULL;
-	put_map(data->window, data->map);
+	put_floor_and_ceiling(data->window, 0x888888FF, 0x008888FF);
+	put_minimap(data->window, data);
 	put_player(data->window, data->player);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	mlx_set_setting(MLX_FULLSCREEN, true);

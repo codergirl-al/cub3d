@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 18:19:53 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/18 11:46:33 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/18 15:00:58 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	*get_closer_wall_to_player(t_loop_data *data, double angle)
 	return (coords);
 }
 
-void	cast_rays(t_loop_data *data)
+mlx_image_t	**cast_rays(t_loop_data *data)
 {
 	double				angle;
 	static mlx_image_t	**ray = NULL;
@@ -66,4 +66,5 @@ void	cast_rays(t_loop_data *data)
 		angle = adjust_angle(angle, COUNTER_CLOCKWISE);
 		i++;
 	}
+	return (ray);
 }
