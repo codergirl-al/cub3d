@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 18:19:53 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/25 18:34:04 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/25 18:38:13 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static mlx_image_t	*init_ray_images(mlx_t *window)
 {
-	static mlx_image_t	*ray;
-	int					i;
+	mlx_image_t	*ray;
+	int			i;
 
 	i = 0;
 	ray = mlx_new_image(window, 1, 1);
