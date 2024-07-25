@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:02:55 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/18 17:13:46 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/25 16:13:59 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,10 @@ static void	find_wall(t_loop_data *data, double angle, int coords[2])
 	const float			ncot = -1 / tan(angle);
 	int					adjustment[2];
 
-	adjustment[X] = MINIMAP_SIZE * ncot;
 	adjustment[Y] = -MINIMAP_SIZE;
 	if (angle < PI)
-	{
-		adjustment[X] *= -1;
 		adjustment[Y] *= -1;
-	}
+	adjustment[X] = -adjustment[Y] * ncot;
 	while (is_inside_map(coords[X], coords[Y], data)
 		&& data->map[coords[Y] / MINIMAP_SIZE][coords[X] / MINIMAP_SIZE] != '1')
 	{

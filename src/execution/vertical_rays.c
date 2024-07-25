@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:13:36 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/22 15:55:30 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/25 16:13:53 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,9 @@ static void	find_wall(t_loop_data *data, double angle, int coords[2])
 	int					adjustment[2];
 
 	adjustment[X] = MINIMAP_SIZE;
-	adjustment[Y] = -MINIMAP_SIZE * ntan;
 	if (angle > PI / 2 && angle < 3 * PI / 2)
-	{
 		adjustment[X] *= -1;
-		adjustment[Y] *= -1;
-	}
+	adjustment[Y] = -adjustment[X] * ntan;
 	while (is_inside_map(coords[X], coords[Y], data)
 		&& data->map[coords[Y] / MINIMAP_SIZE][coords[X] / MINIMAP_SIZE] != '1')
 	{
@@ -46,7 +43,7 @@ int	*get_coords_vertical_ray(t_loop_data *data, double angle)
 	static int			coords[2];
 	const float			ntan = -tan(angle);
 	const int			player_pos[2]
-		= {(int)(data->player->img->instances->x + PLAYER_CENTER),
+		= {data->player->img->instances->x + PLAYER_CENTER,
 		(data->player->img->instances->y + PLAYER_CENTER)};
 
 	coords[X] = normalize_coord_to_grid(player_pos[X]);
