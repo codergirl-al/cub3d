@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 18:19:53 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/18 15:00:58 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/25 14:48:24 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,14 @@ mlx_image_t	**cast_rays(t_loop_data *data)
 		ray = init_ray_images(data->window);
 	i = 0;
 	angle = data->player->angle - ((FOV * PI / 180) / 2);
+	angle = adjust_angle(angle, 0);
 	while (i <= RAY_COUNT)
 	{
 		wall_coords = get_closer_wall_to_player(data, angle);
 		ray[i]->instances->x = wall_coords[X];
 		ray[i]->instances->y = wall_coords[Y];
-		angle = adjust_angle(angle, COUNTER_CLOCKWISE);
+		angle += (FOV * PI / 180) / RAY_COUNT;
+		angle = adjust_angle(angle, 0);
 		i++;
 	}
 	return (ray);

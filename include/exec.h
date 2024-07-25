@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 18:47:49 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/18 17:13:19 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/25 14:45:47 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 enum e_data
 {
-	RAY_COUNT = (int)((FOV * PI / 180) / (RADIAN_STEP)),
+	RAY_COUNT = 60,
 	PLAYER_CENTER = MINIMAP_SIZE / 4,
 };
 
