@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 18:19:53 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/25 16:42:28 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/25 18:34:04 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,16 @@ static int	*get_closer_wall_to_player(t_loop_data *data, double angle)
 	int			*coords;
 	int			*horizontal;
 	int			*vertical;
-	double		hipotenuse;
+	double		h_hypotenuse;
 	const int	player_pos[2]
 		= {data->player->img->instances->x + PLAYER_CENTER,
 		data->player->img->instances->y + PLAYER_CENTER};
 
 	horizontal = get_coords_horizontal_ray(data, angle);
 	vertical = get_coords_vertical_ray(data, angle);
-	hipotenuse = get_hipothenuse(horizontal[Y] - player_pos[Y], angle);
+	h_hypotenuse = get_hypotenuse(horizontal[Y] - player_pos[Y], angle);
 	coords = vertical;
-	if (hipotenuse < get_hipothenuse(vertical[Y] - player_pos[Y], angle))
+	if (h_hypotenuse < get_hypotenuse(vertical[Y] - player_pos[Y], angle))
 		coords = horizontal;
 	return (coords);
 }
