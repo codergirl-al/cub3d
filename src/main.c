@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:52:21 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/22 16:16:15 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/30 14:03:48 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,15 @@ const char	**get_map(t_player player[1], t_loop_data *data)
 		"10000000000000001101010010001",
 		"11000001110101011111011110N0111",
 		"11110111 1110101 101111010001",
-		"11111111 1111111 111111111111",
-		NULL
-	};
+		"11111111 1111111 111111111111", NULL};
 
 	data->map_height = 14;
 	data->map_width = 33;
 	player->x = 26;
 	player->y = 11;
 	player->angle = 3 * PI / 2;
-	player->delta_x = PLAYER_CENTER * (1 + cos(player->angle));
-	player->delta_y = PLAYER_CENTER * (1 + sin(player->angle));
+	player->delta_x = get_delta_x(player->angle);
+	player->delta_y = get_delta_y(player->angle);
 	return (map);
 }
 
