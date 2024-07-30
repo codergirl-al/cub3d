@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 18:47:49 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/30 15:27:20 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/30 15:46:14 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@
 # define MINIMAP_SIZE 16
 # define MINIMAP_FLOOR_COLOR 0x00000044
 # define MINIMAP_WALL_COLOR 0x00FFFF44
+
+# define NORTH 4.7123889804 // 3 * PI / 2
+# define SOUTH 1.5707963268 // PI / 2
+# define EAST 0
+# define WEST 3.1415926535 // PI
 
 enum e_data
 {
