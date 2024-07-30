@@ -35,11 +35,11 @@ static void	draw_rectangle(mlx_image_t *img, int start[2], int end[2],
 static int	get_vertical_size(t_loop_data *data, int i)
 {
 	const double	angle
-		= adjust_angle(data->player->angle + (i * RADIAN_STEP), 0);
+		= adjust_angle(data->player->angle + (i * PI / 180), 0);
 	const int		opposite_side = (data->rays->instances[i].y
 			- (data->player->img->instances->y + PLAYER_CENTER));
 	const int		hypotenuse = (int) get_hypotenuse(opposite_side, angle);
-	const double	ray_distance = (hypotenuse * cos((i * RADIAN_STEP)));
+	const double	ray_distance = (hypotenuse * cos((i * PI / 180)));
 	int				vertical_size;
 
 	vertical_size = 0;
