@@ -128,7 +128,7 @@ int	main(void)
 	data->map = get_map(data->player, data);
 	data->window = mlx_init(WIDTH, HEIGHT, "Cub3D", true);
 	put_floor_and_ceiling(data->window, 0x888888FF, 0x008888FF);
-	put_minimap(data->window, data);
+	data->minimap = put_minimap(data->window, data);
 	put_player(data->window, data->player);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	mlx_set_setting(MLX_FULLSCREEN, true);

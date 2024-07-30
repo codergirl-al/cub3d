@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:24:43 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/29 14:40:58 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/30 15:11:34 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ void	render_fov(void *param)
 {
 	t_loop_data *const	data = (t_loop_data *)param;
 
+	if (data->fov == NULL)
+	{
+		data->fov = mlx_new_image(data->window, WIDTH, HEIGHT);
+		mlx_image_to_window(data->window, data->fov, 0, 0);
+	}
 	data->rays = cast_rays(data);
 	draw_fov(data);
 }

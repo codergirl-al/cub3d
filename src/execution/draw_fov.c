@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:22:28 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/29 19:52:42 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/30 15:26:42 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,23 @@ static int	get_vertical_size(t_loop_data *data, int i)
 	return (vertical_size);
 }
 
+static void	put_minimap_on_top(t_loop_data *data)
+{
+	const int			new_z = data->fov->instances->z + 1;
+
+	if (data->minimap == NULL
+		|| data->fov->instances->z < data->minimap->instances->z)
+		return ;
+	mlx_set_instance_depth(data->minimap->instances, new_z);
+	mlx_set_instance_depth(data->player->img->instances, new_z + 1);
+}
+
 void	draw_fov(t_loop_data *data)
 {
 	const int	horizontal_step = WIDTH / (RAY_COUNT - 1);
 	int			i;
 	int			vertical_size;
 
-	if (data->fov == NULL)
-	{
-		data->fov = mlx_new_image(data->window, WIDTH, HEIGHT);
-		mlx_image_to_window(data->window, data->fov, 0, 0);
-	}
 	ft_bzero(data->fov->pixels, WIDTH * HEIGHT * sizeof(int));
 	i = -1;
 	while (++i <= RAY_COUNT)
@@ -70,7 +76,5 @@ void	draw_fov(t_loop_data *data)
 			+ (vertical_size / 2)},
 			0x004400ff);
 	}
-	if (data->minimap != NULL)
-		mlx_set_instance_depth(data->minimap->instances,
-			data->fov->instances->z + 1);
+	put_minimap_on_top(data);
 }
