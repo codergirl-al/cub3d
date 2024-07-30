@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 18:47:49 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/30 15:46:14 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/30 16:31:38 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,14 @@ enum e_direction
 	RIGHT,
 };
 
+enum e_wall_orientation
+{
+	NORTH_TEXTURE,
+	SOUTH_TEXTURE,
+	EAST_TEXTURE,
+	WEST_TEXTURE,
+};
+
 typedef struct s_player
 {
 	double		x;
@@ -65,6 +73,12 @@ typedef struct s_player
 	mlx_image_t	*img;
 }				t_player;
 
+typedef struct ray_data
+{
+	enum e_wall_orientation	orientation;
+	mlx_image_t				*img;
+}	t_ray_data;
+
 typedef struct s_loop_data
 {
 	t_player	player[1];
@@ -72,7 +86,7 @@ typedef struct s_loop_data
 	int			map_width;
 	int			map_height;
 	mlx_image_t	*fov;
-	mlx_image_t	*rays;
+	t_ray_data	*rays;
 	mlx_image_t	*minimap;
 	mlx_t		*window;
 }	t_loop_data;
@@ -88,7 +102,7 @@ int			*get_coords_horizontal_ray(t_loop_data *data, double angle);
 int			*get_coords_vertical_ray(t_loop_data *data, double angle);
 int			normalize_coord_to_grid(int coord);
 bool		is_inside_map(int x, int y, t_loop_data *data);
-mlx_image_t	*cast_rays(t_loop_data *data);
+t_ray_data	*cast_rays(t_loop_data *data);
 double		get_hypotenuse(int opposite, double angle);
 void		movement(t_loop_data *data, int direction);
 void		render_fov(void *param);
