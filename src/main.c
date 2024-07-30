@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:52:21 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/30 14:03:48 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/30 14:06:05 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,42 +48,6 @@ const char	**get_map(t_player player[1], t_loop_data *data)
 	player->delta_x = get_delta_x(player->angle);
 	player->delta_y = get_delta_y(player->angle);
 	return (map);
-}
-
-mlx_image_t	*get_wall_img(mlx_t *window)
-{
-	mlx_image_t	*img;
-	int			x;
-	int			y;
-
-	img = mlx_new_image(window, MINIMAP_SIZE, MINIMAP_SIZE);
-	y = 0;
-	while (y < MINIMAP_SIZE - 1)
-	{
-		x = 0;
-		while (x < MINIMAP_SIZE - 1)
-			mlx_put_pixel(img, x++, y, 0x00FFFFFF);
-		y++;
-	}
-	return (img);
-}
-
-mlx_image_t	*get_floor_img(mlx_t *window)
-{
-	mlx_image_t	*img;
-	int			x;
-	int			y;
-
-	img = mlx_new_image(window, MINIMAP_SIZE, MINIMAP_SIZE);
-	y = 0;
-	while (y < MINIMAP_SIZE - 1)
-	{
-		x = 0;
-		while (x < MINIMAP_SIZE - 1)
-			mlx_put_pixel(img, x++, y, 0x000000FF);
-		y++;
-	}
-	return (img);
 }
 
 void	draw_minimap_tile(mlx_image_t *img, int x, int y, int color)
