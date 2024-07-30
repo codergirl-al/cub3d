@@ -50,7 +50,7 @@ static int	get_vertical_size(t_loop_data *data, int i)
 
 void	draw_fov(t_loop_data *data)
 {
-	const int	horizontal_step = WIDTH / RAY_COUNT;
+	const int	horizontal_step = WIDTH / (RAY_COUNT - 1);
 	int			i;
 	int			vertical_size;
 
@@ -61,7 +61,7 @@ void	draw_fov(t_loop_data *data)
 	}
 	ft_bzero(data->fov->pixels, WIDTH * HEIGHT * sizeof(int));
 	i = -1;
-	while (++i < RAY_COUNT)
+	while (++i <= RAY_COUNT)
 	{
 		vertical_size = get_vertical_size(data, i);
 		draw_rectangle(data->fov, (int [2]){i * horizontal_step,
