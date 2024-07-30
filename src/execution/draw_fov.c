@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:22:28 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/30 16:44:34 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/30 18:02:31 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	get_vertical_size(t_loop_data *data, int i)
 	const int		opposite_side = (data->rays->img->instances[i].y
 			- (data->player->img->instances->y + PLAYER_CENTER));
 	const int		hypotenuse = (int) get_hypotenuse(opposite_side, angle);
-	const double	ray_distance = (hypotenuse * cos((i * PI / 180)));
+	const double	ray_distance = (hypotenuse * cos(i * PI / 180));
 	int				vertical_size;
 
 	vertical_size = 0;
@@ -50,7 +50,7 @@ static int	get_vertical_size(t_loop_data *data, int i)
 
 static void	put_minimap_on_top(t_loop_data *data)
 {
-	const int			new_z = data->fov->instances->z + 1;
+	const int	new_z = data->fov->instances->z + 1;
 
 	if (data->minimap == NULL
 		|| data->fov->instances->z < data->minimap->instances->z)
@@ -69,14 +69,14 @@ enum e_wall_orientation_color
 
 void	draw_fov(t_loop_data *data)
 {
-	const int	horizontal_step = WIDTH / (RAY_COUNT - 1);
+	const float	horizontal_step = (float)WIDTH / RAY_COUNT;
 	int			i;
 	int			vertical_size;
 	int			color;
 
 	ft_bzero(data->fov->pixels, WIDTH * HEIGHT * sizeof(int));
 	i = -1;
-	while (++i <= RAY_COUNT)
+	while (++i < RAY_COUNT)
 	{
 		vertical_size = get_vertical_size(data, i);
 		color = NORTH_TEXTURE_COLOR;
@@ -86,10 +86,10 @@ void	draw_fov(t_loop_data *data)
 			color = EAST_TEXTURE_COLOR;
 		if (data->rays[i].orientation == WEST_TEXTURE)
 			color = WEST_TEXTURE_COLOR;
-		draw_rectangle(data->fov, (int [2]){i * horizontal_step,
+		draw_rectangle(data->fov, (int [2]){(i * horizontal_step),
 			(HEIGHT / 2) - (vertical_size / 2)},
-			(int [2]){(i + 1) *horizontal_step, (HEIGHT / 2)
-			+ (vertical_size / 2)}, color);
+			(int [2]){((i + 1) * horizontal_step) - 1,
+			(HEIGHT / 2) + (vertical_size / 2)}, color);
 	}
 	put_minimap_on_top(data);
 }
