@@ -6,7 +6,7 @@
 #    By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 23:23:18 by apeposhi          #+#    #+#              #
-#    Updated: 2024/07/29 14:39:34 by JFikents         ###   ########.fr        #
+#    Updated: 2024/07/31 16:04:27 by JFikents         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ _DEPENDENCIES	:=	cub3d.h exec.h
 DEPENDENCIES	:=	$(addprefix include/, $(_DEPENDENCIES))
 
 _EXEC_SRC		:=	draw.c keyhook.c math.c horizontal_rays.c vertical_rays.c\
-					cast_rays.c movement.c draw_fov.c
+					cast_rays.c movement.c draw_fov.c minimap.c
 EXEC_SRC		:=	$(addprefix execution/, $(_EXEC_SRC))
 
 _CLEANUP_SRC	:=	cleanup.c
