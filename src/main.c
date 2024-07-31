@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:52:21 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/30 15:46:40 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/07/31 16:01:49 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,50 +55,6 @@ const char	**get_map(t_player player[1], t_loop_data *data)
 	player->delta_x = get_delta_x(player->angle);
 	player->delta_y = get_delta_y(player->angle);
 	return (map);
-}
-
-void	draw_minimap_tile(mlx_image_t *img, int x, int y, int color)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < MINIMAP_SIZE - 1)
-	{
-		j = 0;
-		while (j < MINIMAP_SIZE - 1)
-			mlx_put_pixel(img, x + j++, y + i, color);
-		i++;
-	}
-}
-
-mlx_image_t	*put_minimap(mlx_t *window, t_loop_data *data)
-{
-	const char	**map = data->map;
-	uint32_t	x;
-	uint32_t	y;
-	mlx_image_t	*minimap;
-
-	minimap = mlx_new_image(window, data->map_width * MINIMAP_SIZE,
-			data->map_height * MINIMAP_SIZE);
-	y = 0;
-	while (map[y])
-	{
-		x = 0;
-		while (map[y][x])
-		{
-			if (map[y][x] == '1')
-				draw_minimap_tile(minimap, x * MINIMAP_SIZE, y * MINIMAP_SIZE,
-					MINIMAP_WALL_COLOR);
-			else if (map[y][x] != ' ')
-				draw_minimap_tile(minimap, x * MINIMAP_SIZE, y * MINIMAP_SIZE,
-					MINIMAP_FLOOR_COLOR);
-			x++;
-		}
-		y++;
-	}
-	mlx_image_to_window(window, minimap, 0, 0);
-	return (minimap);
 }
 
 static mlx_image_t	*put_floor_and_ceiling(mlx_t *window, int floor,
