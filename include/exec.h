@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 18:47:49 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/31 16:05:14 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:37:21 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ typedef struct ray_data
 {
 	enum e_wall_orientation	orientation;
 	mlx_image_t				*img;
+	double					angle;
+	double					distance;
 }	t_ray_data;
 
 typedef struct s_loop_data

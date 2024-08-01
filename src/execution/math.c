@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:59:21 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/25 18:32:43 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:31:38 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	normalize_coord_to_grid(int coord)
 
 double	get_hypotenuse(int opposite, double angle)
 {
-	return (opposite / sin(angle));
+	return (fabs(opposite / sin(angle)));
 }
 
 /*

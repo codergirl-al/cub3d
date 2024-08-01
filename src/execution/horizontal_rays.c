@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:02:55 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/25 16:13:59 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:14:51 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,25 @@ bool	is_inside_map(int x, int y, t_loop_data *data)
 		&& y >= 0 && y < MINIMAP_SIZE * data->map_height);
 }
 
-static void	find_wall(t_loop_data *data, double angle, int coords[2])
+static void	find_wall(t_loop_data *data, double angle, float coords[2])
 {
 	const float			ncot = -1 / tan(angle);
-	int					adjustment[2];
+	float				adjustment[2];
+	int					map_coords[2];
 
 	adjustment[Y] = -MINIMAP_SIZE;
 	if (angle < PI)
 		adjustment[Y] *= -1;
 	adjustment[X] = -adjustment[Y] * ncot;
+	map_coords[X] = (int)(coords[X] / MINIMAP_SIZE);
+	map_coords[Y] = (int)(coords[Y] / MINIMAP_SIZE);
 	while (is_inside_map(coords[X], coords[Y], data)
-		&& data->map[coords[Y] / MINIMAP_SIZE][coords[X] / MINIMAP_SIZE] != '1')
+		&& data->map[map_coords[Y]][map_coords[X]] != '1')
 	{
 		coords[Y] += adjustment[Y];
 		coords[X] += adjustment[X];
+		map_coords[X] = (int)(coords[X] / MINIMAP_SIZE);
+		map_coords[Y] = (int)(coords[Y] / MINIMAP_SIZE);
 	}
 	if (angle < PI)
 		coords[Y] -= 1;
@@ -46,7 +51,8 @@ static double	get_adjustment_to_where_player_is_facing(double angle)
 
 int	*get_coords_horizontal_ray(t_loop_data *data, double angle)
 {
-	static int	coords[2];
+	static int	result[2];
+	float		coords[2];
 	const float	ncot = -1 / tan(angle);
 	const int	player_pos[2]
 		= {data->player->img->instances->x + PLAYER_CENTER,
@@ -56,5 +62,7 @@ int	*get_coords_horizontal_ray(t_loop_data *data, double angle)
 	coords[Y] += get_adjustment_to_where_player_is_facing(angle);
 	coords[X] = (player_pos[Y] - coords[Y]) * ncot + player_pos[X];
 	find_wall(data, angle, coords);
-	return (coords);
+	result[X] = (int)round(coords[X]);
+	result[Y] = (int)round(coords[Y]);
+	return (result);
 }

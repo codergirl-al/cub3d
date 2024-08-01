@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 18:19:53 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/30 19:37:37 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:39:27 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,14 @@ static int	*get_closer_wall_to_player(t_loop_data *data, double angle,
 	vertical = get_coords_vertical_ray(data, angle);
 	h_hypotenuse = get_hypotenuse(horizontal[Y] - player_pos[Y], angle);
 	coords = vertical;
+	ray->distance = get_hypotenuse(vertical[Y] - player_pos[Y], angle);
 	ray->orientation = WEST_TEXTURE;
 	if (angle <= NORTH && angle >= SOUTH)
 		ray->orientation = EAST_TEXTURE;
-	if (h_hypotenuse < get_hypotenuse(vertical[Y] - player_pos[Y], angle))
+	if (h_hypotenuse < ray->distance)
 	{
 		coords = horizontal;
+		ray->distance = h_hypotenuse;
 		ray->orientation = NORTH_TEXTURE;
 		if (angle <= WEST && angle >= EAST)
 			ray->orientation = SOUTH_TEXTURE;
@@ -56,26 +58,25 @@ static int	*get_closer_wall_to_player(t_loop_data *data, double angle,
 
 t_ray_data	*cast_rays(t_loop_data *data)
 {
-	static t_ray_data	rays_data[RAY_COUNT + 1];
-	static mlx_image_t	*ray = NULL;
+	static t_ray_data	rays_data[RAY_COUNT];
 	double				angle;
+	double				angle_step;
 	int					*wall_coords;
 	int					i;
 
-	if (ray == NULL)
-	{
+	if (rays_data->img == NULL)
 		init_ray_images(data->window, rays_data);
-		ray = rays_data->img;
-	}
 	i = 0;
-	angle = data->player->angle - ((FOV * PI / 180) / 2);
+	angle_step = PI / 180;
+	angle = data->player->angle - ((RAY_COUNT - 1) / 2 * angle_step);
 	angle = adjust_angle(angle, 0);
 	while (i < RAY_COUNT)
 	{
 		wall_coords = get_closer_wall_to_player(data, angle, &rays_data[i]);
-		ray->instances[i].x = wall_coords[X];
-		ray->instances[i].y = wall_coords[Y];
-		angle += PI / 180;
+		rays_data[i].angle = angle;
+		rays_data->img->instances[i].x = wall_coords[X];
+		rays_data->img->instances[i].y = wall_coords[Y];
+		angle += angle_step;
 		angle = adjust_angle(angle, 0);
 		i++;
 	}

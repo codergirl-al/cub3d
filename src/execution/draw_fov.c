@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:22:28 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/30 18:02:31 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:32:14 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,12 @@ static void	draw_rectangle(mlx_image_t *img, int start[2], int end[2],
 
 static int	get_vertical_size(t_loop_data *data, int i)
 {
-	const double	angle
-		= adjust_angle(data->player->angle + (i * PI / 180), 0);
-	const int		opposite_side = (data->rays->img->instances[i].y
-			- (data->player->img->instances->y + PLAYER_CENTER));
-	const int		hypotenuse = (int) get_hypotenuse(opposite_side, angle);
-	const double	ray_distance = (hypotenuse * cos(i * PI / 180));
+	const double	angle = data->rays[i].angle - data->player->angle;
+	const int		hypotenuse = data->rays[i].distance;
+	const double	ray_distance = (hypotenuse * cos(angle));
 	int				vertical_size;
 
-	vertical_size = 0;
+	vertical_size = HEIGHT;
 	if (ray_distance != 0)
 		vertical_size = (int)((MINIMAP_SIZE * HEIGHT) / ray_distance);
 	return (vertical_size);
