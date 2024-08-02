@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:13:36 by JFikents          #+#    #+#             */
-/*   Updated: 2024/08/01 16:15:17 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/02 15:12:55 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	find_wall(t_loop_data *data, double angle, float coords[2])
 {
-	const float			ntan = -tan(angle);
-	float				adjustment[2];
-	int					map_coords[2];
+	const float	ntan = -tan(angle);
+	float		adjustment[2];
+	int			map_coords[2];
 
 	adjustment[X] = MINIMAP_SIZE;
 	if (angle > PI / 2 && angle < 3 * PI / 2)
@@ -56,7 +56,7 @@ int	*get_coords_vertical_ray(t_loop_data *data, double angle)
 	coords[X] += get_adjustment_to_where_player_is_facing(angle);
 	coords[Y] = (player_pos[X] - coords[X]) * ntan + player_pos[Y];
 	find_wall(data, angle, coords);
-	result[X] = coords[X];
-	result[Y] = coords[Y];
+	result[X] = (int)round(coords[X]);
+	result[Y] = (int)round(coords[Y]);
 	return (result);
 }

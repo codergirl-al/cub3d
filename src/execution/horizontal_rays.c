@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:02:55 by JFikents          #+#    #+#             */
-/*   Updated: 2024/08/01 16:14:51 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/02 15:12:47 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ bool	is_inside_map(int x, int y, t_loop_data *data)
 
 static void	find_wall(t_loop_data *data, double angle, float coords[2])
 {
-	const float			ncot = -1 / tan(angle);
-	float				adjustment[2];
-	int					map_coords[2];
+	const float	ncot = -1 / tan(angle);
+	float		adjustment[2];
+	int			map_coords[2];
 
 	adjustment[Y] = -MINIMAP_SIZE;
 	if (angle < PI)

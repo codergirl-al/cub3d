@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 18:19:53 by JFikents          #+#    #+#             */
-/*   Updated: 2024/08/01 16:39:27 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/02 16:05:17 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,12 @@ static int	*get_closer_wall_to_player(t_loop_data *data, double angle,
 	horizontal = get_coords_horizontal_ray(data, angle);
 	vertical = get_coords_vertical_ray(data, angle);
 	h_hypotenuse = get_hypotenuse(horizontal[Y] - player_pos[Y], angle);
+	if (h_hypotenuse == 0)
+		h_hypotenuse = abs(horizontal[X] - player_pos[X]);
 	coords = vertical;
 	ray->distance = get_hypotenuse(vertical[Y] - player_pos[Y], angle);
+	if (ray->distance == 0)
+		ray->distance = abs(vertical[X] - player_pos[X]);
 	ray->orientation = WEST_TEXTURE;
 	if (angle <= NORTH && angle >= SOUTH)
 		ray->orientation = EAST_TEXTURE;
