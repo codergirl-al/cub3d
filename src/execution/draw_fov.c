@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:22:28 by JFikents          #+#    #+#             */
-/*   Updated: 2024/08/01 16:32:14 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/01 17:05:13 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	draw_rectangle(mlx_image_t *img, int start[2], int end[2],
 	i = -1;
 	while (++i + start[Y] <= end[Y])
 	{
-		j = -1;
+		j = 0;
 		while (++j + start[X] <= end[X])
 		{
 			if (start[X] + j < 0 || start[X] + j >= WIDTH

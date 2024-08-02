@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:01:23 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/31 16:02:06 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/02 15:16:53 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,18 @@ mlx_image_t	*put_minimap(mlx_t *window, t_loop_data *data)
 	while (map[y])
 	{
 		x = 0;
+		mlx_put_string(window, ft_itoa(y), x, y * MINIMAP_SIZE);
 		while (map[y][x])
 		{
+			if (y == 0)
+			{
+				if (x % 2 == 0 || x < 10)
+					mlx_put_string(window, ft_itoa(x), x * MINIMAP_SIZE,
+						y * MINIMAP_SIZE);
+				else
+					mlx_put_string(window, ft_itoa(x), x * MINIMAP_SIZE,
+						y * MINIMAP_SIZE + 16);
+			}
 			if (map[y][x] == '1')
 				draw_minimap_tile(minimap, x * MINIMAP_SIZE, y * MINIMAP_SIZE,
 					MINIMAP_WALL_COLOR);
