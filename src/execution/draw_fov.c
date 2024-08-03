@@ -71,7 +71,7 @@ void	draw_fov(t_loop_data *data)
 	int			vertical_size;
 	int			color;
 
-	ft_bzero(data->fov->pixels, WIDTH * HEIGHT * sizeof(int));
+	ft_clear_image(data->fov);
 	i = -1;
 	while (++i < RAY_COUNT)
 	{
