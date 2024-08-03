@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 18:47:49 by JFikents          #+#    #+#             */
-/*   Updated: 2024/08/01 16:37:21 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/03 15:06:09 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,8 @@ double		get_hypotenuse(int opposite, double angle);
 void		movement(t_loop_data *data, int direction);
 void		render_fov(void *param);
 void		draw_fov(t_loop_data *data);
+void		ft_clear_image(mlx_image_t *img);
+void		draw_line_from_player(mlx_image_t *img, t_player *player,
+				int coords[2], int color);
 
 #endif
