@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:22:28 by JFikents          #+#    #+#             */
-/*   Updated: 2024/08/06 13:41:55 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:57:05 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ static float	get_vertical_size(t_loop_data *data, int i)
 {
 	const float	angle = data->rays[i].angle - data->player->angle;
 	const float	distance_from_player = data->rays[i].distance;
-	const float	distace_from_camera_pane = distance_from_player * cos(angle);
+	const float	distance_from_camera_pane = distance_from_player * cos(angle);
 	float		vertical_size;
 
-	vertical_size = MINIMAP_SIZE * HEIGHT / distace_from_camera_pane;
+	vertical_size = MINIMAP_SIZE * HEIGHT / distance_from_camera_pane;
 	return (vertical_size);
 }
 
