@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:22:28 by JFikents          #+#    #+#             */
-/*   Updated: 2024/08/01 17:05:13 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/06 13:41:55 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,14 @@ static void	draw_rectangle(mlx_image_t *img, int start[2], int end[2],
 	}
 }
 
-static int	get_vertical_size(t_loop_data *data, int i)
+static float	get_vertical_size(t_loop_data *data, int i)
 {
-	const double	angle = data->rays[i].angle - data->player->angle;
-	const int		hypotenuse = data->rays[i].distance;
-	const double	ray_distance = (hypotenuse * cos(angle));
-	int				vertical_size;
+	const float	angle = data->rays[i].angle - data->player->angle;
+	const float	distance_from_player = data->rays[i].distance;
+	const float	distace_from_camera_pane = distance_from_player * cos(angle);
+	float		vertical_size;
 
-	vertical_size = HEIGHT;
-	if (ray_distance != 0)
-		vertical_size = (int)((MINIMAP_SIZE * HEIGHT) / ray_distance);
+	vertical_size = MINIMAP_SIZE * HEIGHT / distace_from_camera_pane;
 	return (vertical_size);
 }
 
@@ -67,8 +65,8 @@ enum e_wall_orientation_color
 void	draw_fov(t_loop_data *data)
 {
 	const float	horizontal_step = (float)WIDTH / RAY_COUNT;
+	float		vertical_size;
 	int			i;
-	int			vertical_size;
 	int			color;
 
 	ft_clear_image(data->fov);
