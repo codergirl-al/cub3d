@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 18:47:49 by JFikents          #+#    #+#             */
-/*   Updated: 2024/08/03 15:06:09 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:15:34 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int			*get_coords_vertical_ray(t_loop_data *data, double angle);
 int			normalize_coord_to_grid(int coord);
 bool		is_inside_map(int x, int y, t_loop_data *data);
 t_ray_data	*cast_rays(t_loop_data *data);
-double		get_hypotenuse(int opposite, double angle);
+double		get_hypotenuse_with_pythagoras(int adjacent, int opposite);
 void		movement(t_loop_data *data, int direction);
 void		render_fov(void *param);
 void		draw_fov(t_loop_data *data);

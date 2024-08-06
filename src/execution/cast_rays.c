@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 18:19:53 by JFikents          #+#    #+#             */
-/*   Updated: 2024/08/03 17:33:11 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:13:48 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,30 @@ static void	init_ray_images(mlx_t *window, t_ray_data *ray, t_loop_data *data)
 	mlx_set_instance_depth(ray->img->instances, 27);
 }
 
-static double	get_distance_to_wall(t_player *player, int *wall_coords,
-	double angle)
+static double	get_distance_to_wall(t_player *player, int *wall_coords)
 {
 	double		distance;
 	const int	player_pos[2]
 		= {player->img->instances->x + PLAYER_CENTER,
 		player->img->instances->y + PLAYER_CENTER};
 
-	distance = get_hypotenuse(wall_coords[Y] - player_pos[Y], angle);
-	if (distance == 0)
-		distance = abs(wall_coords[X] - player_pos[X]);
+	distance = get_hypotenuse_with_pythagoras(wall_coords[X] - player_pos[X],
+			wall_coords[Y] - player_pos[Y]);
 	return (distance);
 }
 
 static bool	is_vertical_closer_to_player(int vertical[2], int horizontal[2],
-	t_player *player, double angle)
+	t_player *player)
 {
 	double		vertical_distance;
 	double		horizontal_distance;
+	static bool	last_result = false;
 
-	vertical_distance = get_distance_to_wall(player, vertical, angle);
-	horizontal_distance = get_distance_to_wall(player, horizontal, angle);
-	return (vertical_distance < horizontal_distance);
+	vertical_distance = get_distance_to_wall(player, vertical);
+	horizontal_distance = get_distance_to_wall(player, horizontal);
+	if (horizontal_distance == vertical_distance)
+		return (last_result);
+	return (last_result = vertical_distance < horizontal_distance);
 }
 
 static int	*get_closer_wall_to_player(t_loop_data *data, double angle,
@@ -53,15 +54,15 @@ static int	*get_closer_wall_to_player(t_loop_data *data, double angle,
 
 	horizontal = get_coords_horizontal_ray(data, angle);
 	vertical = get_coords_vertical_ray(data, angle);
-	if (is_vertical_closer_to_player(vertical, horizontal, data->player, angle))
+	if (is_vertical_closer_to_player(vertical, horizontal, data->player))
 	{
-		ray->distance = get_distance_to_wall(data->player, vertical, angle);
+		ray->distance = get_distance_to_wall(data->player, vertical);
 		ray->orientation = WEST_TEXTURE;
 		if (angle <= NORTH && angle >= SOUTH)
 			ray->orientation = EAST_TEXTURE;
 		return (vertical);
 	}
-	ray->distance = get_distance_to_wall(data->player, horizontal, angle);
+	ray->distance = get_distance_to_wall(data->player, horizontal);
 	ray->orientation = NORTH_TEXTURE;
 	if (angle <= WEST && angle >= EAST)
 		ray->orientation = SOUTH_TEXTURE;
