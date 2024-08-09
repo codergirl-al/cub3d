@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 18:19:53 by JFikents          #+#    #+#             */
-/*   Updated: 2024/08/09 18:34:22 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/09 19:00:58 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_ray_data	*cast_rays(t_loop_data *data)
 	angle = adjust_angle(angle, 0);
 	while (i < RAY_COUNT)
 	{
-		wall_coords = get_closer_wall_to_player(data, angle, &rays_data[i]);
+		wall_coords = get_closer_wall_to_player(data, &rays_data[i]);
 		rays_data[i].angle = angle;
 		draw_line_from_player(rays_data->img, data->player, wall_coords,
 			0xff00ffff);
