@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 18:19:53 by JFikents          #+#    #+#             */
-/*   Updated: 2024/08/06 15:13:48 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/09 18:34:22 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,51 +20,46 @@ static void	init_ray_images(mlx_t *window, t_ray_data *ray, t_loop_data *data)
 	mlx_set_instance_depth(ray->img->instances, 27);
 }
 
-static double	get_distance_to_wall(t_player *player, int *wall_coords)
-{
-	double		distance;
-	const int	player_pos[2]
-		= {player->img->instances->x + PLAYER_CENTER,
-		player->img->instances->y + PLAYER_CENTER};
-
-	distance = get_hypotenuse_with_pythagoras(wall_coords[X] - player_pos[X],
-			wall_coords[Y] - player_pos[Y]);
-	return (distance);
-}
-
 static bool	is_vertical_closer_to_player(int vertical[2], int horizontal[2],
-	t_player *player)
+	t_player *player, t_ray_data *ray)
 {
-	double		vertical_distance;
-	double		horizontal_distance;
-	static bool	last_result = false;
+	bool		result;
+	const int	player_pos[2] = {player->img->instances->x + PLAYER_CENTER,
+		player->img->instances->y + PLAYER_CENTER};
+	const int	adjecent[2] = {abs(vertical[X] - player_pos[X]),
+		abs(horizontal[X] - player_pos[X])};
+	const int	oposite[2] = {abs(vertical[Y] - player_pos[Y]),
+		abs(horizontal[Y] - player_pos[Y])};
+	static bool	last_result;
 
-	vertical_distance = get_distance_to_wall(player, vertical);
-	horizontal_distance = get_distance_to_wall(player, horizontal);
-	if (horizontal_distance == vertical_distance)
+	result = adjecent[VERTICAL] + oposite[VERTICAL]
+		< adjecent[HORIZONTAL] + oposite[HORIZONTAL];
+	if (result == true)
+		ray->distance = get_hypotenuse(adjecent[VERTICAL], 0, ray);
+	else
+		ray->distance = get_hypotenuse(0, oposite[HORIZONTAL], ray);
+	if (adjecent[VERTICAL] + oposite[VERTICAL]
+		== adjecent[HORIZONTAL] + oposite[HORIZONTAL])
 		return (last_result);
-	return (last_result = vertical_distance < horizontal_distance);
+	return (last_result = result);
 }
 
-static int	*get_closer_wall_to_player(t_loop_data *data, double angle,
-	t_ray_data *ray)
+static int	*get_closer_wall_to_player(t_loop_data *data, t_ray_data *ray)
 {
 	int			*horizontal;
 	int			*vertical;
 
-	horizontal = get_coords_horizontal_ray(data, angle);
-	vertical = get_coords_vertical_ray(data, angle);
-	if (is_vertical_closer_to_player(vertical, horizontal, data->player))
+	horizontal = get_coords_horizontal_ray(data, ray->angle);
+	vertical = get_coords_vertical_ray(data, ray->angle);
+	if (is_vertical_closer_to_player(vertical, horizontal, data->player, ray))
 	{
-		ray->distance = get_distance_to_wall(data->player, vertical);
 		ray->orientation = WEST_TEXTURE;
-		if (angle <= NORTH && angle >= SOUTH)
+		if (ray->angle <= NORTH && ray->angle >= SOUTH)
 			ray->orientation = EAST_TEXTURE;
 		return (vertical);
 	}
-	ray->distance = get_distance_to_wall(data->player, horizontal);
 	ray->orientation = NORTH_TEXTURE;
-	if (angle <= WEST && angle >= EAST)
+	if (ray->angle <= WEST && ray->angle >= EAST)
 		ray->orientation = SOUTH_TEXTURE;
 	return (horizontal);
 }

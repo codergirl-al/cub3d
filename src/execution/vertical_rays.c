@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:13:36 by JFikents          #+#    #+#             */
-/*   Updated: 2024/08/06 12:11:10 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/09 17:35:02 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,10 @@ int	*get_coords_vertical_ray(t_loop_data *data, double angle)
 	find_wall(data, angle, coords);
 	result[X] = (int)floor(coords[X]);
 	result[Y] = (int)floor(coords[Y]);
+	if (result[X] < 0 || result[Y] < 0)
+	{
+		result[X] = WIDTH;
+		result[Y] = HEIGHT;
+	}
 	return (result);
 }

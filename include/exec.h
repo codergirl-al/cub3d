@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 18:47:49 by JFikents          #+#    #+#             */
-/*   Updated: 2024/08/06 15:15:34 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/09 18:41:55 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define PI 3.1415926535
 # define WIDTH 768
 # define HEIGHT 640
-# define FOV 60
+# define FOV 90
 # define RADIAN_STEP 0.0872664626
 # define MINIMAP_SIZE 16
 # define MINIMAP_FLOOR_COLOR 0x00000044
@@ -28,6 +28,12 @@
 # define SOUTH 1.5707963268 // PI / 2
 # define EAST 0
 # define WEST 3.1415926535 // PI
+
+enum e_vertical_or_horizontal
+{
+	VERTICAL,
+	HORIZONTAL,
+};
 
 enum e_data
 {
@@ -73,7 +79,7 @@ typedef struct s_player
 	mlx_image_t	*img;
 }				t_player;
 
-typedef struct ray_data
+typedef struct s_ray_data
 {
 	enum e_wall_orientation	orientation;
 	mlx_image_t				*img;
@@ -106,7 +112,8 @@ int			*get_coords_vertical_ray(t_loop_data *data, double angle);
 int			normalize_coord_to_grid(int coord);
 bool		is_inside_map(int x, int y, t_loop_data *data);
 t_ray_data	*cast_rays(t_loop_data *data);
-double		get_hypotenuse_with_pythagoras(int adjacent, int opposite);
+// double		get_hypotenuse_with_pythagoras(int adjacent, int opposite);
+double		get_hypotenuse(int adjacent, int opposite, t_ray_data *ray);
 void		movement(t_loop_data *data, int direction);
 void		render_fov(void *param);
 void		draw_fov(t_loop_data *data);

@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:59:21 by JFikents          #+#    #+#             */
-/*   Updated: 2024/08/06 15:13:39 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/09 18:30:23 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,13 @@ int	normalize_coord_to_grid(int coord)
 	return ((coord >> (int)log2(MINIMAP_SIZE)) << (int)log2(MINIMAP_SIZE));
 }
 
-// double	get_hypotenuse_with_sine(int opposite, double angle)
-// {
-// 	return (fabs(opposite / sin(angle)));
-// }
-
-double	get_hypotenuse_with_pythagoras(int adjacent, int opposite)
+	// if (ray->angle >= 7 * PI / 4 || ray->angle <= PI / 4
+	// 	|| (ray->angle >= 3 * PI / 4 && ray->angle <= 5 * PI / 4))
+double	get_hypotenuse(int adjacent, int opposite, t_ray_data *ray)
 {
-	return (sqrt(pow(adjacent, 2) + pow(opposite, 2)));
+	if (adjacent != 0)
+		return (fabs(adjacent / cos(ray->angle)));
+	return (fabs(opposite / sin(ray->angle)));
 }
 /*
 All math can be seen in the following link:
