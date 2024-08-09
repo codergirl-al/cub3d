@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 18:19:53 by JFikents          #+#    #+#             */
-/*   Updated: 2024/08/09 19:00:58 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/09 19:49:11 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_ray_data	*cast_rays(t_loop_data *data)
 {
 	static t_ray_data	rays_data[RAY_COUNT];
 	double				angle;
-	double				angle_step;
+	const double		angle_step = PI / 180;
 	int					*wall_coords;
 	int					i;
 
@@ -77,17 +77,15 @@ t_ray_data	*cast_rays(t_loop_data *data)
 	else
 		ft_clear_image(rays_data->img);
 	i = 0;
-	angle_step = PI / 180;
 	angle = data->player->angle - ((RAY_COUNT - 1) / 2 * angle_step);
-	angle = adjust_angle(angle, 0);
 	while (i < RAY_COUNT)
 	{
-		wall_coords = get_closer_wall_to_player(data, &rays_data[i]);
+		angle = adjust_angle(angle, 0);
 		rays_data[i].angle = angle;
+		wall_coords = get_closer_wall_to_player(data, &rays_data[i]);
 		draw_line_from_player(rays_data->img, data->player, wall_coords,
 			0xff00ffff);
 		angle += angle_step;
-		angle = adjust_angle(angle, 0);
 		i++;
 	}
 	return (rays_data);
