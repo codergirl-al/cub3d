@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:52:21 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/02 15:22:11 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/10 18:37:28 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ const char	**get_map(t_player player[1], t_loop_data *data)
 	player->angle = NORTH;
 	player->delta_x = get_delta_x(player->angle);
 	player->delta_y = get_delta_y(player->angle);
+	data->file_path[NORTH_TEXTURE] = "textures/wall_1.png";
+	data->file_path[SOUTH_TEXTURE] = "textures/wall_2.png";
+	data->file_path[EAST_TEXTURE] = "textures/wall_3.png";
+	data->file_path[WEST_TEXTURE] = "textures/wall_4.png";
+	ft_bzero(data->texture, sizeof(data->texture));
 	return (map);
 }
 

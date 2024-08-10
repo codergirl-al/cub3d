@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 18:19:53 by JFikents          #+#    #+#             */
-/*   Updated: 2024/08/09 19:49:11 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/10 17:56:29 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,24 @@ static void	init_ray_images(mlx_t *window, t_ray_data *ray, t_loop_data *data)
 static bool	is_vertical_closer_to_player(int vertical[2], int horizontal[2],
 	t_player *player, t_ray_data *ray)
 {
-	bool		result;
 	const int	player_pos[2] = {player->img->instances->x + PLAYER_CENTER,
 		player->img->instances->y + PLAYER_CENTER};
-	const int	adjecent[2] = {abs(vertical[X] - player_pos[X]),
+	const int	adj[2] = {abs(vertical[X] - player_pos[X]),
 		abs(horizontal[X] - player_pos[X])};
-	const int	oposite[2] = {abs(vertical[Y] - player_pos[Y]),
+	const int	opos[2] = {abs(vertical[Y] - player_pos[Y]),
 		abs(horizontal[Y] - player_pos[Y])};
 	static bool	last_result;
+	double		distance[2];
 
-	result = adjecent[VERTICAL] + oposite[VERTICAL]
-		< adjecent[HORIZONTAL] + oposite[HORIZONTAL];
-	if (result == true)
-		ray->distance = get_hypotenuse(adjecent[VERTICAL], 0, ray);
+	distance[VERTICAL] = get_hypotenuse(adj[VERTICAL], opos[VERTICAL]);
+	distance[HORIZONTAL] = get_hypotenuse(adj[HORIZONTAL], opos[HORIZONTAL]);
+	if (distance[VERTICAL] > distance[HORIZONTAL])
+		ray->distance = distance[HORIZONTAL];
 	else
-		ray->distance = get_hypotenuse(0, oposite[HORIZONTAL], ray);
-	if (adjecent[VERTICAL] + oposite[VERTICAL]
-		== adjecent[HORIZONTAL] + oposite[HORIZONTAL])
+		ray->distance = distance[VERTICAL];
+	if (distance[VERTICAL] == distance[HORIZONTAL])
 		return (last_result);
-	return (last_result = result);
+	return (last_result = distance[VERTICAL] < distance[HORIZONTAL]);
 }
 
 static int	*get_closer_wall_to_player(t_loop_data *data, t_ray_data *ray)
@@ -67,8 +66,8 @@ static int	*get_closer_wall_to_player(t_loop_data *data, t_ray_data *ray)
 t_ray_data	*cast_rays(t_loop_data *data)
 {
 	static t_ray_data	rays_data[RAY_COUNT];
+	int					opos;
 	double				angle;
-	const double		angle_step = PI / 180;
 	int					*wall_coords;
 	int					i;
 
@@ -76,17 +75,16 @@ t_ray_data	*cast_rays(t_loop_data *data)
 		init_ray_images(data->window, rays_data, data);
 	else
 		ft_clear_image(rays_data->img);
-	i = 0;
-	angle = data->player->angle - ((RAY_COUNT - 1) / 2 * angle_step);
-	while (i < RAY_COUNT)
+	opos = -RAY_COUNT / 2;
+	i = -1;
+	while (++i < RAY_COUNT)
 	{
-		angle = adjust_angle(angle, 0);
-		rays_data[i].angle = angle;
+		angle = atan((double)opos / (RAY_COUNT / 2)) + data->player->angle;
+		rays_data[i].angle = adjust_angle(angle, 0);
 		wall_coords = get_closer_wall_to_player(data, &rays_data[i]);
 		draw_line_from_player(rays_data->img, data->player, wall_coords,
 			0xff00ffff);
-		angle += angle_step;
-		i++;
+		opos++;
 	}
 	return (rays_data);
 }

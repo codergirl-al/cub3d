@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 18:47:49 by JFikents          #+#    #+#             */
-/*   Updated: 2024/08/09 18:41:55 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/10 18:35:59 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ enum e_vertical_or_horizontal
 
 enum e_data
 {
-	RAY_COUNT = FOV,
+	RAY_COUNT = WIDTH,
 	PLAYER_CENTER = MINIMAP_SIZE / 4,
 };
 
@@ -89,14 +89,16 @@ typedef struct s_ray_data
 
 typedef struct s_loop_data
 {
-	t_player	player[1];
-	const char	**map;
-	int			map_width;
-	int			map_height;
-	mlx_image_t	*fov;
-	t_ray_data	*rays;
-	mlx_image_t	*minimap;
-	mlx_t		*window;
+	t_player		player[1];
+	const char		**map;
+	int				map_width;
+	int				map_height;
+	mlx_image_t		*fov;
+	t_ray_data		*rays;
+	mlx_image_t		*minimap;
+	mlx_t			*window;
+	mlx_texture_t	*texture[4];
+	char			*file_path[4];
 }	t_loop_data;
 
 mlx_image_t	*put_minimap(mlx_t *window, t_loop_data *data);
@@ -113,12 +115,13 @@ int			normalize_coord_to_grid(int coord);
 bool		is_inside_map(int x, int y, t_loop_data *data);
 t_ray_data	*cast_rays(t_loop_data *data);
 // double		get_hypotenuse_with_pythagoras(int adjacent, int opposite);
-double		get_hypotenuse(int adjacent, int opposite, t_ray_data *ray);
+double		get_hypotenuse(int adjacent, int opposite);
 void		movement(t_loop_data *data, int direction);
 void		render_fov(void *param);
 void		draw_fov(t_loop_data *data);
 void		ft_clear_image(mlx_image_t *img);
 void		draw_line_from_player(mlx_image_t *img, t_player *player,
 				int coords[2], int color);
+void		get_textures(t_loop_data *data);
 
 #endif
