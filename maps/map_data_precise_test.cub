@@ -1,12 +1,13 @@
-BB reter
-SG WSEGWEG
-WD WOEGWIOEN
-CD SOIEJGIOWEGOIW
+NO ./textures/one.png
+SO ./textures/two.png
+WE ./textures/three.png
+EA ./textures/four.png
 
-F sngsdnjsgsd
-C wegwiegnwigjwo
+F 220,200,0
+
+C 225,30,0
 
 1111111
 1000001
-1000001
+1000N01
 1111111
