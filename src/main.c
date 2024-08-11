@@ -6,17 +6,23 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:04:05 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/20 16:07:27 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/12 01:08:30 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+#include <fcntl.h>
 
 int main(int argc, char **argv)
 {
 	t_data	playground;
 	
-	playground = ft_parse(argc, argv);
-	// set up hookers nd shit
+	ft_bzero(&playground, sizeof(t_data));
+	playground.fd = open(argv[1], O_RDONLY);
+        if (playground.fd < 0)
+          return ft_print_err("Error\n", 0);
+        ft_parse(argc, argv, &playground);
 	ft_free_data(&playground);
+	close(playground.fd);
+	return (0);
 }
