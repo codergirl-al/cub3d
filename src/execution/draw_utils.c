@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:19:44 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/22 17:47:04 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/11 14:23:40 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,26 +52,20 @@ void	draw_line(mlx_image_t *img, int start[2], int end[2], int color)
 	}
 }
 
-int	put_player(mlx_t *window, t_player player[1])
+void	clear_image(mlx_image_t *img)
 {
-	player->img = mlx_new_image(window, (PLAYER_CENTER * 2) + 1,
-			(PLAYER_CENTER * 2) + 1);
-	redraw_player(player);
-	mlx_image_to_window(window, player->img,
-		(player->x * MINIMAP_SIZE) + MINIMAP_SIZE / 2 - PLAYER_CENTER,
-		(player->y * MINIMAP_SIZE) + MINIMAP_SIZE / 2 - PLAYER_CENTER);
-	return (0);
+	ft_bzero(img->pixels, img->width * img->height * sizeof(int));
 }
 
-int	redraw_player(t_player player[1])
+void	draw_line_from_player(mlx_image_t *img, t_player *player, int coords[2],
+	int color)
 {
-	mlx_image_t	*img;
+	int		start[2];
+	int		end[2];
 
-	img = player->img;
-	ft_bzero(img->pixels, img->width * img->height * sizeof(int));
-	draw_line(img, (int []){PLAYER_CENTER - 1, PLAYER_CENTER - 1},
-		(int []){(int)(player->delta_x), (int)(player->delta_y)}, 0xff0000FF);
-	mlx_put_pixel(img, PLAYER_CENTER - 1, PLAYER_CENTER - 1, 0xffffffFF);
-	mlx_put_pixel(img, 0, 0, 0xffff00FF);
-	return (0);
+	start[X] = player->img->instances->x + PLAYER_CENTER;
+	start[Y] = player->img->instances->y + PLAYER_CENTER;
+	end[X] = coords[X];
+	end[Y] = coords[Y];
+	draw_line(img, start, end, color);
 }

@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:24:43 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/30 15:11:34 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/11 13:17:39 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,20 @@ void	player_moves(mlx_key_data_t key, void *param)
 	redraw_player(player);
 }
 
+static void	put_minimap_on_top(t_loop_data *data)
+{
+	const int	fov_z = data->fov->instances->z;
+	const int	minimap_z = data->minimap->instances->z;
+	const int	player_z = data->player->img->instances->z;
+
+	if (data->minimap == NULL
+		|| data->fov->instances->z < data->minimap->instances->z)
+		return ;
+	mlx_set_instance_depth(data->fov->instances, minimap_z);
+	mlx_set_instance_depth(data->minimap->instances, player_z);
+	mlx_set_instance_depth(data->player->img->instances, fov_z);
+}
+
 void	render_fov(void *param)
 {
 	t_loop_data *const	data = (t_loop_data *)param;
@@ -52,4 +66,5 @@ void	render_fov(void *param)
 	}
 	data->rays = cast_rays(data);
 	draw_fov(data);
+	put_minimap_on_top(data);
 }

@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:59:21 by JFikents          #+#    #+#             */
-/*   Updated: 2024/08/10 17:40:18 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/11 13:33:45 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ double	get_delta_y(double angle)
 
 double	adjust_angle(double angle, int direction)
 {
-	angle += direction * RADIAN_STEP;
+	angle += direction * TURNING_ANGLE;
 	if (angle < 0)
 		angle += 2 * PI;
 	if (angle > 2 * PI)
@@ -54,6 +54,6 @@ double	get_hypotenuse(int adjacent, int opposite)
 	return (opposite * sqrt(1.0 + ratio * ratio));
 }
 /*
-All math can be seen in the following link:
+All math for player movement can be seen in the following link:
 https://www.geogebra.org/graphing/bkd7pzm4
 */

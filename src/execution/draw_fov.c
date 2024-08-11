@@ -6,131 +6,85 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:22:28 by JFikents          #+#    #+#             */
-/*   Updated: 2024/08/10 18:35:26 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/11 14:32:23 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	draw_rectangle(mlx_image_t *img, int start[2], int end[2],
-	int color)
+static int	reverse_bytes(int c)
 {
-	int			i;
-	int			j;
+	unsigned int	b;
 
-	i = -1;
-	while (++i + start[Y] <= end[Y])
-	{
-		j = -1;
-		while (++j + start[X] <= end[X])
-		{
-			if (start[X] + j < 0 || start[X] + j >= WIDTH
-				|| start[Y] + i < 0 || start[Y] + i >= HEIGHT)
-				continue ;
-			mlx_put_pixel(img, start[X] + j, start[Y] + i, color);
-		}
-	}
+	b = 0;
+	b |= (c & 0xFF) << 24;
+	b |= (c & 0xFF00) << 8;
+	b |= (c & 0xFF0000) >> 8;
+	b |= (c & 0xFF000000) >> 24;
+	return (b);
 }
 
-// static void	put_pixel_slice(t_loop_data *data, t_ray_data *ray, int pos[2],
-// 	int height)
-// {
-// 	while (height-- > 0)
-// 	{
-// 		if (pos[Y] + height < 0 || pos[Y] + height >= HEIGHT)
-// 			continue ;
-// 		mlx_put_pixel(data->fov, pos[X], pos[Y] + (int)height,
-// 			data->texture[ray->orientation]->pixels[
-// 				(int)(pos[X] % MINIMAP_SIZE) + (int)(height)]);
-// 	}
-// }
+static double	get_x_offset(const t_ray_data ray, const int texture_width)
+{
+	double	x_offset;
 
-// static void	draw_fov_chunk(t_loop_data *data, int i, int step_width,
-// 	float height[2])
-// {
-// 	float		slope;
-// 	float		y;
-// 	int			x;
-// 	const int	start[2]
-// 		= {(i * step_width), (HEIGHT / 2) - (height[0] / 2)};
+	if (ray.orientation == NORTH_TEXTURE || ray.orientation == SOUTH_TEXTURE)
+		x_offset = fmodf(ray.coords[X] * (texture_width / MINIMAP_SIZE),
+				texture_width);
+	else
+		x_offset = fmodf(ray.coords[Y] * (texture_width / MINIMAP_SIZE),
+				texture_width);
+	return (x_offset);
+}
 
-// 	slope = (height[1] - height[0]) / step_width;
-// 	y = (float)start[Y];
-// 	x = 0;
-// 	while (x < step_width)
-// 	{
-// 		put_pixel_slice(data, &data->rays[i],
-// 			(int [2]){start[X] + x, (int)y}, (int)(height[0] + (slope * x)));
-// 		y -= slope;
-// 		x++;
-// 	}
-// }
+static void	draw_fov_line(t_loop_data *data, int i, int start[2], int end[2])
+{
+	const mlx_texture_t	*texture = data->texture[data->rays[i].orientation];
+	const double		ratio = 1.0 * texture->height / abs(end[Y] - start[Y]);
+	const uint32_t		*pixels = (uint32_t *)texture->pixels;
+	const double		x_offset = get_x_offset(data->rays[i], texture->width);
+	double				y_offset;
+
+	y_offset = 0;
+	while (start[Y] < end[Y])
+	{
+		if (start[X] >= 0 && start[X] < WIDTH && start[Y] >= 0
+			&& start[Y] < HEIGHT)
+			mlx_put_pixel(data->fov, start[X], start[Y], reverse_bytes(
+					pixels[(int)y_offset * texture->width + (int)x_offset]));
+		start[Y]++;
+		y_offset += ratio;
+	}
+}
 
 static float	get_height(t_loop_data *data, int i)
 {
 	const float	angle
 		= adjust_angle(data->rays[i].angle - data->player->angle, 0);
-	float		distance_from_player = data->rays[i].distance;
-	float		distance_from_camera_pane;
+	const float	distance_from_player = data->rays[i].distance;
+	const float	distance_from_camera_pane = distance_from_player * cos(angle);
 	float		height;
 
-	distance_from_player = data->rays[i].distance;
-	distance_from_camera_pane = distance_from_player * cos(angle);
-	height = MINIMAP_SIZE * HEIGHT / distance_from_camera_pane;
+	height = MINIMAP_SIZE * HEIGHT / distance_from_camera_pane / tan(FOV / 2);
+	if (height > HEIGHT)
+		height = HEIGHT;
 	return (height);
 }
-
-static void	put_minimap_on_top(t_loop_data *data)
-{
-	const int	new_z = data->fov->instances->z + 1;
-
-	if (data->minimap == NULL
-		|| data->fov->instances->z < data->minimap->instances->z)
-		return ;
-	mlx_set_instance_depth(data->minimap->instances, new_z);
-	mlx_set_instance_depth(data->player->img->instances, new_z + 1);
-}
-
-enum e_wall_orientation_color
-{
-	NORTH_TEXTURE_COLOR = 0x004400ff,
-	SOUTH_TEXTURE_COLOR = 0x008800ff,
-	EAST_TEXTURE_COLOR = 0x448800ff,
-	WEST_TEXTURE_COLOR = 0x66cc00ff,
-};
 
 void	draw_fov(t_loop_data *data)
 {
 	const float	step_width = (float)WIDTH / RAY_COUNT;
 	float		height;
 	int			i;
-	int			color;
 
-	ft_clear_image(data->fov);
+	clear_image(data->fov);
 	i = -1;
 	while (++i < RAY_COUNT)
 	{
 		height = get_height(data, i);
-		color = NORTH_TEXTURE_COLOR;
-		if (data->rays[i].orientation == SOUTH_TEXTURE)
-			color = SOUTH_TEXTURE_COLOR;
-		if (data->rays[i].orientation == EAST_TEXTURE)
-			color = EAST_TEXTURE_COLOR;
-		if (data->rays[i].orientation == WEST_TEXTURE)
-			color = WEST_TEXTURE_COLOR;
-		draw_rectangle(data->fov, (int [2]){(i * step_width),
+		draw_fov_line(data, i, (int [2]){(i * step_width),
 			(HEIGHT / 2) - (height / 2)},
 			(int [2]){((i + 1) * step_width) - 1,
-			(HEIGHT / 2) + (height / 2)}, color);
+			(HEIGHT / 2) + (height / 2)});
 	}
-	put_minimap_on_top(data);
 }
-	// float		next_v_size;
-	// next_v_size = get_height(data, 0);
-	// if (data->texture[NORTH_TEXTURE] == NULL)
-	// 	get_textures(data);
-		// height = next_v_size;
-		// if (i + 1 < RAY_COUNT)
-		// 	next_v_size = get_height(data, i + 1);
-		// draw_fov_chunk(data, i, step_width,
-		// 	(float [2]){height, next_v_size});

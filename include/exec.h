@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 18:47:49 by JFikents          #+#    #+#             */
-/*   Updated: 2024/08/10 18:35:59 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/11 14:32:38 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include "MLX42.h"
 
 # define PI 3.1415926535
-# define WIDTH 768
-# define HEIGHT 640
+# define WIDTH 2880
+# define HEIGHT 1620
 # define FOV 90
-# define RADIAN_STEP 0.0872664626
+# define TURNING_ANGLE 0.0872664626
 # define MINIMAP_SIZE 16
 # define MINIMAP_FLOOR_COLOR 0x00000044
 # define MINIMAP_WALL_COLOR 0x00FFFF44
@@ -85,6 +85,7 @@ typedef struct s_ray_data
 	mlx_image_t				*img;
 	double					angle;
 	double					distance;
+	int						coords[2];
 }	t_ray_data;
 
 typedef struct s_loop_data
@@ -101,27 +102,38 @@ typedef struct s_loop_data
 	char			*file_path[4];
 }	t_loop_data;
 
-mlx_image_t	*put_minimap(mlx_t *window, t_loop_data *data);
-void		draw_line(mlx_image_t *img, int start[2], int end[2], int color);
-void		player_moves(mlx_key_data_t key, void *param);
-int			put_player(mlx_t *window, t_player player[1]);
-int			redraw_player(t_player player[1]);
-double		get_delta_x(double angle);
-double		get_delta_y(double angle);
-double		adjust_angle(double angle, int direction);
-int			*get_coords_horizontal_ray(t_loop_data *data, double angle);
-int			*get_coords_vertical_ray(t_loop_data *data, double angle);
-int			normalize_coord_to_grid(int coord);
-bool		is_inside_map(int x, int y, t_loop_data *data);
+/*									Exec.c									  */
+int			exec(t_loop_data *data);
+/*								  Cast_rays.c								  */
 t_ray_data	*cast_rays(t_loop_data *data);
-// double		get_hypotenuse_with_pythagoras(int adjacent, int opposite);
-double		get_hypotenuse(int adjacent, int opposite);
-void		movement(t_loop_data *data, int direction);
-void		render_fov(void *param);
+/*								  Draw_fov.c								  */
 void		draw_fov(t_loop_data *data);
-void		ft_clear_image(mlx_image_t *img);
+/*								  Draw_utils.c								  */
+void		draw_line(mlx_image_t *img, int start[2], int end[2], int color);
 void		draw_line_from_player(mlx_image_t *img, t_player *player,
 				int coords[2], int color);
-void		get_textures(t_loop_data *data);
+void		clear_image(mlx_image_t *img);
+/*								Horizontal_rays.c							  */
+bool		is_inside_map(int x, int y, t_loop_data *data);
+int			*get_coords_horizontal_ray(t_loop_data *data, double angle);
+/*								Vertical_rays.c								  */
+int			*get_coords_vertical_ray(t_loop_data *data, double angle);
+/*								  Keyhook.c									  */
+void		player_moves(mlx_key_data_t key, void *param);
+void		render_fov(void *param);
+/*								  Math.c									  */
+double		get_delta_x(double angle);
+double		get_delta_y(double angle);
+double		get_hypotenuse(int adjacent, int opposite);
+int			normalize_coord_to_grid(int coord);
+double		adjust_angle(double angle, int direction);
+/*						Minimap_player_floor_and_ceiling.c					  */
+mlx_image_t	*put_minimap(mlx_t *window, t_loop_data *data);
+void		put_player(mlx_t *window, t_player player[1]);
+void		redraw_player(t_player player[1]);
+mlx_image_t	*put_floor_and_ceiling(mlx_t *window, int floor, int ceiling);
+/*								  Movement.c								  */
+void		movement(t_loop_data *data, int direction);
+
 
 #endif
