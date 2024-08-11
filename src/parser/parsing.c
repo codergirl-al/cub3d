@@ -6,81 +6,78 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:46:25 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/22 16:59:56 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/11 19:41:36 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-#include <stdio.h>
 
-int ft_read_map(t_data *playground, char *filename, char **data, int iter, int skip) {
-  int i;
-  char *temp;
+char  *ft_skip_nls(int  fd)
+{
+  char  *temp;
 
-  playground->fd = open(filename, O_RDONLY);
-  if (playground->fd < 0)
-    return ft_print_err("Couldn't open file to read.", 0);
-  temp = ft_calloc(1, sizeof(char *));
-  free(temp);
-  if (skip) {
-    temp = get_next_line(playground->fd);
+  temp = get_next_line(fd);
+  while (temp && *temp == '\n')
+  {
     free(temp);
+    temp = get_next_line(fd);
   }
-  i = 0;
-  while (i < iter || iter == 0) {
-    temp = get_next_line(playground->fd);
-    if (temp == NULL) {
-      free(temp);
-      break;
-    }
-    *data = ft_strjoin(*data, temp);
+  return (temp);
+}
+
+int ft_read_map(t_data *playground)
+{
+  char  *temp;
+
+  temp = ft_skip_nls(playground->fd);
+  playground->map_data = ft_strdup("");
+  while(temp)
+  {
+    if (temp[0] == '\n')
+      return (ft_handle_invalid(playground));
+    playground->map_data = ft_strjoin(playground->map_data, temp);
     free(temp);
-    if (!data) {
-      return ft_print_err("Couldn't read data.", 0);
-    }
-    i++;
+    temp = get_next_line(playground->fd);
   }
-  close(playground->fd);
   return (0);
 }
 
-int ft_analyze_input_file(char **argv, t_data *playground)
+int ft_read_settings(t_data *playground)
 {
-  ft_read_map(playground, argv[1], &playground->textures, 4, 0);
-  if (!playground->textures || !ft_handle_textures(playground))
-    return (ft_print_err("Empty file given.", 0));
-  ft_read_map(playground, argv[1], &playground->floor_data, 1, 1);
-  if (!playground->floor_data || !ft_handle_input(playground, 'F'))
-    return (ft_print_err("Couldn't read floor data", 0));
-  ft_read_map(playground, argv[1], &playground->ceiling_data, 1, 0);
-  if (!playground->ceiling_data || !ft_handle_input(playground, 'C'))
-    return (ft_print_err("Couldn't read ceiling data", 0));
-  ft_read_map(playground, argv[1], &playground->map_data, 0, 1);
+  int i;
+  char *temp;
+
+  temp = ft_skip_nls(playground->fd);
+  i = -1;
+  while (++i < 6 && temp)
+  {
+    if (temp[0] == '\n')
+      temp = ft_skip_nls(playground->fd);
+    playground->raw_data = ft_strjoin(playground->raw_data, temp);
+    free(temp);
+    temp = get_next_line(playground->fd);
+  }
+  return 0;
+}
+
+int ft_analyze_input_file(t_data *playground)
+{
+  ft_read_settings(playground);
+  if (!playground->raw_data || !ft_handle_raw_data(playground))
+    return (0);
+  ft_read_map(playground);
   if (!playground->map_data || !ft_handle_map(playground))
-    return (ft_print_err("Couldn't read map.", 0));
+    return (0);
   return (1);
 }
 
-int ft_init_map_data(t_data *playground) {
-  playground->map_data = malloc(sizeof(char *));
-  if (!playground->map_data)
-    return (ft_print_err("Couldn't initialize map data", 0));
-  return 1;
-}
-
-// Main parsing function
-t_data ft_parse(int argc, char **argv)
+void  ft_parse(int argc, char **argv, t_data *playground)
 {
-  t_data playground;  playground.fd = 3;
 
-  
-  if (argc != 2 || !ft_check_ending(argv[1])) {
-    write(1, "Error: Something wrong with the arguments given.", 47);
+  if (argc != 2 || !ft_check_ending(argv[1]))
+  {
+    write(1, "Error\n", 6);
     exit(0);
   }
-
-  ft_init_map_data(&playground);
-  ft_analyze_input_file(argv, &playground);
-
-  return playground;
+  ft_analyze_input_file(playground);
 }
