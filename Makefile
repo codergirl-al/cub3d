@@ -6,7 +6,7 @@
 #    By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 23:23:18 by apeposhi          #+#    #+#              #
-#    Updated: 2024/07/22 15:35:20 by apeposhi         ###   ########.fr        #
+#    Updated: 2024/08/08 14:16:57 by apeposhi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ all: $(NAME)
 _CLEANUP_SRC    :=  cleanup.c
 CLEANUP_SRC     :=  $(addprefix cleanup/, $(_CLEANUP_SRC))
 
-_PARSER_SRC     :=  parsing.c checker_utils.c f_c_handler.c map_handler.c texture_handler.c
+_PARSER_SRC     :=  parsing.c checker_utils.c f_c_handler.c map_handler.c texture_handler.c raw_data_handler.c
 PARSER_SRC      :=  $(addprefix parser/, $(_PARSER_SRC))
 
 _VALIDATOR_SRC  :=  map.c
@@ -35,7 +35,7 @@ OBJS            :=  $(SRC:src/%.c=bin/%.o)
 
 # Compiler and Flags
 CC              :=  cc
-CFLAGS          :=  -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS          :=  -Wall -Wextra -Werror -g3
 
 INCLUDES        :=  -Iinclude -Ilibft/includes
 
