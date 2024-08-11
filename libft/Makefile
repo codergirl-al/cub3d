@@ -6,14 +6,14 @@
 #    By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/17 14:25:17 by apeposhi          #+#    #+#              #
-#    Updated: 2024/07/17 19:06:21 by apeposhi         ###   ########.fr        #
+#    Updated: 2024/07/27 14:36:42 by apeposhi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # PROJECT #
 NAME	= libft.a
 CC		= cc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -g3
 RM		= @rm -f
 FILE	= $(shell ls -lR src/ | grep -F .c | wc -l)
 CMP		= 1

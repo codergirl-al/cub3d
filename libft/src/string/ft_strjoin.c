@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 18:44:59 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/17 19:28:27 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/07/27 14:38:53 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,18 @@ char  *ft_strjoin(char *s1, char *s2)
   size_t j;
   char *res;
 
-  if (!s1) {
-    s1 = (char *)malloc(sizeof(char));
-    s1[0] = '\0';
-  }
-  if (!s1)
+  if (!s1 && !s2)
     return (NULL);
   if (!s2)
     return (s1);
-  res = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1 * sizeof(char));
+  if (!s1)
+    return (ft_strdup(s2));
+  res = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
   if (res == NULL)
+  {
+    free(s1);
     return (NULL);
+  }
   i = -1;
   j = 0;
   while (s1[++i] != '\0')
