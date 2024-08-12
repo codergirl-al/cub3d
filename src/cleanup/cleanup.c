@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 21:06:22 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/11 18:45:51 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/12 04:52:46 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,8 @@ void	ft_free_data(t_data *gd)
 {
 	if (gd->map_2d)
 		free(gd->map_2d);
-	// if (gd->textures)
-	// 	free(gd->textures);
-	if (gd->floor_data)
-		free(gd->floor_data);
-	if (gd->ceiling_data)
-		free(gd->ceiling_data);
 	if (gd->map_data)
 		free(gd->map_data);
 	if (gd->textur.north)
 		ft_free_textures(gd->textur);
-	// if (gd->raw_data)
-	// 	free(gd->raw_data);
 }

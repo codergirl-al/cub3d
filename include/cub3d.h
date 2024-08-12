@@ -6,12 +6,12 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:53:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/09 22:25:14 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/12 04:52:23 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
-# define CUB3D_h
+# define CUB3D_H
 
 # include "../libft/includes/libft.h"
 # include <math.h>
@@ -39,36 +39,34 @@ typedef struct s_data
 	char		player_d;
 	int			map_width;
 	int			map_height;
-	char		*floor_data;
-	char		*ceiling_data;
+	int			f_colors[3];
+	int			c_colors[3];
 	int			fd;
-	int			index;
-	char		*current_line;
-	char		*texture_key;
 	char		*map_data;
 	char		*textures;
-	char		**square_map;
-	char		**rgb_values;
 	t_texture	textur;
 }	t_data;
 
 // validator functions
-int	ft_validate_args(int argc, char **argv);
+int		ft_validate_args(int argc, char **argv);
 
 // parser functions
 void	ft_parse(int argc, char **argv, t_data *playground);
 int		ft_handle_raw_data(t_data *playground);
 int		ft_handle_textures(t_data *playground);
 int		ft_handle_map(t_data *playground);
-int		ft_handle_input(t_data *playground, char *data, char flag);
+int		t_handle_input(t_data *playground, char *data, char flag);
+
 // parser utilities
 int		ft_check_ending(char *filename);
+int		ft_arrlen(char **arr);
+void	ft_arrfree(char **arr);
+int		ft_digit_check(char *color);
 
 // utility functions
 int		ft_print_err(char *message, int r_value);
 
 // cleanup 
-
 void	ft_free_data(t_data *gd);
 int		ft_handle_invalid(t_data *playground);
 

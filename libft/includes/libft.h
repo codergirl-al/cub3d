@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:24:48 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/18 23:39:28 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/12 04:47:41 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
-
 
 typedef struct s_list
 {

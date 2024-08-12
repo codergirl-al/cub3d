@@ -6,24 +6,25 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:23:19 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/12 02:45:32 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/12 04:56:51 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-size_t ft_strcountchr(char *str, char c)
+size_t	ft_strcountchr(char *str, char c)
 {
-  int i;
-  size_t counter;
+	int		i;
+	size_t	counter;
 
-  i = -1;
-  counter = 0;
-  while (str[++i]) {
-    if (str[i] == c)
-      counter++;
-  }
-  return (counter);
+	i = -1;
+	counter = 0;
+	while (str[++i])
+	{
+		if (str[i] == c)
+			counter++;
+	}
+	return (counter);
 }
 
 static int	ft_parse_color(char *data, int colors[3])
@@ -43,8 +44,7 @@ static int	ft_parse_color(char *data, int colors[3])
 	return (ft_arrfree(rgb), ft_arrfree(prsd), 0);
 }
 
-// to add: ERROR HANDLING
-int ft_handle_input(t_data *playground, char *data, char flag)
+int	ft_handle_input(t_data *playground, char *data, char flag)
 {
 	if (flag == 'C')
 	{

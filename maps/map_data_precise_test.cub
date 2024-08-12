@@ -3,9 +3,14 @@ SO ./textures/two.png
 WE ./textures/three.png
 EA ./textures/four.png
 
+
 F 220,200,0
 
+
+
 C 225,30,0
+
+
 
 1111111
 1000001

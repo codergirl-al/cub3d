@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 21:14:11 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/15 23:17:31 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/12 04:57:30 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_check_ending(char *filename)
 {
-	char *d_pos;
+	char	*d_pos;
 
 	if (!filename)
 		return (0);
@@ -24,3 +24,50 @@ int	ft_check_ending(char *filename)
 	return (0);
 }
 
+int	ft_arrlen(char **arr)
+{
+	int	it;
+
+	it = -1;
+	if (arr)
+		while (arr[++it])
+			;
+	return (it);
+}
+
+void	ft_arrfree(char **arr)
+{
+	int	i;
+
+	if (arr == NULL)
+		return ;
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
+
+int	ft_is_number(const char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+	}
+	return (1);
+}
+
+int	ft_digit_check(char *color)
+{
+	if (!ft_is_number(color))
+		return (-1);
+	if (ft_atoi(color) < 0 || ft_atoi(color) > 255)
+		return (-1);
+	return (ft_atoi(color));
+}
