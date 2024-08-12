@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:53:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/12 04:52:23 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/12 05:20:36 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int		ft_check_ending(char *filename);
 int		ft_arrlen(char **arr);
 void	ft_arrfree(char **arr);
 int		ft_digit_check(char *color);
+size_t	ft_strcountchr(char *str, char c);
 
 // utility functions
 int		ft_print_err(char *message, int r_value);
