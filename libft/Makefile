@@ -6,7 +6,7 @@
 #    By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/17 14:25:17 by apeposhi          #+#    #+#              #
-#    Updated: 2024/07/27 14:36:42 by apeposhi         ###   ########.fr        #
+#    Updated: 2024/08/15 15:04:48 by apeposhi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC		= ./src/memory/ft_bzero.c\
 	      ./src/check/ft_isalpha.c\
 	      ./src/check/ft_isprint.c\
 	      ./src/memory/ft_memcpy.c\
+		  ./src/string/ft_cut_chr.c\
 	      ./src/string/ft_strchr.c\
 	      ./src/string/ft_strlcpy.c\
 	      ./src/string/ft_strrchr.c\

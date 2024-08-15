@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 04:42:27 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/12 04:58:19 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/15 01:32:59 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_handle_raw_data(t_data *playground)
 		if (data[i][0] == 'F')
 			ft_handle_input(playground, data[i], 'F');
 		else if (data[i][0] == 'C')
-			ft_handle_input(playground, data[i], 'C');
+			ft_handle_input(playground, data[i], 'C');	
 		else if (data [i][0] == 'N')
 		{
 			j = -1;
@@ -37,7 +37,7 @@ int	ft_handle_raw_data(t_data *playground)
 			ft_handle_textures(playground);
 		}
 		else
-			return (ft_handle_invalid(playground));
+			return (free(data), ft_handle_invalid(playground));
 	}
 	return (free(data), 1);
 }

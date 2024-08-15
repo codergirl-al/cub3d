@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:24:48 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/12 04:47:41 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/15 14:58:26 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	*ft_calloc(unsigned long count, unsigned long size);
 void	ft_bzero(void *s, size_t n);
 
 /*		STRING		*/
+char	*ft_cut_chr(char *str, char c);
 size_t	ft_strlen(const char *s);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
