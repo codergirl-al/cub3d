@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 14:47:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/15 14:58:11 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/16 01:37:01 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_cut_chr(char *str, char c)
 {
 	char	*trimmed;
 	size_t	i;
-	size_t	j;
+	size_t	j; 
 	size_t	count;
 
 	i = 0;

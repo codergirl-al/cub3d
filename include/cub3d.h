@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:53:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/15 17:51:51 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/16 01:36:33 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,22 @@ typedef struct s_texture
 
 typedef struct s_data
 {
-	char		**map_2d;
-	char		*raw_data;
-	int			map_rows;
-	int			map_cols;
-	int			player_x;
-	int			player_y;
-	char		player_d;
-	int			map_width;
-	int			map_height;
-	int			f_colors[3];
-	int			c_colors[3];
-	int			fd;
-	char		*map_data;
-	char		*textures;
-	t_texture	textur;
+	char			**map_2d;
+	char			*raw_data;
+	int				map_rows;
+	int				map_cols;
+	int				player_x;
+	int				player_y;
+	char			player_d;
+	int				map_width;
+	unsigned int	map_mwidth;
+	int				map_height;
+	int				f_colors[3];
+	int				c_colors[3];
+	int				fd;
+	char			*map_data;
+	char			*textures;
+	t_texture		textur;
 }	t_data;
 
 // validator functions
