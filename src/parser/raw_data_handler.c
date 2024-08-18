@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 04:42:27 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/15 01:32:59 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/18 16:37:19 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_handle_raw_data(t_data *playground)
 			ft_handle_textures(playground);
 		}
 		else
-			return (free(data), ft_handle_invalid(playground));
+			return (ft_free_array(data), ft_handle_invalid(playground));
 	}
-	return (free(data), 1);
+	return (ft_free_array(data), 1);
 }
