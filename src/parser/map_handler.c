@@ -6,12 +6,11 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:18:28 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/18 13:45:27 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/18 16:40:03 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-#include <stdlib.h>
 
 size_t	ft_strlen_updated(const char *s)
 {
@@ -32,33 +31,19 @@ static int ft_validate_full_ones(char **map)
 {
 	size_t	j;
 	size_t	map_length;
-	int		found_one;
 
 	j = ft_skip_space(map, 0);
-	found_one = 0;
 	while (map[0][++j] != '\0')
 	{
-		if (map[0][j] == '1')
-			found_one = 1;
-		else if (map[0][j] != '1')
+		if (map[0][j] != '1')
 			return (0);
-	}
-	if (!found_one)
-		return (0);
 	map_length = 0;
 	while (map[map_length] != NULL)
 		map_length++;
 	j = ft_skip_space(map, map_length - 1);
-	found_one = 0;
 	while (map[map_length - 1][++j] != '\0')
-	{
-		if (map[map_length - 1][j] == '1')
-			found_one = 1;
-		else if (map[map_length - 1][j] != '1')
+		if (map[map_length - 1][j] != '1')
 			return (0);
-	}
-	if (!found_one)
-		return (0);
 	return (1);
 }
 

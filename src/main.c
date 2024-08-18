@@ -21,7 +21,6 @@ int	main(int argc, char **argv)
 	if (playground.fd < 0)
 		return (ft_print_err("Error\n", 0));
 	ft_parse(argc, argv, &playground);
-	printf("well weve gotten thru it bitch, we didnt lose our motherfucking medula\n");
 	ft_free_data(&playground);
 	close(playground.fd);
 	return (0);

@@ -29,7 +29,7 @@ char	*ft_cut_chr(char *str, char c)
 			count++;
 	trimmed = (char *)malloc(sizeof(char) * (count + 1));
 	if (!trimmed)
-		return (NULL);
+		return (free(str), NULL);
 	for (i = 0; str[i]; i++)
 		if (str[i] != c)
 			trimmed[j++] = str[i];
