@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:46:25 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/12 04:56:41 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/18 16:29:29 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,14 @@ int	ft_analyze_input_file(t_data *playground)
 
 void	ft_parse(int argc, char **argv, t_data *playground)
 {
-	if (argc != 2 || !ft_check_ending(argv[1]))
+	if (argc != 2)
 	{
-		write(1, "Error\n", 6);
+		write(1, "Error\nInvalid number of arguments passed.\n", 43);
+		exit(0);
+	}
+	if (!ft_check_ending(argv[1]))
+	{
+		write(1, "Error\nFilename doesn't comply to the rules.\n", 45);
 		exit(0);
 	}
 	ft_analyze_input_file(playground);

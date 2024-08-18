@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 21:14:11 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/15 17:52:10 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/18 16:26:27 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_check_ending(char *filename)
 	if (!filename)
 		return (0);
 	d_pos = ft_strrchr(filename, '.');
-	if (d_pos && !ft_strcmp(d_pos, ".cub"))
+	if (d_pos && !ft_strcmp(d_pos, ".cub\0"))
 		return (1);
 	return (0);
 }

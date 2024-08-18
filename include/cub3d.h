@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:53:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/16 01:36:33 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/18 16:31:39 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_data
 	int				player_y;
 	char			player_d;
 	int				map_width;
-	unsigned int	map_mwidth;
+	unsigned int	map_width;
 	int				map_height;
 	int				f_colors[3];
 	int				c_colors[3];
