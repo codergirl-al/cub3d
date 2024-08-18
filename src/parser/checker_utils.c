@@ -65,12 +65,12 @@ int	ft_is_number(const char *str)
 
 int	ft_digit_check(char *color)
 {
-	int	color;
+	int	prsd;
 
 	if (!ft_is_number(color))
 		return (-1);
-	color = ft_atoi(color);
-	if (color < 0 || color > 255)
+	prsd = ft_atoi(color);
+	if (prsd < 0 || prsd > 255)
 		return (-1);
-	return (color);
+	return (prsd);
 }

@@ -38,7 +38,6 @@ typedef struct s_data
 	int				player_y;
 	char			player_d;
 	int				map_width;
-	unsigned int	map_width;
 	int				map_height;
 	int				f_colors[3];
 	int				c_colors[3];
@@ -55,8 +54,8 @@ int		ft_validate_args(int argc, char **argv);
 void	ft_parse(int argc, char **argv, t_data *playground);
 int		ft_handle_raw_data(t_data *playground);
 int		ft_handle_textures(t_data *playground);
-int		ft_handle_map(t_data *playground);
 int		ft_handle_input(t_data *playground, char *data, char flag);
+int		ft_handle_map(t_data *playground);
 
 // parser utilities
 int		ft_check_ending(char *filename);
@@ -66,10 +65,13 @@ int		ft_digit_check(char *color);
 size_t	ft_strcountchr(char *str, char c);
 
 // utility functions
-int		ft_print_err(char *message, int r_value);
+int		ft_calc_width(t_data *playground);
+size_t	ft_strlen_updated(const char *s);
+int		ft_count_directions(char *temp);
 
 // cleanup 
 void	ft_free_data(t_data *gd);
+int		ft_print_err(char *message, int r_value);
 int		ft_handle_invalid(t_data *playground);
 
 #endif

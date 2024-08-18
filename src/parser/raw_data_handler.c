@@ -37,7 +37,7 @@ int	ft_handle_raw_data(t_data *playground)
 			ft_handle_textures(playground);
 		}
 		else
-			return (ft_free_array(data), ft_handle_invalid(playground));
+			return (ft_arrfree(data), ft_handle_invalid(playground));
 	}
-	return (ft_free_array(data), 1);
+	return (ft_arrfree(data), 1);
 }

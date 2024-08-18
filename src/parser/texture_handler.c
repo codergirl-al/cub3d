@@ -42,10 +42,14 @@ int	ft_handle_textures(t_data *playground)
 			(!ft_strncmp(d_txtr[0], "EA", 2) && i == 3 && ft_check_texture(d_txtr[1])))
 			*(&playground->textur.north + i) = d_txtr[1];
 		else
-			ft_free_array(d_txtr); ft_free_array(txtrs); return (ft_handle_invalid(playground));
-		ft_free_array(d_txtr);
+		{
+			ft_arrfree(d_txtr);
+			ft_arrfree(txtrs);
+			return (ft_handle_invalid(playground));
+		}
+		ft_arrfree(d_txtr);
 		i++;
 	}
-	ft_free_array(txtrs);
+	ft_arrfree(txtrs);
 	return (1);
 }
