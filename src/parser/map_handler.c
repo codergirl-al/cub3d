@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:18:28 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/18 13:09:46 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/18 13:45:27 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,13 @@ size_t	ft_strlen_updated(const char *s)
 	return (count);
 }
 
-static int	ft_skip_spaces(char **temp, int x)
-{
-	int	i;
-	
-	i = 0;
-	while (temp[x][i] == ' ')
-		i++;
-	return (i);
-		
-}
-
 static int ft_validate_full_ones(char **map)
 {
 	size_t	j;
 	size_t	map_length;
 	int		found_one;
 
-	j = ft_skip_spaces(map, 0);
+	j = ft_skip_space(map, 0);
 	found_one = 0;
 	while (map[0][++j] != '\0')
 	{
@@ -59,9 +48,10 @@ static int ft_validate_full_ones(char **map)
 	map_length = 0;
 	while (map[map_length] != NULL)
 		map_length++;
-	j = ft_skip_spaces(map, map_length - 1);
+	j = ft_skip_space(map, map_length - 1);
 	found_one = 0;
-	while (map[map_length - 1][++j] != '\0') {
+	while (map[map_length - 1][++j] != '\0')
+	{
 		if (map[map_length - 1][j] == '1')
 			found_one = 1;
 		else if (map[map_length - 1][j] != '1')
@@ -177,7 +167,7 @@ static int	ft_validate_map_elements(t_data *playground)
 
 int ft_handle_map(t_data * playground)
 {
-	playground->map_2d = ft_split(playground->map_data, '\n');
+	playground->map_2d = ft_split_moderated(playground->map_data, '\n');
 	ft_validate_map_elements(playground);
 	playground->map_height = ft_arrlen(playground->map_2d);
 	if (!ft_validate_full_ones(playground->map_2d))
