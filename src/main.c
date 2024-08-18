@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:04:05 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/12 04:53:50 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/18 03:23:54 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int argc, char **argv)
 	if (playground.fd < 0)
 		return (ft_print_err("Error\n", 0));
 	ft_parse(argc, argv, &playground);
+	printf("well weve gotten thru it bitch, we didnt lose our motherfucking medula\n");
 	ft_free_data(&playground);
 	close(playground.fd);
 	return (0);

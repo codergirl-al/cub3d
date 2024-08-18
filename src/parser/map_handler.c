@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:18:28 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/18 02:54:01 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/18 13:09:46 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,48 @@ size_t	ft_strlen_updated(const char *s)
 	return (count);
 }
 
-static int	ft_validate_full_ones(char *row)
+static int	ft_skip_spaces(char **temp, int x)
 {
-	if (ft_strcountchr(row, '1') == ft_strlen_updated(row))
-		return (1);
-	return (0);
+	int	i;
+	
+	i = 0;
+	while (temp[x][i] == ' ')
+		i++;
+	return (i);
+		
+}
+
+static int ft_validate_full_ones(char **map)
+{
+	size_t	j;
+	size_t	map_length;
+	int		found_one;
+
+	j = ft_skip_spaces(map, 0);
+	found_one = 0;
+	while (map[0][++j] != '\0')
+	{
+		if (map[0][j] == '1')
+			found_one = 1;
+		else if (map[0][j] != '1')
+			return (0);
+	}
+	if (!found_one)
+		return (0);
+	map_length = 0;
+	while (map[map_length] != NULL)
+		map_length++;
+	j = ft_skip_spaces(map, map_length - 1);
+	found_one = 0;
+	while (map[map_length - 1][++j] != '\0') {
+		if (map[map_length - 1][j] == '1')
+			found_one = 1;
+		else if (map[map_length - 1][j] != '1')
+			return (0);
+	}
+	if (!found_one)
+		return (0);
+	return (1);
 }
 
 static int	ft_handle_side(t_data *playground)
@@ -64,12 +101,12 @@ static int	ft_handle_side(t_data *playground)
 static int	ft_count_directions(char *temp)
 {
 	int	directions[4];
-	int	total_directions;
+	int	count;
 	int	i;
 	
 	ft_bzero(directions, sizeof(directions));
-	total_directions = ft_count_directions(temp);
-	i = -1;
+        count = 0;
+        i = -1;
 	while (temp[++i]) {
 		if (temp[i] == 'N')
 			directions[0]++;
@@ -82,8 +119,38 @@ static int	ft_count_directions(char *temp)
 	}
 	i = -1;
 	while (++i < 4)
-	  total_directions += directions[i];
-	return (0);
+	  count += directions[i];
+	return (count);
+}
+
+static int	ft_assign_values(t_data *playground)
+{
+	size_t	i;
+	size_t	j;
+	char	*temp;
+
+	i = -1;
+	while (playground->map_2d[++i] != NULL)
+	{
+		j = -1;
+		while (playground->map_2d[i][++j] != '\0')
+		{
+			if (playground->map_2d[i][j] == 'N' \
+				|| playground->map_2d[i][j] == 'S' \
+				|| playground->map_2d[i][j] == 'W' \
+				|| playground->map_2d[i][j] == 'E')
+			{
+				playground->player_x = j;
+				playground->player_y = i;
+				playground->player_d = playground->map_2d[i][j];
+				temp = ft_strdup(playground->map_2d[i]);
+				temp[j] = '0';
+				playground->map_2d[i] = ft_strdup(temp);
+				free(temp);
+			}
+		}
+	}
+	return (1);
 }
 
 static int	ft_validate_map_elements(t_data *playground)
@@ -101,24 +168,20 @@ static int	ft_validate_map_elements(t_data *playground)
 	total_directions = ft_count_directions(temp);
 	if (total_directions != 1)
 		return (free(temp), ft_handle_invalid(playground));
+	ft_assign_values(playground);
 	if (ft_strlen(temp) != 1)
         return (free(temp), ft_handle_invalid(playground));
     free(temp);
 	return (0);
 }
 
-// function to set map height and map width
-
 int ft_handle_map(t_data * playground)
 {
-	size_t	j;
-	size_t	i;
-
 	playground->map_2d = ft_split(playground->map_data, '\n');
-	i = 0;
 	ft_validate_map_elements(playground);
 	playground->map_height = ft_arrlen(playground->map_2d);
-	ft_validate_full_ones(playground->map_2d[i]);
+	if (!ft_validate_full_ones(playground->map_2d))
+		return (ft_handle_invalid(playground));
 	ft_handle_side(playground);
 	return (1);
 }
