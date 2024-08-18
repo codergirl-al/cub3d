@@ -6,11 +6,12 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:18:28 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/18 00:30:54 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/18 02:54:01 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+#include <stdlib.h>
 
 size_t	ft_strlen_updated(const char *s)
 {
@@ -34,22 +35,30 @@ static int	ft_validate_full_ones(char *row)
 	return (0);
 }
 
-static int ft_handle_side(t_data *playground, size_t i, size_t j)
+static int	ft_handle_side(t_data *playground)
 {
-	if (playground->map_2d[i][j] == 1)
+	size_t	i;
+	size_t	first;
+	size_t	last;
+	char	*row;
+
+	if (!playground || !playground->map_2d)
+		return (0);
+
+	i = -1;
+	while (playground->map_2d[++i] != NULL)
 	{
-		if (j == 0)
-		{
-			if (playground->map_2d[i][j])
-				return (ft_handle_invalid(playground));
-		}
-		else if (j == ft_strlen(playground->map_2d[i] - 1))
-		{
-			if (playground->map_2d[i][j])
-				return (ft_handle_invalid(playground));
-		}
+		row = playground->map_2d[i];
+		first = 0;
+		while (row[first] == ' ')
+			first++;
+		last = ft_strlen(row) - 1;
+		while (last > 0 && row[last] == ' ')
+			last--;
+		if (last <= first || row[first] != '1' || row[last] != '1')
+			return (ft_handle_invalid(playground));
 	}
-	return (0);
+	return (1);
 }
 
 static int	ft_count_directions(char *temp)
@@ -90,11 +99,15 @@ static int	ft_validate_map_elements(t_data *playground)
 	if (ft_strlen(temp) == 0)
 		return (ft_handle_invalid(playground));
 	total_directions = ft_count_directions(temp);
-	free(temp);
 	if (total_directions != 1)
-		return (ft_handle_invalid(playground));
+		return (free(temp), ft_handle_invalid(playground));
+	if (ft_strlen(temp) != 1)
+        return (free(temp), ft_handle_invalid(playground));
+    free(temp);
 	return (0);
 }
+
+// function to set map height and map width
 
 int ft_handle_map(t_data * playground)
 {
@@ -106,17 +119,6 @@ int ft_handle_map(t_data * playground)
 	ft_validate_map_elements(playground);
 	playground->map_height = ft_arrlen(playground->map_2d);
 	ft_validate_full_ones(playground->map_2d[i]);
-	while (i < playground->map_height - 1)
-	{
-		j = -1;
-		while (playground->map_2d[i][++j])
-		{
-			if ((j == 0 || j == (ft_strlen(playground->map_2d[i] - 1))))
-				ft_handle_side(playground, i, j);
-			while (playground->map_2d[i][j] == ' ')
-				j++;
-		}
-	}
-	ft_validate_full_ones(playground->map_2d[i]);
+	ft_handle_side(playground);
 	return (1);
 }
