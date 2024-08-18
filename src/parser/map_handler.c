@@ -20,7 +20,15 @@ int ft_validate_full_ones(char **map)
 	j = ft_skip_space(map, 0);
 	while (map[0][++j] != '\0')
 		if (map[0][j] != '1')
-			return (0);
+		{
+			if (map[0][i] == ' ')
+			{
+				if (map[0][i + 1] != '1')
+					return (0);
+			}
+			else
+				return (0);
+		}
 	map_length = 0;
 	while (map[map_length] != NULL)
 		map_length++;
@@ -111,7 +119,7 @@ static int	ft_validate_map_elements(t_data *playground)
 
 int ft_handle_map(t_data *playground)
 {
-	playground->map_2d = ft_split_moderated(playground->map_data, '\n');
+	playground->map_2d = ft_split(playground->map_data, '\n');
 	ft_validate_map_elements(playground);
 	playground->map_height = ft_arrlen(playground->map_2d);
 	if (!ft_validate_full_ones(playground->map_2d))
