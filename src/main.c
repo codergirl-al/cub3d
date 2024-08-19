@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:52:21 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/11 14:17:10 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/19 11:05:49 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ const char	**get_map(t_player player[1], t_loop_data *data)
 	data->file_path[SOUTH_TEXTURE] = "textures/south.png";
 	data->file_path[EAST_TEXTURE] = "textures/east.png";
 	data->file_path[WEST_TEXTURE] = "textures/west.png";
-	ft_bzero(data->texture, sizeof(data->texture));
 	return (map);
 }
 
@@ -67,6 +66,7 @@ int	main(void)
 {
 	t_loop_data	data[1];
 
+	ft_bzero(data, sizeof(data));
 	data->map = get_map(data->player, data);
 	data->window = mlx_init(WIDTH, HEIGHT, "Cub3D", true);
 	exec(data);
