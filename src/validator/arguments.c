@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arguments.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 23:03:00 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/05/15 00:26:43 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/07/17 17:05:06 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_validate_args(int argc, char **argv)
 		if (argc == 1)
 			write(2, "Error: No map entered.\n", 23);
 		else
-		 	write(2, "Error: Too many arguments.\n", 27);
+			write(2, "Error: Too many arguments.\n", 27);
 		return (1);
 	}
 	location = ft_strnstr(argv[1], ".cub", ft_strlen(argv[1]));
@@ -34,4 +34,3 @@ int	ft_validate_args(int argc, char **argv)
 	close (fd);
 	return (0);
 }
-

@@ -3,18 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:53:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/06 21:33:55 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/07/14 18:51:22 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
-# define CUB3D_h
+# define CUB3D_H
 
-# include "../libft/includes/libft.h"
-#include <cmath>
+# include "mem/libft_mem_allocation.h"
+# include "libft_fd_operations.h"
+# include "ft_printf.h"
+# include "libft.h"
+# include "MLX42.h"
+# include "exec.h"
+# include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -81,12 +86,12 @@ typedef struct s_data
 	// t_txtr	*t;
 }	t_data;
 // validator functions
-int	ft_validate_args(int argc, char **argv);
+int		ft_validate_args(int argc, char **argv);
 
 // parser functions
 
 // utility functions
-int	ft_print_err(char *message, int r_value);
+int		ft_print_err(char *message, int r_value);
 
 // cleanup 
 void	ft_free_data(t_data *gd);

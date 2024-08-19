@@ -3,46 +3,108 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+         #
+#    By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 23:23:18 by apeposhi          #+#    #+#              #
-#    Updated: 2024/05/14 23:30:12 by apeposhi         ###   ########.fr        #
+#    Updated: 2024/08/19 10:57:10 by JFikents         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 # Metadata
-AUTHOR    :=	apeposhi
-NAME      :=	cub3d
+AUTHOR			:=	apeposhi\
+					JFikents
+NAME			:=	cub3d
 
-# Sources & Objects
-SRC       :=	src/main.c src/parser.c \
-				src/validator/arguments.c
-OBJS      :=	$(SRC:.cpp=.o)
+ifeq ($(DEBUG), 1)
+re: fclean all
+endif
 
-# Compiler and Flags
-CXX       :=	cc
-CXXFLAGS  :=	-Wall -Wextra -Werror
-EXE_FLAG  :=	-o
-EXEC      :=	cub3d
-
-# Suffix Rules
-.cpp.o:
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-# Targets
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) $(EXE_FLAG) $(EXEC)
+# Sources & Objects
+_DEPENDENCIES	:=	cub3d.h exec.h
+DEPENDENCIES	:=	$(addprefix include/, $(_DEPENDENCIES))
+
+_EXEC_SRC		:=	cast_rays.c\
+					draw_fov.c\
+					draw_utils.c\
+					exec.c\
+					horizontal_rays.c\
+					keyhook.c\
+					math.c\
+					minimap_player_floor_and_ceiling.c\
+					movement.c\
+					vertical_rays.c
+EXEC_SRC		:=	$(addprefix execution/, $(_EXEC_SRC))
+
+_CLEANUP_SRC	:=	cleanup.c
+CLEANUP_SRC		:=	$(addprefix cleanup/, $(_CLEANUP_SRC))
+
+_PARSER_SRC		:=	parsing.c
+PARSER_SRC		:=	$(addprefix parser/, $(_PARSER_SRC))
+
+_VALIDATOR_SRC	:=	arguments.c
+VALIDATOR_SRC	:=	$(addprefix validator/, $(_VALIDATOR_SRC))
+
+_SRC			:=	main.c parser.c error_handling.c\
+					$(VALIDATOR_SRC)\
+					$(PARSER_SRC)\
+					$(CLEANUP_SRC)\
+					$(EXEC_SRC)
+SRC				:=	$(addprefix src/, $(_SRC))
+
+OBJS			:=	$(SRC:src/%.c=bin/%.o)
+
+# Compiler and Flags
+CC				:=	cc
+CFLAGS			:=	-Wall -Wextra -Werror -Wunreachable-code
+ifeq ($(DEBUG), 1)
+CFLAGS	+= -g3
+endif
+
+_INCLUDES		:=	include/ libft/includes/ lib/MLX42/include/MLX42/ \
+					lib/libft/includes/
+INCLUDES		:=	$(addprefix -I, $(_INCLUDES))
+
+# Libraries
+_LIB_PATH		:=	lib/MLX42/build/ lib/libft/ libft/
+LIB_PATH		:=	$(addprefix -L, $(_LIB_PATH))
+LIBMLX42		:=	lib/MLX42/build/libmlx42.a
+LIBFT			:=	libft/libft.a lib/libft/libft.a
+_LIBS			:=	mlx42 ft glfw m
+LIBS			:=	$(addprefix -l, $(_LIBS))
+LIB_FLAGS		:=	$(LIB_PATH) $(LIBS)
+
+$(LIBMLX42):
+	@git submodule update --init --recursive lib/MLX42
+	@cmake -B lib/MLX42/build -S lib/MLX42/
+	@cmake --build lib/MLX42/build -j4
+
+$(LIBFT):
+	@git submodule update --init --recursive lib/libft
+	@make -C libft
+	@make -C lib/libft
+
+# Targets
+
+$(NAME): $(LIBFT) $(LIBMLX42) $(OBJS)
+	$(CC) -o $@ $(OBJS) $(CFLAGS) $(INCLUDES) $(LIB_FLAGS)
 
 clean:
 	rm -rf $(OBJS)
 
 fclean: clean
-	rm -rf $(EXEC)
+	rm -rf $(NAME)
 
 re:	fclean all
+
+bin/:
+	@mkdir -p bin/cleanup bin/parser bin/validator bin/execution
+
+# Suffix Rules
+bin/%.o: src/%.c $(DEPENDENCIES) | bin/
+	$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDES)
 
 # Phony Targets
 .PHONY:	all clean fclean re

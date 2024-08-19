@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 21:06:22 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/06 21:29:15 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/07/12 14:35:06 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,4 @@ void	ft_free_data(t_data *gd)
 		free(gd->map_2d);
 	if (gd->map_2d)
 		free(gd->map_2d);
-
 }
-

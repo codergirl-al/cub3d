@@ -1,0 +1,6 @@
+bin/*
+cub3d
+*.o
+libft.a
+local/*
+.vscode/*
