@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:46:25 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/19 18:13:31 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/19 22:28:43 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,16 @@ int	ft_read_settings(t_data *playground)
 	while (++i < 6 && temp)
 	{
 		if (temp[0] == '\n')
+		{
+			free(temp);
 			temp = ft_skip_nls(playground->fd);
+		}
 		playground->raw_data = ft_strjoin(playground->raw_data, temp);
 		free(temp);
 		temp = get_next_line(playground->fd);
 	}
+	if (temp)
+		free(temp);
 	return (0);
 }
 
