@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:18:28 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/18 16:40:03 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/19 00:46:16 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,10 @@ static int	ft_validate_map_elements(t_data *playground)
 
 int ft_handle_map(t_data *playground)
 {
+	int	indicator;
+
 	playground->map_2d = ft_split(playground->map_data, '\n');
+	indicator = ft_validate_first(playground);
 	ft_validate_map_elements(playground);
 	playground->map_height = ft_arrlen(playground->map_2d);
 	if (!ft_validate_full_ones(playground->map_2d))
