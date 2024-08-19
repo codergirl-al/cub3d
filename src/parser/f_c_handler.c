@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   f_c_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:23:19 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/12 04:56:51 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/19 19:44:01 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "cub3d.h"
 
 size_t	ft_strcountchr(char *str, char c)
 {

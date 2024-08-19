@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   map_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:18:28 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/19 00:46:16 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/19 19:44:07 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "cub3d.h"
 
-int ft_validate_full_ones(char **map)
+int	ft_validate_full_ones(char **map)
 {
 	size_t	j;
 	size_t	map_length;
+	size_t	i;
 
+	i = 0;
 	j = ft_skip_space(map, 0);
 	while (map[0][++j] != '\0')
 		if (map[0][j] != '1')
@@ -117,12 +119,13 @@ static int	ft_validate_map_elements(t_data *playground)
 	return (0);
 }
 
-int ft_handle_map(t_data *playground)
+
+int	ft_handle_map(t_data *playground)
 {
-	int	indicator;
+	// int	indicator;
 
 	playground->map_2d = ft_split(playground->map_data, '\n');
-	indicator = ft_validate_first(playground);
+	// indicator = ft_validate_first(playground);
 	ft_validate_map_elements(playground);
 	playground->map_height = ft_arrlen(playground->map_2d);
 	if (!ft_validate_full_ones(playground->map_2d))

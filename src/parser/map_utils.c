@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 00:22:43 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/18 16:31:25 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/19 19:44:47 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "cub3d.h"
 
-int ft_calc_width(t_data *playground)
+int	ft_calc_width(t_data *playground)
 {
-	unsigned long	i;
+	int				i;
 	unsigned long	longest;
 	unsigned long	width;
 
@@ -22,9 +22,9 @@ int ft_calc_width(t_data *playground)
 	longest = 0;
 	while (++i < playground->map_height)
 	{
-        width = ft_strlen(playground->map_2d[i]);
-        if (longest < width)
-            longest = width;
+		width = ft_strlen(playground->map_2d[i]);
+		if (longest < width)
+			longest = width;
 	}
 	playground->map_width = longest;
 	return (0);

@@ -2,5 +2,6 @@ bin/*
 cub3d
 *.o
 libft.a
+libft_local.a
 local/*
 .vscode/*

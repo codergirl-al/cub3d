@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+         #
+#    By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/17 14:25:17 by apeposhi          #+#    #+#              #
-#    Updated: 2024/08/18 13:47:58 by apeposhi         ###   ########.fr        #
+#    Updated: 2024/08/19 18:22:09 by JFikents         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # PROJECT #
-NAME	= libft.a
+NAME	= libft_local.a
 CC		= cc
 CFLAGS	= -Wall -Wextra -Werror -g3
 RM		= @rm -f
