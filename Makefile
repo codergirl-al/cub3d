@@ -6,7 +6,7 @@
 #    By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 23:23:18 by apeposhi          #+#    #+#              #
-#    Updated: 2024/08/11 14:35:49 by JFikents         ###   ########.fr        #
+#    Updated: 2024/08/19 10:40:41 by JFikents         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,7 +88,7 @@ $(LIBFT):
 
 # Targets
 
-$(NAME): $(OBJS) $(LIBFT) $(LIBMLX42)
+$(NAME): $(LIBFT) $(LIBMLX42) $(OBJS)
 	$(CC) -o $@ $(OBJS) $(CFLAGS) $(INCLUDES) $(LIB_FLAGS)
 
 clean:
