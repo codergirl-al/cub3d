@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:18:28 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/19 00:46:16 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 00:58:21 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,10 @@ static int	ft_handle_side(t_data *playground)
 	return (1);
 }
 
-static int	ft_assign_values(t_data *playground)
+static void	ft_assign_values(t_data *playground)
 {
 	size_t	i;
 	size_t	j;
-	char	*temp;
 
 	i = -1;
 	while (playground->map_2d[++i] != NULL)
@@ -84,36 +83,22 @@ static int	ft_assign_values(t_data *playground)
 			{
 				playground->player_x = j;
 				playground->player_y = i;
-				playground->player_d = playground->map_2d[i][j];
-				temp = ft_strdup(playground->map_2d[i]);
-				temp[j] = '0';
-				playground->map_2d[i] = ft_strdup(temp);
-				free(temp);
+				return ;
 			}
 		}
 	}
-	return (1);
 }
 
 static int	ft_validate_map_elements(t_data *playground)
 {
-	char *temp;
-	int total_directions;
+	char	*temp;
 
-	temp = ft_strdup(playground->map_data);
-	temp = ft_cut_chr(temp, '\n');
-	temp = ft_cut_chr(temp, ' ');
-	temp = ft_cut_chr(temp, '0');
-	temp = ft_cut_chr(temp, '1');
-	if (ft_strlen(temp) == 0)
-		return (free(temp), ft_handle_invalid(playground));
-	total_directions = ft_count_directions(temp);
-	if (total_directions != 1)
-		return (free(temp), ft_handle_invalid(playground));
-	ft_assign_values(playground);
+	temp = ft_strtrim(playground->map_data, " \n01");
 	if (ft_strlen(temp) != 1)
-        return (free(temp), ft_handle_invalid(playground));
-    free(temp);
+		return (free(temp), ft_handle_invalid(playground));
+	playground->player_d = temp[0];
+	free(temp);
+	ft_assign_values(playground);
 	return (0);
 }
 

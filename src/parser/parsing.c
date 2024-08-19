@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:46:25 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/18 16:29:29 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/19 23:54:24 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,16 @@ int	ft_read_settings(t_data *playground)
 	while (++i < 6 && temp)
 	{
 		if (temp[0] == '\n')
+		{
+			free(temp);
 			temp = ft_skip_nls(playground->fd);
+		}
 		playground->raw_data = ft_strjoin(playground->raw_data, temp);
 		free(temp);
 		temp = get_next_line(playground->fd);
 	}
+	if (temp)
+		free(temp);
 	return (0);
 }
 

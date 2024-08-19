@@ -6,23 +6,32 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:13:29 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/18 16:36:39 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/19 23:59:23 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static int	ft_check_texture(char *t)
+static bool	ft_check_texture(char *t)
 {
 	int	fd;
 
 	fd = open(t, O_RDONLY);
-	if (fd > 0)
-	{
+	if (fd > 0) {
 		close(fd);
-		return (0);
+		return (true);
 	}
-	return (1);
+	return (false);
+}
+
+static bool	is_valid_texture_format(char *txtr, int i)
+{
+	if ((!ft_strncmp(txtr, "NO", 2) && i == 0) ||
+		(!ft_strncmp(txtr, "SO", 2) && i == 1) ||
+		(!ft_strncmp(txtr, "WE", 2) && i == 2) ||
+		(!ft_strncmp(txtr, "EA", 2) && i == 3))
+		return (true);
+	return (false);
 }
 
 int	ft_handle_textures(t_data *playground)
@@ -36,20 +45,17 @@ int	ft_handle_textures(t_data *playground)
 	while (i < 4)
 	{
 		d_txtr = ft_split(txtrs[i], ' ');
-		if ((!ft_strncmp(d_txtr[0], "NO", 2) && i == 0 && ft_check_texture(d_txtr[1])) ||
-			(!ft_strncmp(d_txtr[0], "SO", 2) && i == 1 && ft_check_texture(d_txtr[1])) ||
-			(!ft_strncmp(d_txtr[0], "WE", 2) && i == 2 && ft_check_texture(d_txtr[1])) ||
-			(!ft_strncmp(d_txtr[0], "EA", 2) && i == 3 && ft_check_texture(d_txtr[1])))
-			*(&playground->textur.north + i) = d_txtr[1];
+		if (is_valid_texture_format(d_txtr[0], i) && ft_check_texture(d_txtr[1]))
+			playground->file_path[i] = ft_strdup(d_txtr[1]);
 		else
 		{
 			ft_arrfree(d_txtr);
 			ft_arrfree(txtrs);
-			return (ft_handle_invalid(playground));
+			return (ft_putstr_fd("Invalid texture format\n", 2), 1);
 		}
 		ft_arrfree(d_txtr);
 		i++;
 	}
 	ft_arrfree(txtrs);
-	return (1);
+	return (0);
 }

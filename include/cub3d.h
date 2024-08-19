@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:53:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/18 16:31:39 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/19 23:56:19 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+#include <stdbool.h>
 
 typedef struct s_texture
 {
@@ -44,7 +45,7 @@ typedef struct s_data
 	int				fd;
 	char			*map_data;
 	char			*textures;
-	t_texture		textur;
+	char			*file_path[4];
 }	t_data;
 
 // validator functions
