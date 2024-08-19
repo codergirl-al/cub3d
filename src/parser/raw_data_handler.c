@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 04:42:27 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/19 19:45:00 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/19 21:31:01 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@ int	ft_handle_raw_data(t_data *playground)
 	data = ft_split(playground->raw_data, '\n');
 	while (++i < 6)
 	{
-		if (data[i][0] == 'F')
-			ft_handle_input(playground, data[i], 'F');
-		else if (data[i][0] == 'C')
-			ft_handle_input(playground, data[i], 'C');	
+		if (data[i][0] == 'F' || data[i][0] == 'C')
+			ft_handle_input(playground, data[i], data[i][0]);
 		else if (data [i][0] == 'N')
 		{
 			j = -1;
@@ -34,7 +32,8 @@ int	ft_handle_raw_data(t_data *playground)
 				playground->textures = ft_strjoin(playground->textures, data[i++]);
 				playground->textures = ft_strjoin(playground->textures, "\n");
 			}
-			ft_handle_textures(playground);
+			if (ft_handle_textures(playground))
+				return (ft_arrfree(data), ft_handle_invalid(playground), 1);
 		}
 		else
 			return (ft_arrfree(data), ft_handle_invalid(playground));

@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:53:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/19 19:28:37 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/19 21:33:52 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-
-typedef struct s_texture
-{
-	char	*north;
-	char	*south;
-	char	*east;
-	char	*west;
-}			t_texture;
 
 typedef struct s_data
 {
@@ -47,7 +39,7 @@ typedef struct s_data
 	int				fd;
 	char			*map_data;
 	char			*textures;
-	t_texture		textur;
+	char			*file_path[4];
 }	t_data;
 
 // validator functions

@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 18:47:49 by JFikents          #+#    #+#             */
-/*   Updated: 2024/08/11 14:32:38 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/19 20:12:07 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ typedef struct s_loop_data
 	mlx_t			*window;
 	mlx_texture_t	*texture[4];
 	char			*file_path[4];
+	int				floor_color;
+	int				ceiling_color;
 }	t_loop_data;
 
 /*									Exec.c									  */
