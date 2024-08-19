@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:13:29 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/19 23:59:23 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 01:19:29 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_handle_textures(t_data *playground)
 		{
 			ft_arrfree(d_txtr);
 			ft_arrfree(txtrs);
-			return (ft_putstr_fd("Invalid texture format\n", 2), 1);
+			return (ft_err(playground, "Invalid texture format\n"));
 		}
 		ft_arrfree(d_txtr);
 		i++;

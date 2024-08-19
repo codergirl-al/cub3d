@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:46:25 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/19 23:54:24 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 01:23:44 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_read_map(t_data *playground)
 	while (temp)
 	{
 		if (temp[0] == '\n')
-			return (ft_handle_invalid(playground));
+			return (ft_err(playground, "Problem reading map\n"));
 		playground->map_data = ft_strjoin(playground->map_data, temp);
 		free(temp);
 		temp = get_next_line(playground->fd);

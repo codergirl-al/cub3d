@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:04:05 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/18 03:23:54 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 01:21:16 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 	ft_bzero(&playground, sizeof(t_data));
 	playground.fd = open(argv[1], O_RDONLY);
 	if (playground.fd < 0)
-		return (ft_print_err("Error\n", 0));
+		return (ft_err(&playground, "Couldn't open file.\n"));
 	ft_parse(argc, argv, &playground);
 	ft_free_data(&playground);
 	close(playground.fd);

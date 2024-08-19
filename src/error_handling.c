@@ -6,20 +6,16 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 23:31:56 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/12 04:54:01 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 01:21:03 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int	ft_print_err(char *message, int r_value)
-{
-	ft_putstr_fd(message, 2);
-	exit (r_value);
-}
-
-int	ft_handle_invalid(t_data *playground)
+int	ft_err(t_data *playground, char *message)
 {
 	ft_free_data(playground);
-	return (ft_print_err("Error\n", 0));
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(message, 2);
+	exit (0);
 }

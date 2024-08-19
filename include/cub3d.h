@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:53:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/19 23:56:19 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 01:07:15 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int		ft_count_directions(char *temp);
 
 // cleanup 
 void	ft_free_data(t_data *gd);
-int		ft_print_err(char *message, int r_value);
-int		ft_handle_invalid(t_data *playground);
+int		ft_err(t_data *playground, char *message);
 
 #endif

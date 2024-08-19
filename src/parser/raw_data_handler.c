@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 04:42:27 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/20 00:32:45 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 01:22:38 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ int	ft_handle_raw_data(t_data *playground)
 				playground->textures = ft_strjoin(playground->textures, "\n");
 			}
 			if (ft_handle_textures(playground))
-                return (ft_arrfree(data), ft_handle_invalid(playground));
+                return (ft_arrfree(data), ft_err(playground, "Could not read textures\n"));
         }
 		else
-			return (ft_arrfree(data), ft_handle_invalid(playground));
+			return (ft_arrfree(data), ft_err(playground, "Could not parse data\n"));
 	}
 	return (ft_arrfree(data), 1);
 }
