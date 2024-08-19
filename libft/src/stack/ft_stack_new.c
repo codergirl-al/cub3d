@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_stack_new.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/16 17:43:05 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/07/21 22:24:55 by apeposhi         ###   ########.fr       */
+/*   Created: 2024/06/04 15:06:32 by apeposhi          #+#    #+#             */
+/*   Updated: 2024/06/10 12:05:16 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "../../includes/libft.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
+t_stack	*ft_stack_new(int value)
+{
+	t_stack	*new_node;
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <fcntl.h>
-
-char	*get_next_line(int fd);
-size_t	ft_g_strln(const char *s);
-char	*ft_gnl_strjoin(char *s1, char *s2);
-char	*ft_gnl_strchr(const char *s, int c);
-
-#endif
+	new_node = NULL;
+	new_node = (t_stack *)malloc(sizeof(t_stack));
+	if (new_node)
+	{
+		new_node -> value = value;
+		new_node -> index = -1;
+		new_node -> next = NULL;
+	}
+	return (new_node);
+}

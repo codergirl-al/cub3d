@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:52:21 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/19 11:05:49 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/19 18:12:03 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,22 @@ const char	**get_map(t_player player[1], t_loop_data *data)
 	return (map);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_loop_data	data[1];
+	t_data	playground;
 
 	ft_bzero(data, sizeof(data));
+	ft_bzero(&playground, sizeof(t_data));
+	playground.fd = open(argv[1], O_RDONLY);
+	if (playground.fd < 0)
+		return (ft_print_err("Error\n", 0));
+	ft_parse(argc, argv, &playground);
+	close(playground.fd);
 	data->map = get_map(data->player, data);
 	data->window = mlx_init(WIDTH, HEIGHT, "Cub3D", true);
 	exec(data);
 	mlx_loop(data->window);
+	ft_free_data(&playground);
 	return (0);
 }

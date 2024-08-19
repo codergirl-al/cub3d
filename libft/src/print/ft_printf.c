@@ -6,11 +6,11 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:48:13 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/02/16 09:23:43 by apeposhi         ###   ########.fr       */
+/*   Updated: 2023/04/12 10:17:01 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./ft_printf.h"
+#include "../../includes/libft.h"
 
 static int	ft_case(va_list v_list, const char c)
 {

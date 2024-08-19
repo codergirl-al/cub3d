@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_stack_size.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 11:24:01 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/04/12 13:10:22 by apeposhi         ###   ########.fr       */
+/*   Created: 2024/06/04 15:12:14 by apeposhi          #+#    #+#             */
+/*   Updated: 2024/06/10 12:05:19 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libft.h"
 
-/*
-** @brief Creates a new node with the given content.
-**
-** @param content: The pointer to be stored in the content
-** of the newly created node.
-** @return a new node/a size-1 linked list, where lst.next is
-** pointing to NULL.
-*/
-t_list	*ft_lstnew(int *content)
+int	ft_stack_size(t_stack *stack)
 {
-	t_list	*new_node;
+	int	len;
 
-	new_node = NULL;
-	new_node = (t_list *)malloc(sizeof(t_list));
-	if (new_node)
+	len = 1;
+	if (!stack)
+		return (0);
+	while (stack->next != NULL)
 	{
-		new_node -> content = content;
-		new_node -> next = NULL;
+		len++;
+		stack = stack->next;
 	}
-	return (new_node);
+	return (len);
 }

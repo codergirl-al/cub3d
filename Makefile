@@ -6,10 +6,12 @@
 #    By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 23:23:18 by apeposhi          #+#    #+#              #
-#    Updated: 2024/08/19 10:57:10 by JFikents         ###   ########.fr        #
+#    Updated: 2024/08/19 18:02:33 by JFikents         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+AUTHORS         :=  apeposhi && JFikents
+NAME            :=  cub3d
 
 # Metadata
 AUTHOR			:=	apeposhi\
@@ -41,13 +43,18 @@ EXEC_SRC		:=	$(addprefix execution/, $(_EXEC_SRC))
 _CLEANUP_SRC	:=	cleanup.c
 CLEANUP_SRC		:=	$(addprefix cleanup/, $(_CLEANUP_SRC))
 
-_PARSER_SRC		:=	parsing.c
+_PARSER_SRC		:=	parsing.c\
+					checker_utils.c\
+					f_c_handler.c\
+					map_handler.c\
+					texture_handler.c\
+					raw_data_handler.c
 PARSER_SRC		:=	$(addprefix parser/, $(_PARSER_SRC))
 
 _VALIDATOR_SRC	:=	arguments.c
 VALIDATOR_SRC	:=	$(addprefix validator/, $(_VALIDATOR_SRC))
 
-_SRC			:=	main.c parser.c error_handling.c\
+_SRC			:=	main.c error_handling.c\
 					$(VALIDATOR_SRC)\
 					$(PARSER_SRC)\
 					$(CLEANUP_SRC)\
@@ -93,11 +100,20 @@ $(NAME): $(LIBFT) $(LIBMLX42) $(OBJS)
 
 clean:
 	rm -rf $(OBJS)
+	$(MAKE) -C libft clean
 
 fclean: clean
 	rm -rf $(NAME)
+	$(MAKE) -C libft fclean
 
-re:	fclean all
+re: fclean all
+
+bin/:
+	@mkdir -p bin/cleanup bin/parser bin/validator
+
+# Suffix Rules
+bin/%.o: src/%.c | bin/
+	$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDES)
 
 bin/:
 	@mkdir -p bin/cleanup bin/parser bin/validator bin/execution
@@ -107,4 +123,4 @@ bin/%.o: src/%.c $(DEPENDENCIES) | bin/
 	$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDES)
 
 # Phony Targets
-.PHONY:	all clean fclean re
+.PHONY: all clean fclean re

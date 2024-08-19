@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_skip_space.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 14:50:02 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/27 14:33:26 by apeposhi         ###   ########.fr       */
+/*   Created: 2024/08/18 13:31:01 by apeposhi          #+#    #+#             */
+/*   Updated: 2024/08/18 13:35:52 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libft.h"
 
-/*
-** @param str: a NULL-terminated string
-** @return the length of the given string
-*/
-size_t	ft_strlen(const char *s)
+int	ft_skip_space(char **temp, int x)
 {
-	size_t	i;
+	int	i;
 
-	if (!s)
-		return (0);
 	i = 0;
-	while (s[i] != '\0')
+	while (temp[x][i] == ' ')
+		i++;
+	return (i);
+}
+
+int ft_skip_spaces(char *temp)
+{
+	int	i;
+
+	i = 0;
+	while (temp[i] == ' ')
 		i++;
 	return (i);
 }

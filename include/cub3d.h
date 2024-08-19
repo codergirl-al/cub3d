@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:53:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/14 18:51:22 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/19 18:04:32 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,81 +19,66 @@
 # include "libft.h"
 # include "MLX42.h"
 # include "exec.h"
+# include "../libft/includes/libft.h"
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
 
-// typedef struct s_texture
-// {
-// 	char	*path;
-// 	int		width;
-// 	int		height;
-// }			t_texture;
-
-// typedef struct s_player
-// {
-// 	double	x;
-// 	double	y;
-// 	double	dir_x;
-// 	double	dir_y;
-// 	double	plane_x;
-// 	double	plane_y;
-// }				t_player;
-
-// typedef struct s_settings
-// {
-// 	int		sc_width;
-// 	int		sc_height;
-// 	double	sp_move;
-// 	double	sp_rotation;
-// }				t_settings;
-
-// typedef struct s_game
-// {
-// 	char		*map_data;
-// 	char		**map;
-// 	t_texture	north;
-// 	t_texture	south;
-// 	t_texture	east;
-// 	t_texture	west;
-// 	int			floor[3];
-// 	int			ceiling[3];
-// 	t_player	player;
-// 	t_settings	settings;
-// }				t_game;
+typedef struct s_texture
+{
+	char	*north;
+	char	*south;
+	char	*east;
+	char	*west;
+}			t_texture;
 
 typedef struct s_data
 {
-	char	**map_2d;
-	int		rows;
-	int		cols;
-	int		p_x;
-	int		p_y;
-	int		w_map;
-	int		h_map;
-	char	**ff;
-	char	**cc;
-	int		fd;
-	int		i;
-	char	*line;
-	char	*ture;
-	char	*map;
-	char	**ture2d;
-	char	**sq_map;
-	char	**rgb;
-	// t_txtr	*t;
+	char			**map_2d;
+	char			*raw_data;
+	int				map_rows;
+	int				map_cols;
+	int				player_x;
+	int				player_y;
+	char			player_d;
+	int				map_width;
+	int				map_height;
+	int				f_colors[3];
+	int				c_colors[3];
+	int				fd;
+	char			*map_data;
+	char			*textures;
+	t_texture		textur;
 }	t_data;
+
 // validator functions
 int		ft_validate_args(int argc, char **argv);
 
 // parser functions
+void	ft_parse(int argc, char **argv, t_data *playground);
+int		ft_handle_raw_data(t_data *playground);
+int		ft_handle_textures(t_data *playground);
+int		ft_handle_input(t_data *playground, char *data, char flag);
+int		ft_handle_map(t_data *playground);
+
+// parser utilities
+int		ft_check_ending(char *filename);
+size_t	ft_arrlen(char **arr);
+void	ft_arrfree(char **arr);
+int		ft_digit_check(char *color);
+size_t	ft_strcountchr(char *str, char c);
 
 // utility functions
 int		ft_print_err(char *message, int r_value);
+int		ft_calc_width(t_data *playground);
+size_t	ft_strlen_updated(const char *s);
+int		ft_count_directions(char *temp);
 
 // cleanup 
 void	ft_free_data(t_data *gd);
+int		ft_print_err(char *message, int r_value);
+int		ft_handle_invalid(t_data *playground);
 
 #endif

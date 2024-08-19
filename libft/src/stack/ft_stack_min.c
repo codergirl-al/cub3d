@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_stack_min.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 11:24:01 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/04/12 13:10:22 by apeposhi         ###   ########.fr       */
+/*   Created: 2024/06/04 15:18:25 by apeposhi          #+#    #+#             */
+/*   Updated: 2024/06/10 12:05:09 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libft.h"
 
-/*
-** @brief Creates a new node with the given content.
-**
-** @param content: The pointer to be stored in the content
-** of the newly created node.
-** @return a new node/a size-1 linked list, where lst.next is
-** pointing to NULL.
-*/
-t_list	*ft_lstnew(int *content)
+t_stack	*ft_stack_min(t_stack **s)
 {
-	t_list	*new_node;
+	t_stack	*head;
+	t_stack	*min;
+	int		has_min;
 
-	new_node = NULL;
-	new_node = (t_list *)malloc(sizeof(t_list));
-	if (new_node)
+	min = NULL;
+	has_min = 0;
+	head = *s;
+	if (head)
 	{
-		new_node -> content = content;
-		new_node -> next = NULL;
+		while (head)
+		{
+			if ((head->index == -1) && (!has_min || head->value < min->value))
+			{
+				min = head;
+				has_min = 1;
+			}
+			head = head->next;
+		}
 	}
-	return (new_node);
+	return (min);
 }

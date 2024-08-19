@@ -1,13 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   ft_stack_last.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 13:24:29 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/17 17:06:00 by JFikents         ###   ########.fr       */
+/*   Created: 2024/06/04 15:11:06 by apeposhi          #+#    #+#             */
+/*   Updated: 2024/08/19 18:06:14 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/libft.h"
+
+t_stack	*ft_stack_last(t_stack *str)
+{
+	while (str)
+	{
+		if (!str->next)
+			return (str);
+		str = str->next;
+	}
+	return (str);
+}
