@@ -6,7 +6,7 @@
 #    By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 23:23:18 by apeposhi          #+#    #+#              #
-#    Updated: 2024/08/19 10:40:41 by JFikents         ###   ########.fr        #
+#    Updated: 2024/08/19 10:57:10 by JFikents         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,7 @@ _LIB_PATH		:=	lib/MLX42/build/ lib/libft/ libft/
 LIB_PATH		:=	$(addprefix -L, $(_LIB_PATH))
 LIBMLX42		:=	lib/MLX42/build/libmlx42.a
 LIBFT			:=	libft/libft.a lib/libft/libft.a
-_LIBS			:=	mlx42 ft glfw
+_LIBS			:=	mlx42 ft glfw m
 LIBS			:=	$(addprefix -l, $(_LIBS))
 LIB_FLAGS		:=	$(LIB_PATH) $(LIBS)
 
