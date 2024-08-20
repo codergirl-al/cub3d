@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 	ft_bzero(&playground, sizeof(t_data));
 	playground.fd = open(argv[1], O_RDONLY);
 	if (playground.fd < 0)
-		return (ft_print_err("Error\n", 0));
+		return (ft_err(&playground));
 	ft_parse(argc, argv, &playground);
 	ft_free_data(&playground);
 	close(playground.fd);

@@ -12,30 +12,59 @@
 
 #include "../../include/cub3d.h"
 
-int ft_validate_full_ones(char **map)
+int ft_validate_first_line(t_data *playground)
 {
+	size_t	i;
 	size_t	j;
-	size_t	map_length;
+	char	*temp;
 
-	j = ft_skip_space(map, 0);
-	while (map[0][++j] != '\0')
-		if (map[0][j] != '1')
+	i = 0;
+	j = 0;
+	temp = ft_strtrim(playground->map_2d[0], "1 \t");
+	if (ft_strlen(temp))
+		return (ft_handle_invalid(playground));
+	while (playground->map_2d[0][j])
+	{
+		if (playground->map_2d[0][j] == ' ' || playground->map_2d[0][j] == '\t')
 		{
-			if (map[0][i] == ' ')
-			{
-				if (map[0][i + 1] != '1')
-					return (0);
-			}
-			else
+			while (playground->map_2d[i][j] == ' ' || playground->map_2d[i][j] == '\t')
+				i++;
+			if (playground->map_2d[i][j] == '0')
 				return (0);
+			i = 0;
 		}
-	map_length = 0;
-	while (map[map_length] != NULL)
-		map_length++;
-	j = ft_skip_space(map, map_length - 1);
-	while (map[map_length - 1][++j] != '\0')
-		if (map[map_length - 1][j] != '1')
-			return (0);
+		j++;
+	}
+	free(temp);
+	return (1);
+}
+
+int	ft_validate_last_line(t_data *playground)
+{
+	size_t	i;
+	size_t	j;
+	char	*temp;
+
+	i = 0;
+	j = 0;
+	temp = ft_strtrim(playground->map_2d[playground->map_height - 1], "1 \t");
+	if (ft_strlen(temp))
+		return (ft_handle_invalid(playground)); // add error message
+	while (playground->map_2d[playground->map_height - 1][j])
+	{
+		if (playground->map_2d[playground->map_height - 1][j] == ' ' 
+			|| playground->map_2d[playground->map_height - 1][j] == '\t')
+		{
+			while (playground->map_2d[playground->map_height - 1 - i][j] == ' '
+				|| playground->map_2d[playground->map_height - 1 - i][j] == '\t')
+				i++;
+			if (playground->map_2d[playground->map_height - 1 - i][j] == '0')
+				return (0);
+			i = 0;
+		}
+		j++;
+	}
+	free(temp);
 	return (1);
 }
 
@@ -122,11 +151,11 @@ int ft_handle_map(t_data *playground)
 	int	indicator;
 
 	playground->map_2d = ft_split(playground->map_data, '\n');
-	indicator = ft_validate_first(playground);
+	indicator = ft_validate_first_line(playground);
+	if (indicator)
+		ft_validate_last_line(playground);
 	ft_validate_map_elements(playground);
 	playground->map_height = ft_arrlen(playground->map_2d);
-	if (!ft_validate_full_ones(playground->map_2d))
-		return (ft_handle_invalid(playground));
 	ft_handle_side(playground);
 	return (1);
 }

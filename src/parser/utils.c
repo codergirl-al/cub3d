@@ -12,7 +12,7 @@
 
 #include "../../include/cub3d.h"
 
-void	ft_free_textures(t_texture	textur)
+static void	ft_free_textures(t_texture	textur)
 {
 	if (textur.north)
 		free(textur.north);
@@ -32,4 +32,11 @@ void	ft_free_data(t_data *gd)
 		free(gd->map_data);
 	if (gd->textur.north)
 		ft_free_textures(gd->textur);
+}
+
+int	ft_err(t_data *playground, char *message)
+{
+	ft_free_data(playground);
+	ft_putstr_fd(message, 2);
+	exit (0);
 }

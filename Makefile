@@ -16,15 +16,12 @@ NAME            :=  cub3d
 all: $(NAME)
 
 # Sources & Objects
-_CLEANUP_SRC    :=  cleanup.c
-CLEANUP_SRC     :=  $(addprefix cleanup/, $(_CLEANUP_SRC))
-
-_PARSER_SRC     :=  parsing.c checker_utils.c f_c_handler.c map_handler.c texture_handler.c raw_data_handler.c
+_PARSER_SRC     :=  parsing.c checker_utils.c f_c_handler.c map_handler.c texture_handler.c raw_data_handler.c utils.c
 PARSER_SRC      :=  $(addprefix parser/, $(_PARSER_SRC))
 
-_SRC            :=  main.c error_handling.c \
+_SRC            :=  main.c \
                     $(PARSER_SRC) \
-                    $(CLEANUP_SRC)
+
 SRC             :=  $(addprefix src/, $(_SRC))
 
 OBJS            :=  $(SRC:src/%.c=bin/%.o)

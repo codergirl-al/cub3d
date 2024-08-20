@@ -71,7 +71,6 @@ int		ft_count_directions(char *temp);
 
 // cleanup 
 void	ft_free_data(t_data *gd);
-int		ft_print_err(char *message, int r_value);
-int		ft_handle_invalid(t_data *playground);
+int		ft_err(t_data *playground);
 
 #endif
