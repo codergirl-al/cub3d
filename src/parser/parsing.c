@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:46:25 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/20 01:23:44 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 20:25:15 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,3 @@ void	ft_parse(int argc, char **argv, t_data *playground)
 	}
 	ft_analyze_input_file(playground);
 }
-

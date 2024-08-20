@@ -6,7 +6,7 @@
 #    By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 23:23:18 by apeposhi          #+#    #+#              #
-#    Updated: 2024/08/20 20:15:08 by JFikents         ###   ########.fr        #
+#    Updated: 2024/08/20 21:03:44 by JFikents         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,8 @@ _PARSER_SRC		:=	parsing.c\
 					map_utils.c\
 					texture_handler.c\
 					raw_data_handler.c\
-					utils.c
+					utils.c\
+					validate_map.c
 PARSER_SRC		:=	$(addprefix parser/, $(_PARSER_SRC))
 
 _SRC			:=	main.c\
@@ -101,10 +102,6 @@ fclean: clean
 	$(MAKE) -C libft fclean
 
 re: fclean all
-
-# Suffix Rules
-bin/%.o: src/%.c | bin/
-	$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDES)
 
 bin/:
 	@mkdir -p bin/parser bin/execution

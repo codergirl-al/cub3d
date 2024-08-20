@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:13:29 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/20 02:37:28 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 20:53:58 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	ft_handle_textures(t_data *playground)
 	int		i;
 
 	txtrs = ft_split(playground->textures, '\n');
+	ft_free_n_null((void **)&playground->textures);
 	i = 0;
 	while (i < 4)
 	{

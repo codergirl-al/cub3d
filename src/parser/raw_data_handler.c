@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 04:42:27 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/20 02:09:05 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 20:55:57 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_handle_raw_data(t_data *game)
 {
+	char	**data;
 	int		i;
 	int		j;
-	char	**data;
 
 	i = -1;
 	data = ft_split(game->raw_data, '\n');

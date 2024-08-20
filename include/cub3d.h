@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:53:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/20 02:43:06 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 21:03:18 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdbool.h>
-# define NORTH_TEXTURE 0
-# define SOUTH_TEXTURE 1
-# define EAST_TEXTURE 2
-# define WEST_TEXTURE 3
 
 typedef struct s_data
 {
@@ -47,9 +43,6 @@ typedef struct s_data
 	char			*file_path[4];
 }	t_data;
 
-// validator functions
-int		ft_validate_args(int argc, char **argv);
-
 // parser functions
 void	ft_parse(int argc, char **argv, t_data *playground);
 int		ft_handle_raw_data(t_data *playground);
@@ -63,9 +56,9 @@ size_t	ft_arrlen(char **arr);
 void	ft_arrfree(char **arr);
 int		ft_digit_check(char *color);
 size_t	ft_strcountchr(char *str, char c);
+int		ft_validate_map_layout(t_data *playground);
 
 // utility functions
-int		ft_print_err(char *message, int r_value);
 int		ft_calc_width(t_data *playground);
 size_t	ft_strlen_updated(const char *s);
 void	ft_assign_values(t_data *playground);
