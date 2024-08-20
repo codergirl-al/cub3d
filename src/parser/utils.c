@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 21:06:22 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/19 21:06:18 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/20 00:29:33 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,12 @@ void	ft_free_data(t_data *gd)
 		free(gd->file_path[EAST_TEXTURE]);
 	if (gd->file_path[WEST_TEXTURE])
 		free(gd->file_path[WEST_TEXTURE]);
+}
+
+int	ft_err(t_data *playground, char *message)
+{
+	ft_free_data(playground);
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(message, 2);
+	exit (0);
 }

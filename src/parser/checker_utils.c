@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 21:14:11 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/19 18:33:36 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/20 02:38:19 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int	ft_check_ending(char *filename)
 
 size_t	ft_arrlen(char **arr)
 {
-  size_t it;
+	size_t	it;
 
-  it = -1;
-  if (arr)
-    while (arr[++it])
-      ;
-  return (it);
+	it = -1;
+	if (arr)
+		while (arr[++it])
+			;
+	return (it);
 }
 
 void	ft_arrfree(char **arr)
@@ -65,12 +65,12 @@ int	ft_is_number(const char *str)
 
 int	ft_digit_check(char *color)
 {
-	int	prsd;
+	int	parsed;
 
 	if (!ft_is_number(color))
 		return (-1);
-	prsd = ft_atoi(color);
-	if (prsd < 0 || prsd > 255)
+	parsed = ft_atoi(color);
+	if (parsed < 0 || parsed > 255)
 		return (-1);
-	return (prsd);
+	return (parsed);
 }

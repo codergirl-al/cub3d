@@ -6,116 +6,128 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:18:28 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/19 22:05:51 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/20 02:09:34 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_validate_full_ones(char **map)
+char	*ft_fill_2(char *s2, int len)
 {
-	size_t	j;
-	size_t	map_length;
-	size_t	i;
+	int	i;
+
+	i = -1;
+	while (++i < len)
+		s2[i] = '2';
+	return (s2);
+}
+
+int	ft_allocate_mem(t_data *playground, char ***r_map)
+{
+	int	i;
 
 	i = 0;
-	j = ft_skip_space(map, 0);
-	while (map[0][++j] != '\0')
-		if (map[0][j] != '1')
-		{
-			if (map[0][i] == ' ')
-			{
-				if (map[0][i + 1] != '1')
-					return (0);
-			}
-			else
-				return (0);
-		}
-	map_length = 0;
-	while (map[map_length] != NULL)
-		map_length++;
-	j = ft_skip_space(map, map_length - 1);
-	while (map[map_length - 1][++j] != '\0')
-		if (map[map_length - 1][j] != '1')
-			return (0);
-	return (1);
-}
-
-static int	ft_handle_side(t_data *playground)
-{
-	size_t	i;
-	size_t	first;
-	size_t	last;
-	char	*row;
-
-	if (!playground || !playground->map_2d)
-		return (0);
-
-	i = -1;
-	while (playground->map_2d[++i] != NULL)
+	while (i < playground->map_height + 2)
 	{
-		row = playground->map_2d[i];
-		first = 0;
-		while (row[first] == ' ')
-			first++;
-		last = ft_strlen(row) - 1;
-		while (last > 0 && row[last] == ' ')
-			last--;
-		if (last <= first || row[first] != '1' || row[last] != '1')
-			return (ft_handle_invalid(playground));
+		(*r_map)[i] = ft_calloc(playground->map_width + 3, sizeof(char));
+		if (!(*r_map)[i])
+		{
+			while (--i >= 0)
+				free((*r_map)[i]);
+			free(*r_map);
+			return (ft_err(playground, "Calloc failed\n"));
+		}
+		ft_fill_2((*r_map)[i], playground->map_width + 2);
+		i++;
 	}
 	return (1);
 }
 
-static void	ft_assign_values(t_data *playground)
+int	ft_fill_r_map(t_data *playground, char ***r_map)
 {
-	size_t	i;
-	size_t	j;
+	int	i;
+	int	j;
+	int	k;
+	int	l;
+
+	ft_allocate_mem(playground, r_map);
+	i = 0;
+	k = 0;
+	while (++i < playground->map_height + 2)
+	{
+		j = 0;
+		l = 0;
+		while (++j < playground->map_width + 3)
+		{
+			if (j < (int)ft_strlen(playground->map_2d[k]) + 1)
+			{
+				(*r_map)[i][j] = playground->map_2d[k][l];
+				if (playground->map_2d[k][l++] == ' ')
+					(*r_map)[i][j] = '2';
+			}
+		}
+		k++;
+	}
+	return (0);
+}
+
+int	ft_validate(char **r_map)
+{
+	int	i;
+	int	j;
 
 	i = -1;
-	while (playground->map_2d[++i] != NULL)
+	while (r_map[++i])
 	{
 		j = -1;
-		while (playground->map_2d[i][++j] != '\0')
+		while (r_map[i][++j])
 		{
-			if (playground->map_2d[i][j] == 'N' \
-				|| playground->map_2d[i][j] == 'S' \
-				|| playground->map_2d[i][j] == 'W' \
-				|| playground->map_2d[i][j] == 'E')
+			if (r_map[i][j] == '0')
 			{
-				playground->player_x = j;
-				playground->player_y = i;
-				return ;
+				if (r_map[i - 1][j] == '2' || r_map[i + 1][j] == '2' \
+					|| r_map[i][j - 1] == '2' || r_map[i][j + 1] == '2' \
+					|| r_map[i - 1][j - 1] == '2' || r_map[i - 1][j + 1] == '2'
+					|| r_map[i + 1][j - 1] == '2' || r_map[i + 1][j + 1] == '2')
+					return (1);
 			}
 		}
 	}
+	return (0);
 }
 
-static int	ft_validate_map_elements(t_data *playground)
+int	ft_map_checkup(t_data *playground)
+{
+	char	**r_map;
+	int		i;
+
+	i = -1;
+	r_map = ft_calloc(playground->map_height + 3, sizeof(char *));
+	ft_fill_r_map(playground, &r_map);
+	if (ft_validate(r_map))
+		return (ft_err(playground, "Invalid map\n"));
+	ft_arrfree(r_map);
+	return (0);
+}
+
+int	ft_validate_map_elements(t_data *playground)
 {
 	char	*temp;
 
 	temp = ft_strtrim(playground->map_data, " \n01");
 	if (ft_strlen(temp) != 1)
-		return (free(temp), ft_handle_invalid(playground));
+		return (free(temp), ft_err(playground, "Invalid map elements given\n"));
 	playground->player_d = temp[0];
 	free(temp);
 	ft_assign_values(playground);
 	return (0);
 }
 
-
 int	ft_handle_map(t_data *playground)
 {
-	// int	indicator;
-
 	playground->map_2d = ft_split(playground->map_data, '\n');
-	// indicator = ft_validate_first(playground);
-	ft_validate_map_elements(playground);
 	playground->map_height = ft_arrlen(playground->map_2d);
-	playground->map_width = 33;
-	// if (!ft_validate_full_ones(playground->map_2d))
-	// 	return (ft_handle_invalid(playground));
-	ft_handle_side(playground);
+	playground->map_width = ft_calc_width(playground);
+	ft_validate_map_elements(playground);
+	ft_map_checkup(playground);
 	return (1);
 }

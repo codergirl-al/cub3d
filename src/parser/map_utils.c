@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 00:22:43 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/19 19:44:47 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/20 02:36:02 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_calc_width(t_data *playground)
 {
-	int				i;
-	unsigned long	longest;
-	unsigned long	width;
+	int	i;
+	int	longest;
+	int	width;
 
 	i = -1;
 	longest = 0;
@@ -26,8 +26,7 @@ int	ft_calc_width(t_data *playground)
 		if (longest < width)
 			longest = width;
 	}
-	playground->map_width = longest;
-	return (0);
+	return (longest);
 }
 
 size_t	ft_strlen_updated(const char *s)
@@ -45,27 +44,27 @@ size_t	ft_strlen_updated(const char *s)
 	return (count);
 }
 
-int	ft_count_directions(char *temp)
+void	ft_assign_values(t_data *playground)
 {
-	int	directions[4];
-	int	count;
-	int	i;
-	
-	ft_bzero(directions, sizeof(directions));
-        count = 0;
-        i = -1;
-	while (temp[++i]) {
-		if (temp[i] == 'N')
-			directions[0]++;
-		else if (temp[i] == 'S')
-			directions[1]++;
-		else if (temp[i] == 'W')
-			directions[2]++;
-		else if (temp[i] == 'E')
-			directions[3]++;
-	}
+	size_t	i;
+	size_t	j;
+
 	i = -1;
-	while (++i < 4)
-	  count += directions[i];
-	return (count);
+	while (playground->map_2d[++i] != NULL)
+	{
+		j = -1;
+		while (playground->map_2d[i][++j] != '\0')
+		{
+			if (playground->map_2d[i][j] == 'N' \
+				|| playground->map_2d[i][j] == 'S' \
+				|| playground->map_2d[i][j] == 'W' \
+				|| playground->map_2d[i][j] == 'E')
+			{
+				playground->player_x = j;
+				playground->player_y = i;
+				playground->map_2d[i][j] = '0';
+				return ;
+			}
+		}
+	}
 }

@@ -30,7 +30,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	i = 0;
 	if (!set || !s1)
 		return (NULL);
-	while (ft_strchr(set, s1[i]) && s1[i])
+	while (s1[i] && ft_strchr(set, s1[i]))
 		i++;
 	j = ft_strlen(s1);
 	while (ft_strchr(set, s1[j]) && j > i)

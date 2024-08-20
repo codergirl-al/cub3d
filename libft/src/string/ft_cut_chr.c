@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 14:47:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/16 01:37:01 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 02:39:56 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,22 @@ char	*ft_cut_chr(char *str, char c)
 {
 	char	*trimmed;
 	size_t	i;
-	size_t	j; 
+	size_t	j;
 	size_t	count;
 
-	i = 0;
+	i = -1;
 	j = 0;
 	count = 0;
 	if (!str)
 		return (NULL);
-	for (i = 0; str[i]; i++)
+	while (str[++i])
 		if (str[i] != c)
 			count++;
 	trimmed = (char *)malloc(sizeof(char) * (count + 1));
 	if (!trimmed)
 		return (free(str), NULL);
-	for (i = 0; str[i]; i++)
+	i = -1;
+	while (str[++i])
 		if (str[i] != c)
 			trimmed[j++] = str[i];
 	trimmed[j] = '\0';
