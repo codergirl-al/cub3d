@@ -64,7 +64,7 @@ size_t	ft_strcountchr(char *str, char c);
 // utility functions
 int		ft_calc_width(t_data *playground);
 size_t	ft_strlen_updated(const char *s);
-int		ft_count_directions(char *temp);
+void	ft_assign_values(t_data *playground);
 
 // cleanup 
 void	ft_free_data(t_data *gd);

@@ -16,7 +16,7 @@ NAME            :=  cub3d
 all: $(NAME)
 
 # Sources & Objects
-_PARSER_SRC     :=  parsing.c checker_utils.c f_c_handler.c map_handler.c texture_handler.c raw_data_handler.c utils.c
+_PARSER_SRC     :=  parsing.c checker_utils.c f_c_handler.c map_handler.c map_utils.c texture_handler.c raw_data_handler.c utils.c
 PARSER_SRC      :=  $(addprefix parser/, $(_PARSER_SRC))
 
 _SRC            :=  main.c \

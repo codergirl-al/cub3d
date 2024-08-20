@@ -31,6 +31,7 @@ void	ft_free_data(t_data *gd)
 int	ft_err(t_data *playground, char *message)
 {
 	ft_free_data(playground);
+	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(message, 2);
 	exit (0);
 }
