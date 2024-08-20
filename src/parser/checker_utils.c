@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 21:14:11 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/18 16:26:27 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 02:02:19 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ int	ft_is_number(const char *str)
 
 int	ft_digit_check(char *color)
 {
-	int	prsd;
+	int	parsed;
 
 	if (!ft_is_number(color))
 		return (-1);
-	prsd = ft_atoi(color);
-	if (prsd < 0 || prsd > 255)
+	parsed = ft_atoi(color);
+	if (parsed < 0 || parsed > 255)
 		return (-1);
-	return (prsd);
+	return (parsed);
 }
