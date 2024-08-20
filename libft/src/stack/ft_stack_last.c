@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   ft_stack_last.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/14 23:31:56 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/12 14:34:27 by JFikents         ###   ########.fr       */
+/*   Created: 2024/06/04 15:11:06 by apeposhi          #+#    #+#             */
+/*   Updated: 2024/08/19 18:06:14 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/libft.h"
 
-int	ft_print_err(char *message, int r_value)
+t_stack	*ft_stack_last(t_stack *str)
 {
-	ft_putstr_fd("Error: ", 2);
-	ft_putstr_fd(message, 2);
-	return (r_value);
+	while (str)
+	{
+		if (!str->next)
+			return (str);
+		str = str->next;
+	}
+	return (str);
 }

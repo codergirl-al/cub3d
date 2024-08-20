@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_stack_indexing.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 13:08:12 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/02/16 09:19:36 by apeposhi         ###   ########.fr       */
+/*   Created: 2024/06/04 15:17:23 by apeposhi          #+#    #+#             */
+/*   Updated: 2024/06/10 12:04:52 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "../../includes/libft.h"
 
-# include <stdarg.h>
-# include "../includes/libft.h"
+void	ft_stack_indexing(t_stack **s)
+{
+	t_stack	*head;
+	int		index;
 
-int	ft_printf(const char *str, ...);
-
-#endif
+	index = 0;
+	while (ft_stack_min(s) != NULL)
+	{
+		head = ft_stack_min(s);
+		head->index = index;
+		index++;
+	}
+}

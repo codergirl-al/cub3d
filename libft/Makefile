@@ -3,23 +3,26 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+         #
+#    By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/17 14:25:17 by apeposhi          #+#    #+#              #
-#    Updated: 2023/02/27 08:32:09 by apeposhi         ###   ########.fr        #
+#    Updated: 2024/08/19 18:22:09 by JFikents         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # PROJECT #
-NAME	= libft.a
-CC		= @cc
-CFLAGS	= -Wall -Wextra -Werror
+NAME	= libft_local.a
+CC		= cc
+CFLAGS	= -Wall -Wextra -Werror -g3
 RM		= @rm -f
+FILE	= $(shell ls -lR src/ | grep -F .c | wc -l)
+CMP		= 1
 
 SRC		= ./src/memory/ft_bzero.c\
 	      ./src/check/ft_isalpha.c\
 	      ./src/check/ft_isprint.c\
 	      ./src/memory/ft_memcpy.c\
+		  ./src/string/ft_cut_chr.c\
 	      ./src/string/ft_strchr.c\
 	      ./src/string/ft_strlcpy.c\
 	      ./src/string/ft_strrchr.c\
@@ -38,11 +41,14 @@ SRC		= ./src/memory/ft_bzero.c\
 	      ./src/string/ft_strlcat.c\
 	      ./src/string/ft_strnstr.c\
 	      ./src/string/ft_toupper.c\
+		  ./src/string/ft_strcmp.c\
 	      ./src/string/ft_strncmp.c\
 	      ./src/string/ft_substr.c\
 	      ./src/string/ft_strjoin.c\
 	      ./src/string/ft_strtrim.c\
 	      ./src/string/ft_split.c\
+	      ./src/string/ft_split_moderated.c\
+	      ./src/string/ft_skip_space.c\
 	      ./src/string/ft_itoa.c\
 	      ./src/string/ft_strmapi.c\
 	      ./src/string/ft_striteri.c\
@@ -65,9 +71,16 @@ SRC		= ./src/memory/ft_bzero.c\
 		  ./src/list/ft_lstclear.c\
 		  ./src/list/ft_lstiter.c\
 		  ./src/list/ft_lstmap.c\
-		  ./ft_printf/ft_printf.c\
-		  ./get_next_line/get_next_line.c\
-		  ./get_next_line/get_next_line_utils.c\
+		  ./src/stack/ft_stack_add_back.c\
+		  ./src/stack/ft_stack_indexing.c\
+		  ./src/stack/ft_stack_last.c\
+		  ./src/stack/ft_stack_min.c\
+		  ./src/stack/ft_stack_new.c\
+		  ./src/stack/ft_stack_size.c\
+		  ./src/stack/ft_stack_sorted.c\
+		  ./src/stack/ft_sqrt.c\
+		  ./src/stack/ft_stack_rotations.c\
+		  ./src/get_next_line.c\
 
 OBJ=$(SRC:.c=.o)
 

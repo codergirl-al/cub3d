@@ -6,51 +6,42 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:43:02 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/07/21 22:26:39 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/12 04:30:12 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-
-char	*ft_handle_rtrn(char *s_buff)
-{
-	free(s_buff);
-	return (NULL);
-}
+#include "../includes/libft.h"
 
 char	*ft_get_read(char *s_buff)
 {
-	int		i;
 	char	*str;
+	int		i;
 
-	i = 0;
 	if (!s_buff[0])
 		return (NULL);
-	while (s_buff[i] && s_buff[i] != '\n')
+	i = 0;
+	while (s_buff[i] != '\0' && s_buff[i] != '\n')
 		i++;
 	str = (char *)malloc(sizeof(char) * (i + 2));
 	if (!str)
-		return (ft_handle_rtrn(s_buff));
-	i = 0;
-	while (s_buff[i] != '\0' && s_buff[i] != '\n')
 	{
-		str[i] = s_buff[i];
-		i++;
+		free(s_buff);
+		return (NULL);
 	}
+	i = -1;
+	while (s_buff[++i] && s_buff[i] != '\n')
+		str[i] = s_buff[i];
 	if (s_buff[i] == '\n')
-	{
-		str[i] = s_buff[i];
-		i++;
-	}
+		str[i++] = '\n';
 	*(str + i) = '\0';
 	return (str);
 }
 
 char	*ft_get_buff(char *s_buff)
 {
+	char	*str;
 	int		i;
 	int		c;
-	char	*str;
 
 	i = 0;
 	while (s_buff[i] && s_buff[i] != '\n')
@@ -60,7 +51,7 @@ char	*ft_get_buff(char *s_buff)
 		free(s_buff);
 		return (NULL);
 	}
-	str = (char *)malloc(sizeof(char) * (ft_g_strln(s_buff) - i + 1));
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s_buff) - i + 1));
 	if (!str)
 	{
 		free(s_buff);
@@ -75,7 +66,7 @@ char	*ft_get_buff(char *s_buff)
 	return (str);
 }
 
-char	*ft_get_line_and_store_output(int fd, char *s_buff)
+char	*ft_get_buffer(int fd, char *s_buff)
 {
 	char	*t_buff;
 	int		byte_r;
@@ -86,14 +77,14 @@ char	*ft_get_line_and_store_output(int fd, char *s_buff)
 		return (NULL);
 	byte_r = 1;
 	fst = 1;
-	while (fst || (!ft_gnl_strchr(t_buff, '\n') && byte_r))
+	while (fst || (!ft_strchr(t_buff, '\n') && byte_r))
 	{
 		fst = 0;
 		byte_r = read(fd, t_buff, BUFFER_SIZE);
 		if (byte_r == -1)
 			return (free(t_buff), NULL);
 		t_buff[byte_r] = '\0';
-		s_buff = ft_gnl_strjoin(s_buff, t_buff);
+		s_buff = ft_strjoin(s_buff, t_buff);
 	}
 	return (free(t_buff), s_buff);
 }
@@ -112,7 +103,7 @@ char	*get_next_line(int fd)
 		}
 		return (NULL);
 	}
-	static_buffer = ft_get_line_and_store_output(fd, static_buffer);
+	static_buffer = ft_get_buffer(fd, static_buffer);
 	if (!static_buffer)
 		return (NULL);
 	read_l = ft_get_read(static_buffer);

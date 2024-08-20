@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:56:29 by JFikents          #+#    #+#             */
-/*   Updated: 2024/07/18 13:57:13 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/20 15:23:39 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static int	*avoid_walls(t_loop_data *data, double *delta)
 		player->img->instances->y + PLAYER_CENTER};
 
 	while (data->map[(int)(player_pos[Y] + delta[Y]) / MINIMAP_SIZE]
+		[(int)(player_pos[X]) / MINIMAP_SIZE] == '1'
+		|| data->map[(int)(player_pos[Y]) / MINIMAP_SIZE]
 		[(int)(player_pos[X] + delta[X]) / MINIMAP_SIZE] == '1')
 	{
 		delta[X]--;

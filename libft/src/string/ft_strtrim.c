@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:46:28 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/01/09 14:50:55 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/15 14:47:27 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	i = 0;
 	if (!set || !s1)
 		return (NULL);
-	while (ft_strchr(set, s1[i]) && s1[i])
+	while (s1[i] && ft_strchr(set, s1[i]))
 		i++;
 	j = ft_strlen(s1);
 	while (ft_strchr(set, s1[j]) && j > i)

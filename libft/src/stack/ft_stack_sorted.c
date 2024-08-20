@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   ft_stack_sorted.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/05 19:46:43 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/17 17:05:38 by JFikents         ###   ########.fr       */
+/*   Created: 2024/06/10 11:57:58 by apeposhi          #+#    #+#             */
+/*   Updated: 2024/08/19 18:07:10 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../includes/libft.h"
 
-static char	*ft_get_map(t_data *gd)
+int	ft_stack_sorted(t_stack **s)
 {
-	gd->map = ft_strdup("");
-	while (gd->line)
+	t_stack	*head;
+
+	head = *s;
+	while (head && head->next)
 	{
-		if (gd->line[0] == '\n')
-		{
-			write(1, "Error\nEmpty line entered\n", 25);
-			return (ft_free_data(gd), NULL);
-		}
+		if (head->value > head->next->value)
+			return (0);
+		head = head->next;
 	}
-}
-
-int	ft_read_map(void)
-{
-	return (1);
-}
-
-int	ft_validate_map(void)
-{
 	return (1);
 }

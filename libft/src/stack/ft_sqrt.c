@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 11:24:01 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/04/12 13:10:22 by apeposhi         ###   ########.fr       */
+/*   Created: 2024/06/20 11:21:05 by apeposhi          #+#    #+#             */
+/*   Updated: 2024/06/20 12:57:58 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libft.h"
 
-/*
-** @brief Creates a new node with the given content.
-**
-** @param content: The pointer to be stored in the content
-** of the newly created node.
-** @return a new node/a size-1 linked list, where lst.next is
-** pointing to NULL.
-*/
-t_list	*ft_lstnew(int *content)
+int	ft_sqrt(int nb)
 {
-	t_list	*new_node;
+	int	n;
 
-	new_node = NULL;
-	new_node = (t_list *)malloc(sizeof(t_list));
-	if (new_node)
+	if (nb <= 0)
+		return (0);
+	n = 1;
+	while (n * n <= nb && n <= 46340)
 	{
-		new_node -> content = content;
-		new_node -> next = NULL;
+		if (n * n == nb)
+			return (n);
+		n++;
 	}
-	return (new_node);
+	return (n - 1);
 }

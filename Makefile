@@ -6,10 +6,12 @@
 #    By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 23:23:18 by apeposhi          #+#    #+#              #
-#    Updated: 2024/08/19 10:57:10 by JFikents         ###   ########.fr        #
+#    Updated: 2024/08/20 21:03:44 by JFikents         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+AUTHORS         :=  apeposhi && JFikents
+NAME            :=  cub3d
 
 # Metadata
 AUTHOR			:=	apeposhi\
@@ -38,17 +40,18 @@ _EXEC_SRC		:=	cast_rays.c\
 					vertical_rays.c
 EXEC_SRC		:=	$(addprefix execution/, $(_EXEC_SRC))
 
-_CLEANUP_SRC	:=	cleanup.c
-CLEANUP_SRC		:=	$(addprefix cleanup/, $(_CLEANUP_SRC))
-
-_PARSER_SRC		:=	parsing.c
+_PARSER_SRC		:=	parsing.c\
+					checker_utils.c\
+					f_c_handler.c\
+					map_handler.c\
+					map_utils.c\
+					texture_handler.c\
+					raw_data_handler.c\
+					utils.c\
+					validate_map.c
 PARSER_SRC		:=	$(addprefix parser/, $(_PARSER_SRC))
 
-_VALIDATOR_SRC	:=	arguments.c
-VALIDATOR_SRC	:=	$(addprefix validator/, $(_VALIDATOR_SRC))
-
-_SRC			:=	main.c parser.c error_handling.c\
-					$(VALIDATOR_SRC)\
+_SRC			:=	main.c\
 					$(PARSER_SRC)\
 					$(CLEANUP_SRC)\
 					$(EXEC_SRC)
@@ -63,16 +66,15 @@ ifeq ($(DEBUG), 1)
 CFLAGS	+= -g3
 endif
 
-_INCLUDES		:=	include/ libft/includes/ lib/MLX42/include/MLX42/ \
-					lib/libft/includes/
+_INCLUDES		:=	include/ libft/includes/ lib/MLX42/include/MLX42/
 INCLUDES		:=	$(addprefix -I, $(_INCLUDES))
 
 # Libraries
 _LIB_PATH		:=	lib/MLX42/build/ lib/libft/ libft/
 LIB_PATH		:=	$(addprefix -L, $(_LIB_PATH))
 LIBMLX42		:=	lib/MLX42/build/libmlx42.a
-LIBFT			:=	libft/libft.a lib/libft/libft.a
-_LIBS			:=	mlx42 ft glfw m
+LIBFT			:=	libft/libft_local.a lib/libft/libft.a
+_LIBS			:=	mlx42 ft glfw m ft_local
 LIBS			:=	$(addprefix -l, $(_LIBS))
 LIB_FLAGS		:=	$(LIB_PATH) $(LIBS)
 
@@ -93,18 +95,20 @@ $(NAME): $(LIBFT) $(LIBMLX42) $(OBJS)
 
 clean:
 	rm -rf $(OBJS)
+	$(MAKE) -C libft clean
 
 fclean: clean
 	rm -rf $(NAME)
+	$(MAKE) -C libft fclean
 
-re:	fclean all
+re: fclean all
 
 bin/:
-	@mkdir -p bin/cleanup bin/parser bin/validator bin/execution
+	@mkdir -p bin/parser bin/execution
 
 # Suffix Rules
 bin/%.o: src/%.c $(DEPENDENCIES) | bin/
 	$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDES)
 
 # Phony Targets
-.PHONY:	all clean fclean re
+.PHONY: all clean fclean re

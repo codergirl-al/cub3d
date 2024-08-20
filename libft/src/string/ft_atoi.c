@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:28:46 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/01/09 14:51:06 by apeposhi         ###   ########.fr       */
+/*   Updated: 2023/04/12 13:30:55 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 */
 int	ft_atoi(const char *str)
 {
-	long long int	val;
+	long			val;
 	int				i;
 	int				isneg;
 

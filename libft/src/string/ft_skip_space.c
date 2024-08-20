@@ -1,13 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   ft_skip_space.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
+/*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 13:24:29 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/07/17 17:06:00 by JFikents         ###   ########.fr       */
+/*   Created: 2024/08/18 13:31:01 by apeposhi          #+#    #+#             */
+/*   Updated: 2024/08/20 02:38:48 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/libft.h"
+
+int	ft_skip_space(char **temp, int x)
+{
+	int	i;
+
+	i = 0;
+	while (temp[x][i] == ' ')
+		i++;
+	return (i);
+}
+
+int	ft_skip_spaces(char *temp)
+{
+	int	i;
+
+	i = 0;
+	while (temp[i] == ' ')
+		i++;
+	return (i);
+}
