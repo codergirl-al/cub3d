@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_skip_space.c                                    :+:      :+:    :+:   */
+/*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/18 13:31:01 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/20 02:38:48 by apeposhi         ###   ########.fr       */
+/*   Created: 2024/05/14 23:31:56 by apeposhi          #+#    #+#             */
+/*   Updated: 2024/08/20 01:21:03 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libft.h"
+#include "../include/cub3d.h"
 
-int	ft_skip_space(char **temp, int x)
+int	ft_err(t_data *playground, char *message)
 {
-	int	i;
-
-	i = 0;
-	while (temp[x][i] == ' ')
-		i++;
-	return (i);
-}
-
-int	ft_skip_spaces(char *temp)
-{
-	int	i;
-
-	i = 0;
-	while (temp[i] == ' ')
-		i++;
-	return (i);
+	ft_free_data(playground);
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(message, 2);
+	exit (0);
 }

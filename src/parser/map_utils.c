@@ -6,13 +6,13 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 00:22:43 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/18 16:31:25 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 02:36:02 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int ft_calc_width(t_data *playground)
+int	ft_calc_width(t_data *playground)
 {
 	unsigned long	i;
 	unsigned long	longest;
@@ -22,9 +22,9 @@ int ft_calc_width(t_data *playground)
 	longest = 0;
 	while (++i < playground->map_height)
 	{
-        width = ft_strlen(playground->map_2d[i]);
-        if (longest < width)
-            longest = width;
+		width = ft_strlen(playground->map_2d[i]);
+		if (longest < width)
+			longest = width;
 	}
 	playground->map_width = longest;
 	return (0);
@@ -50,11 +50,12 @@ int	ft_count_directions(char *temp)
 	int	directions[4];
 	int	count;
 	int	i;
-	
+
 	ft_bzero(directions, sizeof(directions));
-        count = 0;
-        i = -1;
-	while (temp[++i]) {
+	count = 0;
+	i = -1;
+	while (temp[++i])
+	{
 		if (temp[i] == 'N')
 			directions[0]++;
 		else if (temp[i] == 'S')
@@ -66,6 +67,6 @@ int	ft_count_directions(char *temp)
 	}
 	i = -1;
 	while (++i < 4)
-	  count += directions[i];
+		count += directions[i];
 	return (count);
 }

@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:53:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/18 16:31:39 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 02:43:06 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,11 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-
-typedef struct s_texture
-{
-	char	*north;
-	char	*south;
-	char	*east;
-	char	*west;
-}			t_texture;
+# include <stdbool.h>
+# define NORTH_TEXTURE 0
+# define SOUTH_TEXTURE 1
+# define EAST_TEXTURE 2
+# define WEST_TEXTURE 3
 
 typedef struct s_data
 {
@@ -44,7 +41,7 @@ typedef struct s_data
 	int				fd;
 	char			*map_data;
 	char			*textures;
-	t_texture		textur;
+	char			*file_path[4];
 }	t_data;
 
 // validator functions
@@ -71,6 +68,6 @@ int		ft_count_directions(char *temp);
 
 // cleanup 
 void	ft_free_data(t_data *gd);
-int		ft_err(t_data *playground);
+int		ft_err(t_data *playground, char *message);
 
 #endif
