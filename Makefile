@@ -48,7 +48,7 @@ _PARSER_SRC		:=	parsing.c\
 					texture_handler.c\
 					raw_data_handler.c\
 					utils.c\
-					validate_map.c
+					validate_map_layout.c
 PARSER_SRC		:=	$(addprefix parser/, $(_PARSER_SRC))
 
 _SRC			:=	main.c\
