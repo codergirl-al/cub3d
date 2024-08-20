@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:53:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/20 02:40:24 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 02:43:06 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdbool.h>
-# define NORTH 4.7123889804 // 3 * PI / 2
-# define SOUTH 1.5707963268 // PI / 2
-# define EAST 0
-# define WEST 3.1415926535 // PI
+# define NORTH_TEXTURE 0
+# define SOUTH_TEXTURE 1
+# define EAST_TEXTURE 2
+# define WEST_TEXTURE 3
 
 typedef struct s_data
 {
