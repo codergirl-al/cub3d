@@ -12,15 +12,6 @@
 
 #include "../../include/cub3d.h"
 
-void	ft_print_arr(char **arr)
-{
-	int	i;
-
-	i = -1;
-	while (arr[++i])
-		printf("%s\n", arr[i]);
-}
-
 char	*ft_fill_2(char *s2, int len)
 {
 	int	i;
@@ -112,7 +103,6 @@ int	ft_map_checkup(t_data *playground)
 	i = -1;
 	r_map = ft_calloc(playground->map_height + 3, sizeof(char *));
 	ft_fill_r_map(playground, &r_map);
-	ft_print_arr(r_map);
 	if (ft_validate(r_map))
 		return (ft_err(playground, "Invalid map\n"));
 	ft_arrfree(r_map);
