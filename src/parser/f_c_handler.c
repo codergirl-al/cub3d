@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:23:19 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/20 02:01:57 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 02:37:53 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ int	ft_handle_input(t_data *playground, char *data, char flag)
 	if (flag == 'C')
 	{
 		if (ft_parse_color(data, playground->c_colors))
-			return (ft_err(playground, "Wrong color format for ceiling data\n"));
+			return (ft_err(playground, "Wrong color format for the ceiling\n"));
 	}
 	else if (flag == 'F')
 	{
 		if (ft_parse_color(data, playground->f_colors))
-			return (ft_err(playground, "Wrong color format for floor data\n"));
+			return (ft_err(playground, "Wrong color format for the floor\n"));
 	}
 	return (1);
 }

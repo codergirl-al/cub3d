@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:31:01 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/18 13:35:52 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 02:38:48 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_skip_space(char **temp, int x)
 	return (i);
 }
 
-int ft_skip_spaces(char *temp)
+int	ft_skip_spaces(char *temp)
 {
 	int	i;
 

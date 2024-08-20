@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:13:29 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/20 01:19:29 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 02:37:28 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static bool	ft_check_texture(char *t)
 	int	fd;
 
 	fd = open(t, O_RDONLY);
-	if (fd > 0) {
+	if (fd > 0)
+	{
 		close(fd);
 		return (true);
 	}
@@ -26,10 +27,10 @@ static bool	ft_check_texture(char *t)
 
 static bool	is_valid_texture_format(char *txtr, int i)
 {
-	if ((!ft_strncmp(txtr, "NO", 2) && i == 0) ||
-		(!ft_strncmp(txtr, "SO", 2) && i == 1) ||
-		(!ft_strncmp(txtr, "WE", 2) && i == 2) ||
-		(!ft_strncmp(txtr, "EA", 2) && i == 3))
+	if ((!ft_strncmp(txtr, "NO", 2) && i == 0)
+		|| (!ft_strncmp(txtr, "SO", 2) && i == 1)
+		|| (!ft_strncmp(txtr, "WE", 2) && i == 2)
+		|| (!ft_strncmp(txtr, "EA", 2) && i == 3))
 		return (true);
 	return (false);
 }
@@ -45,7 +46,8 @@ int	ft_handle_textures(t_data *playground)
 	while (i < 4)
 	{
 		d_txtr = ft_split(txtrs[i], ' ');
-		if (is_valid_texture_format(d_txtr[0], i) && ft_check_texture(d_txtr[1]))
+		if (is_valid_texture_format(d_txtr[0], i)
+			&& ft_check_texture(d_txtr[1]))
 			playground->file_path[i] = ft_strdup(d_txtr[1]);
 		else
 		{

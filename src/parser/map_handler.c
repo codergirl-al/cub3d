@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:18:28 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/20 01:55:22 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 02:09:34 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static int	ft_handle_side(t_data *playground)
 
 	if (!playground || !playground->map_2d)
 		return (0);
-
 	i = -1;
 	while (playground->map_2d[++i] != NULL)
 	{
@@ -102,7 +101,7 @@ static int	ft_validate_map_elements(t_data *playground)
 	return (0);
 }
 
-int ft_handle_map(t_data *playground)
+int	ft_handle_map(t_data *playground)
 {
 	int	indicator;
 

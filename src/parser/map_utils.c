@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 00:22:43 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/20 01:27:51 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 02:36:02 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,12 @@ int	ft_count_directions(char *temp)
 	int	directions[4];
 	int	count;
 	int	i;
-	
+
 	ft_bzero(directions, sizeof(directions));
 	count = 0;
 	i = -1;
-	while (temp[++i]) {
+	while (temp[++i])
+	{
 		if (temp[i] == 'N')
 			directions[0]++;
 		else if (temp[i] == 'S')
@@ -66,6 +67,6 @@ int	ft_count_directions(char *temp)
 	}
 	i = -1;
 	while (++i < 4)
-	  count += directions[i];
+		count += directions[i];
 	return (count);
 }

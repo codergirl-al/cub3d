@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:53:53 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/20 01:07:15 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 02:40:24 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,11 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-#include <stdbool.h>
-
-typedef struct s_texture
-{
-	char	*north;
-	char	*south;
-	char	*east;
-	char	*west;
-}			t_texture;
+# include <stdbool.h>
+# define NORTH 4.7123889804 // 3 * PI / 2
+# define SOUTH 1.5707963268 // PI / 2
+# define EAST 0
+# define WEST 3.1415926535 // PI
 
 typedef struct s_data
 {

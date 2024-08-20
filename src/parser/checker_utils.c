@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 21:14:11 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/20 02:02:19 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 02:38:19 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int	ft_check_ending(char *filename)
 
 size_t	ft_arrlen(char **arr)
 {
-  size_t it;
+	size_t	it;
 
-  it = -1;
-  if (arr)
-    while (arr[++it])
-      ;
-  return (it);
+	it = -1;
+	if (arr)
+		while (arr[++it])
+			;
+	return (it);
 }
 
 void	ft_arrfree(char **arr)
