@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:52:21 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/19 22:10:42 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/20 20:15:55 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	main(int argc, char **argv)
 	ft_bzero(&parsing_data, sizeof(t_data));
 	parsing_data.fd = open(argv[1], O_RDONLY);
 	if (parsing_data.fd < 0)
-		return (ft_print_err("Error\n", 0));
+		return (ft_err(&parsing_data, "No map was given\n"));
 	ft_parse(argc, argv, &parsing_data);
 	close(parsing_data.fd);
 	init_exec_data(exec_data, &parsing_data);
