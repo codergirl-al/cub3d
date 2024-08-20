@@ -6,38 +6,38 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:18:28 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/20 01:50:56 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/08/20 01:55:22 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int ft_validate_full_ones(char **map)
-{
-	size_t	j;
-	size_t	map_length;
+// int ft_validate_full_ones(char **map)
+// {
+// 	size_t	j;
+// 	size_t	map_length;
 
-	j = ft_skip_space(map, 0);
-	while (map[0][++j] != '\0')
-		if (map[0][j] != '1')
-		{
-			if (map[0][i] == ' ')
-			{
-				if (map[0][i + 1] != '1')
-					return (0);
-			}
-			else
-				return (0);
-		}
-	map_length = 0;
-	while (map[map_length] != NULL)
-		map_length++;
-	j = ft_skip_space(map, map_length - 1);
-	while (map[map_length - 1][++j] != '\0')
-		if (map[map_length - 1][j] != '1')
-			return (0);
-	return (1);
-}
+// 	j = ft_skip_space(map, 0);
+// 	while (map[0][++j] != '\0')
+// 		if (map[0][j] != '1')
+// 		{
+// 			if (map[0][i] == ' ')
+// 			{
+// 				if (map[0][i + 1] != '1')
+// 					return (0);
+// 			}
+// 			else
+// 				return (0);
+// 		}
+// 	map_length = 0;
+// 	while (map[map_length] != NULL)
+// 		map_length++;
+// 	j = ft_skip_space(map, map_length - 1);
+// 	while (map[map_length - 1][++j] != '\0')
+// 		if (map[map_length - 1][j] != '1')
+// 			return (0);
+// 	return (1);
+// }
 
 static int	ft_handle_side(t_data *playground)
 {
@@ -60,7 +60,7 @@ static int	ft_handle_side(t_data *playground)
 		while (last > 0 && row[last] == ' ')
 			last--;
 		if (last <= first || row[first] != '1' || row[last] != '1')
-			return (ft_handle_invalid(playground));
+			return (ft_err(playground, "Bad map layout\n"));
 	}
 	return (1);
 }
@@ -95,7 +95,7 @@ static int	ft_validate_map_elements(t_data *playground)
 
 	temp = ft_strtrim(playground->map_data, " \n01");
 	if (ft_strlen(temp) != 1)
-		return (free(temp), ft_handle_invalid(playground));
+		return (free(temp), ft_err(playground, "Invalid map elements given\n"));
 	playground->player_d = temp[0];
 	free(temp);
 	ft_assign_values(playground);
@@ -107,11 +107,11 @@ int ft_handle_map(t_data *playground)
 	int	indicator;
 
 	playground->map_2d = ft_split(playground->map_data, '\n');
-	indicator = ft_validate_first(playground);
+	// indicator = ft_validate_first(playground);
+	// if (!ft_validate_last(playground->map_2d))
+	// 	return (ft_err(playground)); // code is unpushed in 42 mac
 	ft_validate_map_elements(playground);
 	playground->map_height = ft_arrlen(playground->map_2d);
-	if (!ft_validate_full_ones(playground->map_2d))
-		return (ft_handle_invalid(playground));
 	ft_handle_side(playground);
 	return (1);
 }
