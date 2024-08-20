@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 14:09:52 by JFikents          #+#    #+#             */
-/*   Updated: 2024/08/20 21:24:41 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/20 21:25:24 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	get_textures(t_loop_data *data)
 
 int	exec(t_loop_data *data)
 {
-	put_floor_and_ceiling(data->window,data->floor_color, data->ceiling_color);
+	put_floor_and_ceiling(data->window, data->floor_color, data->ceiling_color);
 	data->minimap = put_minimap(data->window, data);
 	put_player(data->window, data->player);
 	get_textures(data);
