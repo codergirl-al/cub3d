@@ -6,7 +6,7 @@
 #    By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 23:23:18 by apeposhi          #+#    #+#              #
-#    Updated: 2024/08/19 19:33:17 by JFikents         ###   ########.fr        #
+#    Updated: 2024/08/20 20:15:08 by JFikents         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,20 +40,17 @@ _EXEC_SRC		:=	cast_rays.c\
 					vertical_rays.c
 EXEC_SRC		:=	$(addprefix execution/, $(_EXEC_SRC))
 
-_CLEANUP_SRC	:=	cleanup.c
-CLEANUP_SRC		:=	$(addprefix cleanup/, $(_CLEANUP_SRC))
-
 _PARSER_SRC		:=	parsing.c\
 					checker_utils.c\
 					f_c_handler.c\
 					map_handler.c\
 					map_utils.c\
 					texture_handler.c\
-					raw_data_handler.c
-                    utils.c
+					raw_data_handler.c\
+					utils.c
 PARSER_SRC		:=	$(addprefix parser/, $(_PARSER_SRC))
 
-_SRC			:=	main.c error_handling.c\
+_SRC			:=	main.c\
 					$(PARSER_SRC)\
 					$(CLEANUP_SRC)\
 					$(EXEC_SRC)
@@ -105,15 +102,12 @@ fclean: clean
 
 re: fclean all
 
-bin/:
-	@mkdir -p bin/cleanup bin/parser bin/validator
-
 # Suffix Rules
 bin/%.o: src/%.c | bin/
 	$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDES)
 
 bin/:
-	@mkdir -p bin/cleanup bin/parser bin/validator bin/execution
+	@mkdir -p bin/parser bin/execution
 
 # Suffix Rules
 bin/%.o: src/%.c $(DEPENDENCIES) | bin/
