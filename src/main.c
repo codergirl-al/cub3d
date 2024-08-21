@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:52:21 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/20 20:15:55 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/08/21 12:17:31 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ int	main(int argc, char **argv)
 	ft_parse(argc, argv, &parsing_data);
 	close(parsing_data.fd);
 	init_exec_data(exec_data, &parsing_data);
+	ft_free_data(&parsing_data);
 	exec_data->window = mlx_init(WIDTH, HEIGHT, "Cub3D", true);
 	exec(exec_data);
 	mlx_loop(exec_data->window);
-	ft_free_data(&parsing_data);
 	return (0);
 }
