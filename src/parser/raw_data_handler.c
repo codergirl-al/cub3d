@@ -6,7 +6,7 @@
 /*   By: JFikents <Jfikents@student.42Heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 04:42:27 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/08/20 20:55:57 by JFikents         ###   ########.fr       */
+/*   Updated: 2024/09/14 20:17:03 by JFikents         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ int	ft_handle_raw_data(t_data *game)
 			j = -1;
 			while (++j < 4)
 			{
-				game->textures = ft_strjoin(game->textures, data[i++]);
+				game->textures = ft_strjoin(game->textures, data[i + j]);
 				game->textures = ft_strjoin(game->textures, "\n");
 			}
+			i += 3;
 			if (ft_handle_textures(game))
 				return (ft_arrfree(data), ft_err(game, "Wrong textures\n"));
 		}
